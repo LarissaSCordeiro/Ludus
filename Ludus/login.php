@@ -9,13 +9,14 @@
 <body>
 <!--Interface-->
 <header>
-<h1>Cadastro</h1>
+<h1><a href="index.html">Ludus</a></h1>
 </header>
 <!--apresentacao do site-->
 <nav>
+<h1>Login</h1>
 </nav>
 <article>
-<form action="Login.php" method="post">
+<form action="login.php" method="post">
 <label for="email">Email:</label>
 <input type="email" name="email" id="email"/>
 <br><br>
@@ -23,17 +24,18 @@
 <input type="text" name="senha" id="senha"/>
 <br><br>
 <?php
-if(isset($_POST['cadastro'])){
+if(isset($_POST['login'])){
 $email = $_POST['email'];
 $senha = $_POST['senha'];
 require_once("conexao.php");
 $hash = password_hash($_POST['senha'], PASSWORD_BCRYPT);
-$consulta = $mysqli->prepare("INSERT INTO pessoas(email, senha) VALUES (?, ?)");
+$consulta = $mysqli->prepare("INSERT INTO ludus(email, senha) VALUES (?, ?)");
 $consulta->bind_param("ss", $email, $senha);
 $consulta->execute();
 $consulta->close();	
 } ?>
-<input type="submit" name="login" value="Login"/>
+<input type="submit" name="login" value="Logar"/>
+<p>Não tem uma conta ? <a href="cadastro.php">Clique aqui</a></p>
 <br><br>
 </form>
 </article>

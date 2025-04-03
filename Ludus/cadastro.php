@@ -9,10 +9,11 @@
 <body>
 <!--Interface-->
 <header>
-<h1>Cadastro</h1>
+<h1><a href="index.html">Ludus</a></h1>
 </header>
 <!--apresentacao do site-->
 <nav>
+<h1>Cadastro</h1>
 </nav>
 <article>
 <form action="Cadastrar.php" method="post">
@@ -32,7 +33,7 @@ $senha = $_POST['senha'];
 $nome = $_POST['nome'];
 require_once("conexao.php");
 $hash = password_hash($_POST['senha'], PASSWORD_BCRYPT);
-$consulta = $mysqli->prepare("INSERT INTO pessoas(email, senha, nome) VALUES (?, ?, ?)");
+$consulta = $mysqli->prepare("INSERT INTO ludus(email, senha, nome) VALUES (?, ?, ?)");
 $consulta->bind_param("sss", $email, $senha, $nome);
 $consulta->execute();
 $consulta->close();	
