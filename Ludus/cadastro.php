@@ -1,21 +1,27 @@
-<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Ludus">
 <title>Ludus | Site de avaliação de jogos Indie BR</title>
 <link rel="icon" href="./img/Ludus_Favicon (1).png">
+<link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
 <!--Interface-->
 <header>
 <h1><a href="index.html">Ludus</a></h1>
+<nav class="menu">
+<ul>
+<li><h3><a href="perfil.php">Perfil</a></h3></li>
+<li><h3><a href="#">Sobre nós</a></h3></li>
+</ul>
+</nav>
 </header>
 <!--apresentacao do site-->
-<nav>
+<section class= "log_cad">
+<article id = "log_cad">
 <h1>Cadastro</h1>
-</nav>
-<article>
+<h2>Insira os dados a seguir :</h2>
 <form action="Cadastrar.php" method="post">
 <label for="email">Email:</label>
 <input type="email" name="email" id="email"/>
@@ -42,7 +48,7 @@ $consulta->close();
 <br><br>
 <a href="login.php">Fazer Login</a>
 </form>
-</article>
+</article></section>
 <!--Contatos-->
 <footer>
 <h3>Desenvolvedores</h3>

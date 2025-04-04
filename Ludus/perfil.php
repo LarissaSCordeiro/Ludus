@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+<?php
+//include("seguranca.php");
+//protegePagina();
+?>
 <html>
-<head>
 <meta charset="UTF-8">
 <meta name="description" content="Ludus">
-<meta name="keywords" content="Indie, games, brazilian">
 <title>Ludus | Site de avaliação de jogos Indie BR</title>
 <link rel="icon" href="./img/Ludus_Favicon (1).png">
 <link rel="stylesheet" href="./css/style.css" />
@@ -11,19 +12,14 @@
 <body>
 <!--Interface-->
 <header>
-<h1><a href="#">Ludus</a></h1>
+<h1><a href="index.html">Ludus</a></h1>
 <nav class="menu">
 <ul>
-<li><h3><a href="perfil.php">Perfil</a></h3></li>
+<li><h3><a href="#">Perfil</a></h3></li>
 <li><h3><a href="#">Sobre nós</a></h3></li>
-<li><h3><a href="login.php">Login</a></h3></li><!--VOU APAGAR DEPOIS(Lari)--> 
 </ul>
-</nav></header>
-<!--Jogos -->
-<article>
-<h2>Jogos Indie BR</h2>
-</article>
-<!--Contatos-->
+</nav>
+</header>
 <footer>
 <h3>Desenvolvedores</h3>
 </footer>
