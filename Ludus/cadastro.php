@@ -29,22 +29,22 @@
 <label for="senha">Senha:</label>
 <input type="text" name="senha" id="senha"/>
 <br><br>
-<label for="nome">Nome:</label>
-<input type="text" name="nome" id="nome"/>
+<label for="usuario">Nome:</label>
+<input type="text" name="usuario" id="usuario"/>
 <br><br>
 <?php
 if(isset($_POST['cadastro'])){
 $email = $_POST['email'];
 $senha = $_POST['senha'];
-$nome = $_POST['nome'];
+$usuario = $_POST['usuario'];
 require_once("conexao.php");
 $hash = password_hash($_POST['senha'], PASSWORD_BCRYPT);
-$consulta = $mysqli->prepare("INSERT INTO ludus(email, senha, nome) VALUES (?, ?, ?)");
-$consulta->bind_param("sss", $email, $senha, $nome);
+$consulta = $mysqli->prepare("INSERT INTO ludus(email, senha, usuario) VALUES (?, ?, ?)");
+$consulta->bind_param("sss", $email, $senha, $usuario);
 $consulta->execute();
 $consulta->close();	
 } ?>
-<input type="submit" name="cadastro" value="Cadastrar"/>
+<input type="submit" name="cadastro" value="Enviar"/>
 <br><br>
 <a href="login.php">Fazer Login</a>
 </form>
