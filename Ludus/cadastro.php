@@ -4,7 +4,7 @@
 <meta name="description" content="Ludus">
 <title>Ludus | Site de avaliação de jogos Indie BR</title>
 <link rel="icon" href="./img/Ludus_Favicon (1).png">
-<link rel="stylesheet" href="./css/style.css" />
+<link rel="stylesheet" href="./css/style.css"/>
 </head>
 <body>
 <!--Interface-->
