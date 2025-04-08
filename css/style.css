@@ -1,0 +1,123 @@
+html {
+height: 100%;
+min-height: 100%;
+margin: 0;
+}
+body {
+background-color:#515151;
+display: flex;
+flex-direction: column;
+min-height: 100%;
+color:white;
+font-family: Arial, sans-serif;
+margin: 0;
+}
+/* Cabeçalho */
+header {
+background-color:black;
+padding: 20px;
+}
+/* Links do cabeçalho */
+header a {
+color:white;
+}
+/*menu*/
+}
+nav {
+	border-bottom: solid 1px #eaeaeb;
+	height: 70px;
+	line-height: 70px;
+}
+menu {
+	margin: 0 30px 0 0;
+	float : right;
+}
+/* Links do menu */
+menu a {
+	text-decoration: none;
+	color:white;
+	padding: 15px 15px 15px 15px;
+	margin: 0 10px;
+	line-height: 70px;
+}
+menu a:hover {
+	background-color: #888;
+	color: #fff;
+}
+label {
+	margin: 0 40px 0 0;
+	font-size: 26px;
+	line-height: 70px;
+	display: none;
+	width: 26px;
+	float: right;
+}
+#toggle {
+	display: none;
+}
+@media only screen and (max-width: 700px) {
+	label {
+		display: block;
+		cursor: pointer;
+	}
+	menu {
+		text-align: center;
+		width: 100%;
+		display: none;
+    position: static;
+	}
+	menu a {
+		display: block;
+		border-bottom: solid 1px white;
+		margin: 0;
+		padding: 0;
+	}
+	menu a:hover {
+		color:#fff;
+		background-color: #888;
+	}
+
+	#toggle:checked + menu {
+		display: block;
+	}
+}
+/* Links em geral */
+a {
+text-decoration: none;
+color : blue;
+}
+/* Login e Cadastro */
+.log_cad{ /*section*/
+position:relative;
+height: 100vh;
+padding: 50px; background-color: grey;
+width: 100%; max-width: 600px; margin: 0;
+height: 450px;
+float : right;
+}
+#log,#cad { /*article*/
+position:relative;
+text-align: center;
+border-radius: 10px;
+background-color: purple; 
+border:2px solid white;
+padding: 50px;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+ }
+#log{ /*Proporcoes do container do login*/
+height: 40%;
+width: 50%;
+}
+#cad{ /*Proporcoes do container do cadastro*/
+height: 55%;
+width: 50%;
+}
+/* final */
+footer {
+margin-top: auto;
+background-color:black;
+padding: 20px;
+}
