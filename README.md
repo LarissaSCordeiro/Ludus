@@ -93,3 +93,10 @@ Criar uma plataforma acessível e intuitiva que valorize os jogos independentes 
 ### 📑 Documento de Requisitos
 
 📄 [Documento de Requisitos - Google Docs](https://docs.google.com/document/d/1nwGpNzgDNhkSorWja8zdFBIu19M6-GUW/edit?usp=sharing&ouid=104092952947185357370&rtpof=true&sd=true)
+
+---
+
+### Cronograma
+
+📄 [Cronograma - Google Sheets]([https://docs.google.com/document/d/1nwGpNzgDNhkSorWja8zdFBIu19M6-GUW/edit?usp=sharing&ouid=104092952947185357370&rtpof=true&sd=true](https://docs.google.com/spreadsheets/d/1dqqndkkDbBrcT9zx_V7ehyULfcvbHYGMPKhsg61XIhQ/edit?usp=sharing))
+
