@@ -11,14 +11,14 @@
 <body>
 <!--Interface-->
 <header>
-<h1><a href="index.html">Ludus</a></h1>
+<a href="index.html"><img class="logo" src="./img/logo.png" alt="logo" width="170" height="70"></a>
 <nav>
 <label for="toggle">&#9776;</label>
 <input type="checkbox" id="toggle">
 <menu>
-<a href="perfil.php"><strong>Perfil</strong></a>
-<a href="#"><strong>Sobre nós</strong></a>
-<a href="#"><strong>Categorias</strong></a>
+<a class="btn" href="cadastro.php"><strong>Cadastrar-se</strong></a>
+<!--<a href="#"><strong></strong></a>-->
+<!--<a href="#"><strong></strong></a>-->
 </menu>
 </nav>
 </header>
