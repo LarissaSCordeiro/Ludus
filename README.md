@@ -104,6 +104,6 @@ Criar uma plataforma acessível e intuitiva que valorize os jogos independentes 
 
 ### Documento do Pré-Projeto
 
-📄 [Documento do Pré-Projeto - Google Docs](https://docs.google.com/document/d/1B_BUXs0s4PRzQQGUUKXng4dqs5pKvfSW1NNmXq0PXbE/edit?usp=sharing)
+📄 [Documento do Pré-Projeto - Google Docs](https://docs.google.com/document/d/1pT7XnPT7Tx82m4Q3Dk8IOFdpJTZaViIqtQradwUKMVc/edit?usp=sharing)
 
 
