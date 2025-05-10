@@ -16,7 +16,7 @@
 <label for="toggle">&#9776;</label>
 <input type="checkbox" id="toggle">
 <menu>
-<a class="btn" href="cadastro.php"><strong>Cadastrar-se</strong></a>
+<a class="btn" href="#"><strong>Catalogo</strong></a>
 <!--<a href="#"><strong></strong></a>-->
 <!--<a href="#"><strong></strong></a>-->
 </menu>
@@ -24,15 +24,15 @@
 </header>
 <!--apresentacao do site-->
 <main>
-<section class = "log_cad">
+<section class = "log">
 <article id = "log">
-<h1>Login</h1>
+<h2>Login</h2>
 <form action="verificacao.php" method="post">
 <input type="email" name="email" id="email" placeholder="Digite seu Email" required>
 <br><br>
 <input type="text" name="senha" id="senha" min="6" placeholder="Digite sua Senha" required>
 <br><br>
-<input type="submit" name="login" value="Enviar"/>
+<button type="submit" name="login" id="btn" > <strong>Enviar</strong> </button>
 <p>Não tem uma conta ? <a href="cadastro.php">Clique aqui</a></p>
 <br><br>
 </form>

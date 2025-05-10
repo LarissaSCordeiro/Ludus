@@ -4,7 +4,7 @@ min-height: 100%;
 margin: 0;
 }
 body {
-background-color:#515151;
+background-color:#100a27;
 display: flex;
 flex-direction: column;
 min-height: 100%;
@@ -15,18 +15,15 @@ margin: 0;
 /* Cabeçalho */
 header {
 background-color:#070412;
-padding: 15px;
 }
 /* Links do cabeçalho */
 header a {
 color:white;
 }
+.logo{
+padding: 20px;
+}
 /*menu*/
-}
-nav {
-	height: 70px;
-	line-height: 70px;
-}
 menu {
 	margin: 0 20px 0 0;
 	float : right;
@@ -87,33 +84,59 @@ text-decoration: none;
 color : blue;
 }
 /* Login e Cadastro */
-.log_cad{ /*section*/
+.log, .cad{ /*section*/
 position:relative;
 height: 100vh;
-padding: 50px; background-color: grey;
-width: 100%; max-width: 600px; margin: 0;
+/*background-color: grey; */ 
+width: 100%; max-width: 40%; margin: 0;/* essa margin tem que ser zero*/
 height: 450px;
 float : right;
+}
+.log{
+padding: 3%;/*ao inves da margin use esse padding*/	
+}
+.cad{
+padding: 6%;/*ao inves da margin use esse padding*/	
 }
 #log,#cad { /*article*/
 position:relative;
 text-align: center;
-border-radius: 10px;
-background-color: purple; 
+border-radius: 20px;
+background-color: #c6c2c2; 
 border:2px solid white;
-padding: 50px;
+padding: 5%;
 position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
+
  }
 #log{ /*Proporcoes do container do login*/
-height: 40%;
-width: 50%;
+height: 70%;
+width: 45%;
+
 }
 #cad{ /*Proporcoes do container do cadastro*/
-
-width: 50%;
+height: 78%;
+width: 42%;
+}
+#email, #senha, #usuario{
+  padding: 5%; 
+  margin: 3%;	
+  border-radius: 20px;
+  border:1px solid white;
+  width: 95%;
+  box-sizing: border-box;
+}
+#btn{
+  padding: 5%; 
+  margin: 4%;	
+  border-radius: 5px;
+  border:0px ;
+  color:white;
+  width: 80%;
+  box-sizing: border-box;
+  background-color: #cd3dff;
 }
 /* final */
 footer {

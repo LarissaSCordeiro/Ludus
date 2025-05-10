@@ -10,20 +10,19 @@
 <!--Interface-->
 <header>
 <a href="index.html"><img class="logo" src="./img/logo.png" alt="logo" width="170" height="70"></a>
-<nav>
 <label for="toggle">&#9776;</label>
-<input type="checkbox" id="toggle">
+<input type="checkbox" id="toggle"><nav>
 <menu>
-<a href="login.php"><strong>login</strong></a>
+<a href="#"><strong>Catalogo</strong></a>
 <!--<a href="#"><strong></strong></a>-->
 <!--<a href="#"><strong></strong></a>-->
-</menu>
-</nav></header>
+</menu></nav>
+</header>
 <!--apresentacao do site-->
 <main>
-<section class= "log_cad">
+<section class= "cad">
 <article id = "cad">
-<h1>Cadastro</h1>
+<h2>Cadastro</h2>
 <h2>Insira os dados a seguir :</h2>
 <form action="Cadastrar.php" method="post">
 <input type="email" name="email" id="email"  placeholder="Digite seu Email" required>
@@ -44,7 +43,7 @@ $consulta->bind_param("sss", $email, $senha, $usuario);
 $consulta->execute();
 $consulta->close();	
 } ?>
-<input type="submit" name="cadastro" value="Enviar"/>
+<button type="submit" name="cadastro" id="btn" > <strong>Enviar</strong> </button>
 <br><br>
 <a href="login.php">Fazer Login</a>
 </form>
