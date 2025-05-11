@@ -87,16 +87,16 @@ color : blue;
 .log, .cad{ /*section*/
 position:relative;
 height: 100vh;
-/*background-color: grey; */ 
+/*background-color: grey; */
 width: 100%; max-width: 40%; margin: 0;/* essa margin tem que ser zero*/
 height: 450px;
 float : right;
 }
 .log{
-padding: 3%;/*ao inves da margin use esse padding*/	
+padding: 2px 5% 5% 1em; /* superior | direita | inferior | esquerda */
 }
 .cad{
-padding: 6%;/*ao inves da margin use esse padding*/	
+padding: 2px 5% 11% 1em;/* superior | direita | inferior | esquerda */
 }
 #log,#cad { /*article*/
 position:relative;
@@ -113,12 +113,12 @@ transform: translate(-50%, -50%);
  }
 #log{ /*Proporcoes do container do login*/
 height: 70%;
-width: 45%;
+width: 45% ;
 
 }
 #cad{ /*Proporcoes do container do cadastro*/
 height: 78%;
-width: 42%;
+width: 42% ;
 }
 #email, #senha, #usuario{
   padding: 5%; 
