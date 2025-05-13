@@ -110,4 +110,4 @@ Criar uma plataforma acessível e intuitiva que valorize os jogos independentes 
 
 ### Prototipo de telas
 
-📄 [Prototipo de telas - Quant-Ux]([https://app.quant-ux.com/#/share.html?h=a2aa10avZkXajOnybySIGxYSzlL5yEpXu373lTM5d1PxakVwlbrnVoLYzyzi](https://app.quant-ux.com/#/apps/67fd3ecb9491e13d3f5568ab.html))
+📄 [Prototipo de telas - Quant-Ux](https://app.quant-ux.com/#/apps/67fd3ecb9491e13d3f5568ab.html)
