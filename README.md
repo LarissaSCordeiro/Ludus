@@ -106,4 +106,8 @@ Criar uma plataforma acessível e intuitiva que valorize os jogos independentes 
 
 📄 [Documento do Pré-Projeto - Google Docs](https://docs.google.com/document/d/1pT7XnPT7Tx82m4Q3Dk8IOFdpJTZaViIqtQradwUKMVc/edit?usp=sharing)
 
+---
 
+### Prototipo de telas
+
+📄 [Prototipo de telas - Quant-Ux](https://app.quant-ux.com/#/share.html?h=a2aa10avZkXajOnybySIGxYSzlL5yEpXu373lTM5d1PxakVwlbrnVoLYzyzi).
