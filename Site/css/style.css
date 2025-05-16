@@ -1,0 +1,146 @@
+html {
+height: 100%;
+min-height: 100%;
+margin: 0;
+}
+body {
+background-color:#100a27;
+display: flex;
+flex-direction: column;
+min-height: 100%;
+color:white;
+font-family: Arial, sans-serif;
+margin: 0;
+}
+/* Cabeçalho */
+header {
+background-color:#070412;
+}
+/* Links do cabeçalho */
+header a {
+color:white;
+}
+.logo{
+padding: 20px;
+}
+/*menu*/
+menu {
+	margin: 0 20px 0 0;
+	float : right;
+}
+/* Links do menu */
+menu a {
+	text-decoration: none;
+	color:white;
+	padding: 15px 15px 15px 15px;
+	margin: 0 10px;
+	line-height: 70px;
+}
+menu a:hover {
+	background-color: #cd3dff;
+	border-radius : 25px;
+	color: #fff;
+}
+label {
+	margin: 0 40px 0 0;
+	font-size: 26px;
+	line-height: 70px;
+	display: none;
+	width: 26px;
+	float: right;
+}
+#toggle {
+	display: none;
+}
+@media only screen and (max-width: 700px) {
+	label {
+		display: block;
+		cursor: pointer;
+	}
+	menu {
+		text-align: center;
+		width: 100%;
+		display: none;
+    position: static;
+	}
+	menu a {
+		display: block;
+		border-bottom: solid 1px white;
+		margin: 0;
+		padding: 0;
+	}
+	menu a:hover {
+		color:#fff;
+		background-color: #888;
+	}
+
+	#toggle:checked + menu {
+		display: block;
+	}
+}
+/* Links em geral */
+a {
+text-decoration: none;
+color : blue;
+}
+/* Login e Cadastro */
+.log, .cad{ /*section*/
+position:relative;
+height: 100vh;
+/*background-color: grey; */
+width: 100%; max-width: 40%; margin: 0;/* essa margin tem que ser zero*/
+height: 450px;
+float : right;
+}
+.log{
+padding: 2px 5% 5% 1em; /* superior | direita | inferior | esquerda */
+}
+.cad{
+padding: 2px 5% 11% 1em;/* superior | direita | inferior | esquerda */
+}
+#log,#cad { /*article*/
+position:relative;
+text-align: center;
+border-radius: 20px;
+background-color: #c6c2c2; 
+border:2px solid white;
+padding: 5%;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+
+ }
+#log{ /*Proporcoes do container do login*/
+height: 70%;
+width: 45% ;
+
+}
+#cad{ /*Proporcoes do container do cadastro*/
+height: 78%;
+width: 42% ;
+}
+#email, #senha, #usuario{
+  padding: 5%; 
+  margin: 3%;	
+  border-radius: 20px;
+  border:1px solid white;
+  width: 95%;
+  box-sizing: border-box;
+}
+#btn{
+  padding: 5%; 
+  margin: 4%;	
+  border-radius: 5px;
+  border:0px ;
+  color:white;
+  width: 80%;
+  box-sizing: border-box;
+  background-color: #cd3dff;
+}
+/* final */
+footer {
+margin-top: auto;
+background-color:#070412;
+padding: 20px;
+}
