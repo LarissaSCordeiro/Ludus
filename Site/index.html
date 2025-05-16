@@ -1,34 +1,117 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="description" content="Ludus">
-<meta name="keywords" content="Indie, games, brazilian">
-<title>Ludus | Site de avaliação de jogos Indie BR</title>
-<link rel="icon" href="./img/Ludus_Favicon (1).png">
-<link rel="stylesheet" href="css/style.css"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, max-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ludus - Home</title>
+    <link rel="stylesheet" href="./css/principal.css" />
+    <script defer src="./js/script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
-<!--Interface-->
-<header>
-<img class="logo" src="./img/logo.png" alt="logo" width="170" height="70">
-<nav>
-<label for="toggle">&#9776;</label>
-<input type="checkbox" id="toggle">
-<menu>
-<a href="perfil.php"><strong>Perfil</strong></a>
-<!--<a href="#"><strong></strong></a>-->
-<a href="login.php"><strong>log-in</strong></a>
-</menu>
-</nav></header>
-<main>
-<article>
-</article>
-</main>
-<!--Contatos-->
-<footer>
-<h3>Desenvolvedores</h3>
-</footer>
+
+    <!-- Cabeçalho -->
+    <header>
+        <!-- Logo do Ludus -->
+        <div class="logo">L<span>UDUS</span></div>
+
+        <!-- Barra de navegaçao -->
+        <nav>
+            <!-- Botao de entrar e links -->
+            <button class="btn">Entrar</button>
+            <a href="#">Criar uma conta</a>
+            <a href="#">Games</a>
+        </nav>
+
+        <!-- Barra de pesquisa personalizada -->
+        <div class="search-container">
+            <input type="text" placeholder="Pesquisar..." />
+            <i class="fas fa-search icon"></i>
+        </div>
+    </header>
+
+    <!-- Parte principal do site -->
+    <main>
+
+        <!-- Carrosel de imagens (linkado ao JS) -->
+        <div class="carousel">
+            <button class="nav prev">&#10094;</button>
+            <!-- Imagens do carrosel -->
+            <div class="carousel-images" id="carouselImages">
+
+                <div class="carousel-slide">
+                    <img src="img/Landscape-img.jpeg" alt="Landscape">
+                    <div class="overlay">
+                        <h2 class="h2-overlay">Clique <span>e explore nosso mundo</span></h2>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <img src="img/ForestMagic-img.jpeg" alt="Forest">
+                    <div class="overlay">
+                        <h2 class="h2-overlay">Clique <span>e explore nosso mundo</span></h2>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <img src="img/Nocturne-img.jpeg" alt="Nocturne">
+                    <div class="overlay">
+                        <h2 class="h2-overlay">Clique <span>e explore nosso mundo</span></h2>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <img src="img/Eden-img.jpeg" alt="Eden">
+                    <div class="overlay">
+                        <h2 class="h2-overlay">Clique <span>e explore nosso mundo</span></h2>
+                    </div>
+                </div>
+            </div>
+
+            <button class="nav next">&#10095;</button>
+            <!-- Pontos do slider -->
+            <div class="dots" id="dotsContainer"></div>
+        </div>
+
+        <div class="nav-center">
+            <a href="#SobreIndies">O que são Jogos indie?</a>
+            <a href="#SobreIndies">Nossa Missão</a>
+            <a href="#SobreIndies">Catálogo</a>
+        </div>
+
+        <!-- Sobre jogos indie -->
+
+        <section class="container-pai-sobrenos">
+            <section class="sobre-nos">
+                <div class="container">
+                    <img src="./img/Montanhas.jpeg" alt="Imagem sobre nós" />
+                    <div class="texto">
+                        <h2>Sobre Nós</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <!-- Rodape -->
+    <footer class="footer-nav">
+        <!-- Redes sociais -->
+        <div class="social-icons">
+            <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://github.com/LarissaSCordeiro/Ludus" target="_blank" title="GitHub"><i
+                    class="fab fa-github"></i></a>
+        </div>
+
+        <span>Ludus • v0.1</span>
+    </footer>
+
 </body>
+
 </html>
