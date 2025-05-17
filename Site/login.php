@@ -26,7 +26,7 @@
 <main>
 <section class = "log">
 <article id = "log">
-<h2>Login</h2>
+<h2 id="titulo" >Login</h2>
 <form action="verificacao.php" method="post">
 <input type="email" name="email" id="email" placeholder="Digite seu Email" required>
 <br><br>

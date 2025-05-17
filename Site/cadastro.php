@@ -10,8 +10,8 @@
 <!--Interface-->
 <header>
 <a href="index.html"><img class="logo" src="./img/logo.png" alt="logo" width="170" height="70"></a>
-<label for="toggle">&#9776;</label>
-<input type="checkbox" id="toggle"><nav>
+<input type="checkbox" id="toggle">
+<nav>
 <menu>
 <a href="#"><strong>Catalogo</strong></a>
 <!--<a href="#"><strong></strong></a>-->
@@ -22,14 +22,15 @@
 <main>
 <section class= "cad">
 <article id = "cad">
-<h2>Cadastro</h2>
-<h2>Insira os dados a seguir :</h2>
+<h2 id="titulo">Cadastro</h2>
 <form action="Cadastrar.php" method="post">
 <input type="email" name="email" id="email"  placeholder="Digite seu Email" required>
 <br><br>
+<input type="text" name="usuario" id="usuario" placeholder="Digite seu Nome" required>
+<br><br>
 <input type="text" name="senha" id="senha" min="6" placeholder="Digite sua Senha" required>
 <br><br>
-<input type="text" name="usuario" id="usuario" placeholder="Digite seu Nome" required>
+<input type="text" name="senha" id="senha" min="6" placeholder="Confirmar Senha" required>
 <br><br>
 <?php
 if(isset($_POST['cadastro'])){

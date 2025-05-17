@@ -12,6 +12,12 @@ color:white;
 font-family: Arial, sans-serif;
 margin: 0;
 }
+p{
+color:#757575
+}
+.logo{
+	padding:20px;
+}
 /* Cabeçalho */
 header {
 background-color:#070412;
@@ -19,9 +25,6 @@ background-color:#070412;
 /* Links do cabeçalho */
 header a {
 color:white;
-}
-.logo{
-padding: 20px;
 }
 /*menu*/
 menu {
@@ -46,7 +49,7 @@ label {
 	font-size: 26px;
 	line-height: 70px;
 	display: none;
-	width: 26px;
+	width: 10px;
 	float: right;
 }
 #toggle {
@@ -94,9 +97,11 @@ float : right;
 }
 .log{
 padding: 2px 5% 5% 1em; /* superior | direita | inferior | esquerda */
+
 }
 .cad{
 padding: 2px 5% 11% 1em;/* superior | direita | inferior | esquerda */
+
 }
 #log,#cad { /*article*/
 position:relative;
@@ -109,7 +114,6 @@ position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
-
  }
 #log{ /*Proporcoes do container do login*/
 height: 70%;
@@ -117,7 +121,7 @@ width: 45% ;
 
 }
 #cad{ /*Proporcoes do container do cadastro*/
-height: 78%;
+height: 82%;
 width: 42% ;
 }
 #email, #senha, #usuario{
@@ -127,6 +131,17 @@ width: 42% ;
   border:1px solid white;
   width: 95%;
   box-sizing: border-box;
+}
+#email{
+ margin: 10% 0 0 0; /* superior | direita | inferior | esquerda */		
+}
+#titulo{/*titulo de cadastro e login*/
+height: 6%;
+width: 100% ;
+padding:  6% 0 6% 0; /* superior | direita | inferior | esquerda */
+margin: 0;
+border-radius: 50px;
+background-color: #100a27; 	
 }
 #btn{
   padding: 5%; 
