@@ -9,14 +9,18 @@
 <body>
 <!--Interface-->
 <header>
+<nav class="search">
 <a href="index.html"><img class="logo" src="./img/logo.png" alt="logo" width="170" height="70"></a>
+<input type="text" id="search" placeholder="Pesquisar..." />
+<i class="fas fa-search icon"></i><br><br>
+</nav>
+<label for="toggle">&#9776;</label>
 <input type="checkbox" id="toggle">
-<nav>
 <menu>
-<a href="#"><strong>Catalogo</strong></a>
+<a href="#"><strong>catalogo</strong></a>
 <!--<a href="#"><strong></strong></a>-->
 <!--<a href="#"><strong></strong></a>-->
-</menu></nav>
+</menu>
 </header>
 <!--apresentacao do site-->
 <main>

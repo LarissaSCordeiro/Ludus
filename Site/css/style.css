@@ -16,7 +16,7 @@ p{
 color:#757575
 }
 .logo{
-	padding:20px;
+	padding: 1em 0 0 1em; /* superior | direita | inferior | esquerda */
 }
 /* Cabeçalho */
 header {
@@ -36,7 +36,7 @@ menu a {
 	text-decoration: none;
 	color:white;
 	padding: 15px 15px 15px 15px;
-	margin: 0 10px;
+	margin: 0 2em 0 1em; /* superior | direita | inferior | esquerda */
 	line-height: 70px;
 }
 menu a:hover {
@@ -131,6 +131,16 @@ width: 42% ;
   border:1px solid white;
   width: 95%;
   box-sizing: border-box;
+}
+#search{
+ padding: 20px 20px 20px 20px ;  /* superior | direita | inferior | esquerda */	
+ margin: 3em 3em 0 0; /* superior | direita | inferior | esquerda */	
+ border-radius: 40px;
+ width: 200px; 
+ height: 5px;
+ float : right;
+ border:1px solid white;
+ 
 }
 #email{
  margin: 10% 0 0 0; /* superior | direita | inferior | esquerda */		
