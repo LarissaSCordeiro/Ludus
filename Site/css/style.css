@@ -91,16 +91,17 @@ color : blue;
 position:relative;
 height: 100vh;
 /*background-color: grey; */
-width: 100%; max-width: 40%; margin: 0;/* essa margin tem que ser zero*/
-height: 450px;
+width: 100%; max-width: 40%; /*margin: 100px 5% 5% 1em;*/
+margin: 20px 0 20px 0; /* superior | direita | inferior | esquerda */
+height: 400px;
 float : right;
 }
 .log{
-padding: 2px 5% 5% 1em; /* superior | direita | inferior | esquerda */
+padding: 40px 5% 5% 1em; /* superior | direita | inferior | esquerda */
 
 }
 .cad{
-padding: 2px 5% 11% 1em;/* superior | direita | inferior | esquerda */
+padding: 60px 5% 11% 1em;/* superior | direita | inferior | esquerda */
 
 }
 #log,#cad { /*article*/
@@ -109,20 +110,22 @@ text-align: center;
 border-radius: 20px;
 background-color: #c6c2c2; 
 border:2px solid white;
-padding: 5%;
+padding: 30px;
 position: absolute;
 top: 50%;
 left: 50%;
+width: 45% ;
 transform: translate(-50%, -50%);
  }
 #log{ /*Proporcoes do container do login*/
 height: 70%;
-width: 45% ;
+
 
 }
 #cad{ /*Proporcoes do container do cadastro*/
-height: 82%;
-width: 42% ;
+height: 85%;
+
+
 }
 #email, #senha, #usuario{
   padding: 5%; 
@@ -132,15 +135,12 @@ width: 42% ;
   width: 95%;
   box-sizing: border-box;
 }
+/* pesquisa */	
 #search{
- padding: 20px 20px 20px 20px ;  /* superior | direita | inferior | esquerda */	
- margin: 3em 3em 0 0; /* superior | direita | inferior | esquerda */	
- border-radius: 40px;
- width: 200px; 
- height: 5px;
+ padding: 15px 90px 15px 15px ;  /* superior | direita | inferior | esquerda */	
+ margin: 3em 3em 1em 3em; /* superior | direita | inferior | esquerda */	
+ border-radius: 40px ;
  float : right;
- border:1px solid white;
- 
 }
 #email{
  margin: 10% 0 0 0; /* superior | direita | inferior | esquerda */		
@@ -157,7 +157,7 @@ background-color: #100a27;
   padding: 5%; 
   margin: 4%;	
   border-radius: 5px;
-  border:0px ;
+  border:0 ;
   color:white;
   width: 80%;
   box-sizing: border-box;
