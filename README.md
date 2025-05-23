@@ -111,3 +111,7 @@ Criar uma plataforma acessível e intuitiva que valorize os jogos independentes 
 ### Protótipo de Telas
 
 📄 [Protótipo de Telas - Quant-UX](https://app.quant-ux.com/#/apps/67fd3ecb9491e13d3f5568ab.html)
+
+### Modelagem Conceitual do Banco de Dados
+
+📄 [Modelagem Conceitual - BRMW](https://app.brmodeloweb.com/#!/publicview/682fa3cf3f13e92855006cfa)
