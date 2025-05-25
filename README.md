@@ -108,9 +108,15 @@ Criar uma plataforma acessível e intuitiva que valorize os jogos independentes 
 
 ---
 
-### Protótipo de Telas
+### Protótipo de Telas e Guia de estilos
 
-📄 [Protótipo de Telas - Quant-UX](https://app.quant-ux.com/#/apps/67fd3ecb9491e13d3f5568ab.html)
+📄 [Protótipo de Telas  e Guia de estilos - Quant-UX](https://app.quant-ux.com/#/apps/67fd3ecb9491e13d3f5568ab.html)
+
+---
+
+### Diagrama de Atividades e Caso de Uso 
+
+📄 [Diagrama de Atividades e Caso de Uso - Google Drive](https://drive.google.com/drive/folders/1wXgwPCqXjYATQi1murx55JZmZDHpLBA5?usp=sharing)
 
 ---
 
