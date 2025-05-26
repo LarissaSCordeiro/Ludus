@@ -27,7 +27,7 @@
 <section class= "cad">
 <article id = "cad">
 <h2 id="titulo">Cadastro</h2>
-<form action="Cadastrar.php" method="post">
+<form action="#" method="post">
 <input type="email" name="email" id="email"  placeholder="Digite seu Email" required>
 <br><br>
 <input type="text" name="usuario" id="usuario" placeholder="Digite seu Nome" required>

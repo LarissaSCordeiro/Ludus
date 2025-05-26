@@ -25,9 +25,15 @@ header {
     position: relative;
 }
 
-.logo img {
-    height: 60px;
-    width: auto;
+/*Personalizaçao da logo do Ludus*/
+.logo {
+    font-size: 24px;
+    color: #d400ff;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #ffffff;
 }
 
 /*Barra de navegaçao do topo*/

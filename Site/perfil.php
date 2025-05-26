@@ -18,7 +18,8 @@
 <label for="toggle">&#9776;</label>
 <input type="checkbox" id="toggle">
 <menu>
-<a href="#"><strong>Categoria</strong></a>
+<a href="#"><strong>catalogo</strong></a>
+<!--<a href="#"><strong></strong></a>-->
 <!--<a href="#"><strong></strong></a>-->
 </menu>
 </nav>

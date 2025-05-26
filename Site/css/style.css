@@ -117,14 +117,12 @@ left: 50%;
 width: 45% ;
 transform: translate(-50%, -50%);
  }
-#log{ /*Proporcoes do container do login*/
+#log{ /*Proporcao do container do login*/
 height: 70%;
 
-
 }
-#cad{ /*Proporcoes do container do cadastro*/
+#cad{ /*Proporcao do container do cadastro*/
 height: 85%;
-
 
 }
 #email, #senha, #usuario{
@@ -134,13 +132,6 @@ height: 85%;
   border:1px solid white;
   width: 95%;
   box-sizing: border-box;
-}
-/* pesquisa */	
-#search{
- padding: 15px 90px 15px 15px ;  /* superior | direita | inferior | esquerda */	
- margin: 3em 3em 1em 3em; /* superior | direita | inferior | esquerda */	
- border-radius: 40px ;
- float : right;
 }
 #email{
  margin: 10% 0 0 0; /* superior | direita | inferior | esquerda */		
@@ -153,7 +144,7 @@ margin: 0;
 border-radius: 50px;
 background-color: #100a27; 	
 }
-#btn{
+#btn{/*botao de cadastro e login*/
   padding: 5%; 
   margin: 4%;	
   border-radius: 5px;
@@ -162,6 +153,36 @@ background-color: #100a27;
   width: 80%;
   box-sizing: border-box;
   background-color: #cd3dff;
+}
+/* Dashboard */
+/*avaliacao de estrelas*/
+.avaliacao{
+	display:flex;
+}
+.star-icon{
+	list-style-type:none;
+	/*border:1px solid #fff;*/
+	cursor:pointer;
+	color:yellow;
+}
+.star-icon::before{ /*cheio*/
+	content:"\2605"; 
+}
+.star-icon.ativo ~ .star-icon::before{ /*vazio*/
+	content:"\2606"; 
+}
+.avaliacao:hover .star-icon::before{ /*cheio*/
+	content:"\2605"; 
+}
+.star-icon:hover ~ .star-icon::before{ /*vazio*/
+	content:"\2606"; 
+}
+/* pesquisa */	
+#search{
+ padding: 15px 90px 15px 15px ;  /* superior | direita | inferior | esquerda */	
+ margin: 3em 3em 1em 3em; /* superior | direita | inferior | esquerda */	
+ border-radius: 40px ;
+ float : right;
 }
 /* final */
 footer {
