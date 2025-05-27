@@ -96,36 +96,36 @@ Criar uma plataforma acessível e intuitiva que valorize os jogos independentes 
 
 ---
 
-### Cronograma
+### 📅 Cronograma
 
 📄 [Cronograma - Google Sheets](https://docs.google.com/spreadsheets/d/1dqqndkkDbBrcT9zx_V7ehyULfcvbHYGMPKhsg61XIhQ/edit?usp=sharing)
 
 ---
 
-### Documento do Pré-Projeto
+### ⭐ Documento do Pré-Projeto
 
 📄 [Documento do Pré-Projeto - Google Docs](https://docs.google.com/document/d/1TAfNFhpTicl6oxAAo2elxP0ehnYAGOqwYtcjRfPvorg/edit?usp=sharing)
 
 ---
 
-### Protótipo de Telas e Guia de estilos
+### 🔨 Protótipo de Telas e Guia de estilos
 
 📄 [Protótipo de Telas  e Guia de estilos - Quant-UX](https://app.quant-ux.com/#/apps/67fd3ecb9491e13d3f5568ab.html)
 
 ---
 
-### Diagrama de Atividades e Caso de Uso 
+### 🚶‍♂️ Diagrama de Atividades e Caso de Uso 
 
 📄 [Diagrama de Atividades e Caso de Uso - Google Drive](https://drive.google.com/drive/folders/1wXgwPCqXjYATQi1murx55JZmZDHpLBA5?usp=sharing)
 
 ---
 
-### Modelagem Conceitual do Banco de Dados
+### 🎲 Modelagem Conceitual do Banco de Dados
 
 📄 [Modelagem Conceitual - BRMW](https://app.brmodeloweb.com/#!/publicview/682fa3cf3f13e92855006cfa)
 
 ---
 
-### Tarefas do projeto Ludus
+### 🔎 Tarefas do projeto Ludus
 
 📄 [Tarefas do projeto Ludus - Trello](https://trello.com/invite/b/683359db20f1ee4069dbd58c/ATTI3837de042cc65c0fa5809bb590371ec8FA985B46/tarefas-do-projeto-ludus)
