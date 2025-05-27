@@ -10,9 +10,9 @@
 
 ## 👥 Membros
 
-- **Jhenifer** – Design e Identidade Visual  
-- **Larissa** – Documentação e Conteúdo  
-- **Pierre** – Desenvolvimento e Lógica
+- **Jhenifer** – Design e Identidade Visual
+- **Larissa** – Desenvolvimento geral
+- **Pierre** – Planejamento e conteúdo
 
 ---
 
