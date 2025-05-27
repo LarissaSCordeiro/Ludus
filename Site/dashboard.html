@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Ludus">
+<title>Ludus | Site de avaliação de jogos Indie BR</title>
+<link rel="icon" href="./img/Ludus_Favicon.png">
+<link rel="stylesheet" href="./css/style.css"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, max-scale=1.0">
+</head>
+<body>
+<!--Interface-->
+<header>
+<nav class="search">
+<a href="index.html"><img class="logo" src="./img/logo.png" alt="logo" width="170" height="70"></a>
+<input type="text" id="search" placeholder="Pesquisar..." />
+<i class="fas fa-search icon"></i><br><br>
+</nav>
+
+<label for="toggle">&#9776;</label>
+<input type="checkbox" id="toggle">
+<menu>
+<a href="#"><strong>catalogo</strong></a>
+<!--<a href="#"><strong></strong></a>-->
+<!--<a href="#"><strong></strong></a>-->
+</menu>
+</header>
+<!--apresentacao do site-->
+<main>
+<article>
+<ul class="avaliacao">
+<li class="star-icon ativo" data-avaliacao="1"></li>
+<li class="star-icon" data-avaliacao="2"></li>
+<li class="star-icon" data-avaliacao="3"></li>
+<li class="star-icon" data-avaliacao="4"></li>
+<li class="star-icon" data-avaliacao="5"></li>
+</ul>
+<script>var stars = document.querySelectorAll('.star-icon');
+/*document.addEventListener('click',function(e){
+var classStar = e.target.classList;
+if(!classStar.contains('ativo')){
+	stars.forEach(function(star){
+		star.classList.remove('ativo');
+	});
+	classStar.add('ativo');
+}
+});*/
+document.addEventListener('click',function(e){
+var stars = e.target.parentElement.getElementsByClassName('star-icon');
+stars = Array.from(stars);
+var classStar = e.target.classList;
+if(!classStar.contains('ativo') && classStar.contains('star-icon')){
+stars.forEach(function(star){
+star.classList.remove('ativo');  
+});
+classStar.add('ativo'); 
+}
+});
+</script></article>
+</main>
+<!--Contatos-->
+<footer>
+<h3>Desenvolvedores</h3>
+</footer>
+</body>
+</html>
