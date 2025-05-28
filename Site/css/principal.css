@@ -26,15 +26,12 @@ header {
 }
 
 /*Personalizaçao da logo do Ludus*/
-.logo {
-    font-size: 24px;
-    color: #d400ff;
-    font-weight: bold;
+.logo img {
+  max-height: 30px;
+  max-width: 100%;
+  height: auto;
 }
 
-.logo span {
-    color: #ffffff;
-}
 
 /*Barra de navegaçao do topo*/
 nav {
@@ -49,17 +46,17 @@ nav a {
     text-decoration: none;
 }
 
-a {
+a:not(.a-Button) {
     font-family: 'comfortaa', sans-serif;
     transition: color 0.3s ease;
 }
 
-a:hover {
+a:hover:not(.a-Button) {
     color: #f4961e;
 }
 
 /*Botao de "Entrar" da barra de navegaçao*/
-.btn {
+.a-Button {
     background: #c130ff;
     color: white;
     border: none;
@@ -72,7 +69,7 @@ a:hover {
     transition: 0.5s ease all;
 }
 
-.btn:hover {
+.a-Button:hover {
     background-color: #5b006d;
 }
 
@@ -108,7 +105,7 @@ a:hover {
 /* Carrosel de imagens */
 .carousel {
     position: relative;
-    width: 100vw;
+    width: 100%;
     height: 450px;
     overflow: hidden;
 }
@@ -117,7 +114,7 @@ a:hover {
 
 .carousel-slide {
     position: relative;
-    width: 100vw;
+    width: 100%;
     height: 450px;
     overflow: hidden;
     flex-shrink: 0;
@@ -251,7 +248,7 @@ main {
   background-color: #0b0619; /* fundo escuro do site */
 }
 
-.container-pai-sobrenos{
+.container-pai{
     padding: 20px;
     height: 500px;
     display: flex;
@@ -259,12 +256,36 @@ main {
     justify-content: center;
 }
 
-.sobre-nos {
-  background-color: #e0e0e0; /* fundo claro da seção */
-  padding: 30px;
-  border-radius: 25px;
-  max-width: 900px;
+.cta-start {
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.cta-container {
+  max-width: 800px;
   margin: 0 auto;
+}
+
+.cta-start h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.cta-start p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #ccc;
+}
+
+.cta-buttons a {
+  display: inline-block;
+  margin: 0 10px;
+  padding: 12px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
 }
 
 .container {

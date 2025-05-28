@@ -17,6 +17,8 @@ color:#757575
 }
 .logo{
 	padding: 1em 0 0 1em; /* superior | direita | inferior | esquerda */
+	width:170px;
+	height:70px;
 }
 /* Cabeçalho */
 header {
