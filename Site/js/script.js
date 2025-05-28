@@ -50,3 +50,10 @@ const resetAutoplay = () => {
 };
 
 startAutoplay();
+
+// menu sanduíche do nav em telas pequenas
+function toggleMenu() {
+  const nav = document.getElementById('nav');
+  nav.classList.toggle('show');
+}
+

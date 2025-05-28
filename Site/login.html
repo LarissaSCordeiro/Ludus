@@ -15,37 +15,54 @@
     <!-- Interface -->
     <header>
         <!-- Logo do Ludus -->
-        <div class="logo">
+        <section class="logo">
             <a href="index.html"><img src="img/logo.png" alt="Logotipo"></a>
-        </div>
+        </section>
 
         <!-- Barra de navegaçao -->
-        <nav>
+        <nav id="nav" class="nav-links">
             <!-- Botao de entrar e links -->
-            <a href="login.html" class="a-Button">Entrar</a>  
-            <a href="cadastro.html">Criar uma conta</a> 
+            <a href="cadastro.html" class="a-Button">Criar uma conta</a>
             <a href="catalogo.html">Games</a>
         </nav>
 
         <!-- Barra de pesquisa personalizada -->
-        <div class="search-container">
+        <section class="search-container">
             <input type="text" placeholder="Pesquisar..." />
             <i class="fas fa-search icon"></i>
+        </section>
+
+        <!-- Ícone do menu sanduíche -->
+        <div class="hamburger" onclick="toggleMenu()">
+            ☰
         </div>
     </header>
 
     <!-- Apresentacao do site -->
     <main>
-        <section class="log">
-            <article id="log">
-                <h2 id="titulo">Login</h2>
-                <form action="verificacao.php" method="post">
-                    <input type="email" name="email" id="email" placeholder="Digite seu Email" required>
-                    <input type="password" name="senha" id="senha" minlength="6" placeholder="Digite sua Senha" required>
-                    <button type="submit" name="login" id="btn"><strong>Enviar</strong></button>
-                    <p>Não tem uma conta? <a href="cadastro.html">Clique aqui</a></p>
-                </form>
-            </article>
+
+        <!-- Section do background atrás do container de login -->
+        <section class="log-page-background">
+
+            <section class="overlay">
+            </section>
+
+            <section id="slogan">
+            <h1>A comunidade de quem cria com paixão e quem joga com propósito</h1>
+            </section>
+            <!-- Section do container de login -->
+                <section class="log">
+                    <article id="log">
+                        <h2 id="titulo">Login</h2>
+                        <form action="verificacao.php" method="post">
+                            <input type="email" name="email" id="email" placeholder="Digite seu Email" required>
+                            <input type="password" name="senha" id="senha" minlength="6" placeholder="Digite sua Senha"
+                                required>
+                            <button type="submit" name="login" id="btn"><strong>Enviar</strong></button>
+                            <p>Não tem uma conta? <a href="cadastro.html">Clique aqui</a></p>
+                        </form>
+                    </article>
+                </section>
         </section>
     </main>
 
@@ -53,7 +70,7 @@
     <footer class="footer-nav">
         <!-- Redes sociais -->
         <div class="social-icons">
-            <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a> 
+            <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a>
             <a href="https://github.com/LarissaSCordeiro/Ludus" target="_blank" title="GitHub"><i
                     class="fab fa-github"></i></a>
         </div>

@@ -3,33 +3,33 @@
 
 /*aplica em toda a pagina*/
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-height: 100%;
-min-height: 100%;
+  height: 100%;
+  min-height: 100%;
 }
 
 /*corpo do site*/
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #0e0a1a;
-    color: white;
-    display: flex;
-    flex-direction: column;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0e0a1a;
+  color: white;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Cabeçalho */
 header {
-    background: #0b0814;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px 30px;
-    position: relative;
+  background: #0b0814;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px;
+  position: relative;
 }
 
 /*Personalizaçao da logo do Ludus*/
@@ -41,390 +41,513 @@ header {
 
 /*menu*/
 menu {
-	margin: 0 20px 0 0;
-	float : right;
+  margin: 0 20px 0 0;
+  float: right;
 }
+
 /* Links do menu */
 menu a {
-	text-decoration: none;
-	color:white;
-	padding: 15px 15px 15px 15px;
-	margin: 0 2em 0 1em; /* superior | direita | inferior | esquerda */
-	line-height: 70px;
+  text-decoration: none;
+  color: white;
+  padding: 15px 15px 15px 15px;
+  margin: 0 2em 0 1em;
+  /* superior | direita | inferior | esquerda */
+  line-height: 70px;
 }
+
 menu a:hover {
-	background-color: #cd3dff;
-	border-radius : 25px;
-	color: #fff;
+  background-color: #cd3dff;
+  border-radius: 25px;
+  color: #fff;
 }
 
 label {
-	margin: 0 40px 0 0;
-	font-size: 26px;
-	line-height: 70px;
-	display: none;
-	width: 10px;
-	float: right;
+  margin: 0 40px 0 0;
+  font-size: 26px;
+  line-height: 70px;
+  display: none;
+  width: 10px;
+  float: right;
 }
 
 #toggle {
-	display: none;
+  display: none;
 }
 
 @media only screen and (max-width: 700px) {
-	label {
-		display: block;
-		cursor: pointer;
-	}
-	menu {
-		text-align: center;
-		width: 100%;
-		display: none;
-    position: static;
-	}
-	menu a {
-		display: block;
-		border-bottom: solid 1px white;
-		margin: 0;
-		padding: 0;
-	}
-	menu a:hover {
-		color:#fff;
-		background-color: #888;
-	}
+  label {
+    display: block;
+    cursor: pointer;
+  }
 
-	#toggle:checked + menu {
-		display: block;
-	}
+  menu {
+    text-align: center;
+    width: 100%;
+    display: none;
+    position: static;
+  }
+
+  menu a {
+    display: block;
+    border-bottom: solid 1px white;
+    margin: 0;
+    padding: 0;
+  }
+
+  menu a:hover {
+    color: #fff;
+    background-color: #888;
+  }
+
+  #toggle:checked+menu {
+    display: block;
+  }
 }
 
 /* Login e Cadastro */
-.log, .cad{ /*section*/
-position:relative;
-height: 100vh;
-/*background-color: grey; */
-width: 100%; max-width: 40%; /*margin: 100px 5% 5% 1em;*/
-margin: 20px 0 20px 0; /* superior | direita | inferior | esquerda */
-height: 400px;
-float : right;
+.log-page-background{
+  background: url('../img/Montanhas.jpeg') no-repeat center center/cover;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 50px;
 }
-.log{
-padding: 40px 5% 5% 1em; /* superior | direita | inferior | esquerda */
+
+#slogan{
+  z-index: 1;
+  width: 500px;
+  text-align: justify;
+  margin-left: 10%;
+  font-size: 36px;
+  font-family: 'League Spartan', sans-serif;
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 440px;
+  background-color: rgba(0, 0, 0, 0.5); /* escurece */
+  z-index: 0;
+}
+
+.log,
+.cad {
+  /*section*/
+  position: relative;
+  height: 100vh;
+  /*background-color: grey; */
+  width: 50%;
+  max-width: 40%;
+  /*margin: 100px 5% 5% 1em;*/
+  margin: 20px 0 20px 0;
+  /* superior | direita | inferior | esquerda */
+  height: 400px;
+  float: right;
+}
+
+.log {
+  padding: 40px 5% 5% 1em;
+  /* superior | direita | inferior | esquerda */
 
 }
-.cad{
-padding: 60px 5% 11% 1em;/* superior | direita | inferior | esquerda */
+
+.cad {
+  padding: 60px 5% 11% 1em;
+  /* superior | direita | inferior | esquerda */
 
 }
-#log,#cad { /*article*/
-position:relative;
-text-align: center;
-border-radius: 20px;
-background-color: #c6c2c2; 
-border:2px solid white;
-padding: 30px;
-position: absolute;
-top: 50%;
-left: 50%;
-width: 45% ;
-transform: translate(-50%, -50%);
- }
-#log{ /*Proporcao do container do login*/
-height: 70%;
 
-}
-#cad{ /*Proporcao do container do cadastro*/
-height: auto;
-width: auto;
-
-}
-#email, #senha, #usuario{
-  padding: 5%; 
-  margin: 3%;	
+#log,
+#cad {
+  /*article*/
+  position: relative;
+  text-align: center;
   border-radius: 20px;
-  border:1px solid white;
+  background-color:  #d9d9d9;
+  border: 2px solid white;
+  padding: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 45%;
+  transform: translate(-50%, -50%);
+}
+
+#log {
+  /*Proporcao do container do login*/
+  height: auto;
+  width: 300px;
+
+}
+
+#cad {
+  /*Proporcao do container do cadastro*/
+  height: auto;
+  width: auto;
+
+}
+
+#email,
+#senha,
+#usuario {
+  padding: 5%;
+  margin: 3%;
+  border-radius: 20px;
+  border: 1px solid white;
   width: 95%;
   box-sizing: border-box;
 }
-#email{
- margin: 10% 0 0 0; /* superior | direita | inferior | esquerda */		
+
+#email {
+  margin: 10% 0 0 0;
+  /* superior | direita | inferior | esquerda */
 }
-#titulo{/*titulo de cadastro e login*/
-height: 60px;
-width: 100% ;
-padding:  6% 0 6% 0; /* superior | direita | inferior | esquerda */
-margin: 0;
-border-radius: 50px;
-background-color: #100a27; 	
+
+#titulo {
+  /*titulo de cadastro e login*/
+  height: 60px;
+  width: 100%;
+  padding: 6% 0 6% 0;
+  /* superior | direita | inferior | esquerda */
+  margin: 0;
+  border-radius: 50px;
+  background-color: #100a27;
 }
-#btn{/*botao de cadastro e login*/
-  padding: 5%; 
-  margin: 4%;	
+
+#btn {
+  /*botao de cadastro e login*/
+  padding: 5%;
+  margin: 4%;
   border-radius: 5px;
-  border:0 ;
-  color:white;
+  border: 0;
+  color: white;
   width: 80%;
   box-sizing: border-box;
   background-color: #cd3dff;
 }
+
 /* Dashboard */
 /*avaliacao de estrelas*/
-.avaliacao{
-	display:flex;
+.avaliacao {
+  display: flex;
 }
-.star-icon{
-	list-style-type:none;
-	/*border:1px solid #fff;*/
-	cursor:pointer;
-	color:yellow;
+
+.star-icon {
+  list-style-type: none;
+  /*border:1px solid #fff;*/
+  cursor: pointer;
+  color: yellow;
 }
-.star-icon::before{ /*cheio*/
-	content:"\2605"; 
+
+.star-icon::before {
+  /*cheio*/
+  content: "\2605";
 }
-.star-icon.ativo ~ .star-icon::before{ /*vazio*/
-	content:"\2606"; 
+
+.star-icon.ativo~.star-icon::before {
+  /*vazio*/
+  content: "\2606";
 }
-.avaliacao:hover .star-icon::before{ /*cheio*/
-	content:"\2605"; 
+
+.avaliacao:hover .star-icon::before {
+  /*cheio*/
+  content: "\2605";
 }
-.star-icon:hover ~ .star-icon::before{ /*vazio*/
-	content:"\2606"; 
+
+.star-icon:hover~.star-icon::before {
+  /*vazio*/
+  content: "\2606";
 }
-/* pesquisa */	
-#search{
- padding: 15px 90px 15px 15px ;  /* superior | direita | inferior | esquerda */	
- margin: 3em 3em 1em 3em; /* superior | direita | inferior | esquerda */	
- border-radius: 40px ;
- float : right;
+
+/* pesquisa */
+#search {
+  padding: 15px 90px 15px 15px;
+  /* superior | direita | inferior | esquerda */
+  margin: 3em 3em 1em 3em;
+  /* superior | direita | inferior | esquerda */
+  border-radius: 40px;
+  float: right;
 }
+
 /* final */
 footer {
-margin-top: auto;
-background-color:#070412;
-padding: 20px;
+  margin-top: auto;
+  background-color: #070412;
+  padding: 20px;
 }
 
 /*Barra de navegaçao do topo*/
-nav {
+
+/*Menu hamburguer para dispositivos móveis*/
+.hamburger {
+  font-size: 1.8rem;
+  display: none;
+  cursor: pointer;
+}
+
+/*links da nav da index*/
+.nav-links {
+  display: flex;
+  gap: 80px;
+  align-items: center;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+}
+
+/* Layout responsivo */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: #1b1629;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  /*ligado ao JS, mostra os links do menu suspenso*/
+  .nav-links.show {
     display: flex;
-    align-items: center;
-    gap: 80px;
+    z-index: 1;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
+
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 80px;
 }
 
 /*Estilizaçao de links*/
 nav a {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 a:not(.a-Button) {
-    font-family: 'comfortaa', sans-serif;
-    transition: color 0.3s ease;
+  font-family: 'comfortaa', sans-serif;
+  transition: color 0.3s ease;
 }
 
 a:hover:not(.a-Button) {
-    color: #f4961e;
+  color: #f4961e;
 }
 
 /*Botao de "Entrar" da barra de navegaçao*/
 .a-Button {
-    background: #c130ff;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: large;
-    font-family: 'League Spartan', sans-serif;
-    transition: 0.5s ease all;
+  background: #c130ff;
+  color: white;
+  text-align: center;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: large;
+  font-family: 'League Spartan', sans-serif;
+  transition: 0.5s ease all;
 }
 
 .a-Button:hover {
-    background-color: #5b006d;
+  background-color: #5b006d;
 }
 
 /*barra de pesquisa*/
 .search-container {
-    position: relative;
-    width: 200px;
+  position: relative;
+  width: 200px;
 }
 
 .search-container input {
-    width: 100%;
-    padding: 8px 30px 8px 10px;
-    border-radius: 20px;
-    border: none;
-    background: #1b1629;
-    color: white;
+  width: 100%;
+  padding: 8px 30px 8px 10px;
+  border-radius: 20px;
+  border: none;
+  background: #1b1629;
+  color: white;
 }
 
 .search-container .icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #999;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
 .search-container input:focus+.icon {
-    opacity: 0;
+  opacity: 0;
 }
 
 /* Carrosel de imagens */
 .carousel {
-    position: relative;
-    width: 100%;
-    height: 450px;
-    overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
 }
 
 /*classe de personalizaçao das imagens*/
 
 .carousel-slide {
-    position: relative;
-    width: 100%;
-    height: 450px;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-  
-  .carousel-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: absolute;
-  }
-  
-  .carousel-slide .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(61, 22, 151, 0.5); /* fundo escuro translúcido */
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .carousel-slide:hover .overlay {
-    opacity: 1;
-  }
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
 
-  /*Personalizaçao do titulo do overlay*/
-  span{
-    color: #ccc;
-  }
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: absolute;
+}
 
-  .h2-overlay{
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 50px;
-    color: #f4961e;
-  }
-  
+.carousel-slide .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(61, 22, 151, 0.5);
+  /* fundo escuro translúcido */
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  text-align: center;
+  padding: 20px;
+}
+
+.carousel-slide:hover .overlay {
+  opacity: 1;
+}
+
+/*Personalizaçao do titulo do overlay*/
+span {
+  color: #ccc;
+}
+
+.h2-overlay {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 50px;
+  color: #f4961e;
+}
+
 .carousel-images {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    width: 100vw;
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100vw;
 }
 
 .carousel-images img {
-    width: 100%;
-    height: 100%;
-    object-position: center;
-    object-fit: cover;
-    flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
 /*Navegaçao do carrosel*/
 .nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(129, 11, 11, 0);
-    color: white;
-    border: none;
-    font-size: 50px;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 10;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(129, 11, 11, 0);
+  color: white;
+  border: none;
+  font-size: 50px;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
 }
 
 /*Botoes de proximo e anterior*/
 .nav.prev {
-    left: 20px;
+  left: 20px;
 }
 
 .nav.next {
-    right: 30px;
+  right: 30px;
 }
 
 /*Pontinhos do slider*/
 .dots {
-    position: absolute;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-    z-index: 10;
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
 }
 
 .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #000000;
-    cursor: pointer;
-    transition: background 0.3s;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #000000;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
 .dot.active {
-    background: #f4961e;
+  background: #f4961e;
 }
 
 /* Barra de navegaçao abaixo do slider */
 .nav-center {
-    background: #0a0714f7;
-    color: white;
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    padding: 20px;
-    font-size: 14px;
-    align-items: center;
+  background: #0a0714f7;
+  color: white;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 20px;
+  font-size: 14px;
+  align-items: center;
 }
 
 .nav-center a {
-    color: #ccc;
-    text-decoration: none;
-    transition: color 0.3s ease;
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .nav-center a:hover {
-    color: #f4961e;
+  color: #f4961e;
 }
 
 
 /* Sobre jogos indie */
 main {
-  background-color: #0b0619; /* fundo escuro do site */
+  background-color: #0b0619;
+  /* fundo escuro do site */
 }
 
-.container-pai{
-    padding: 20px;
-    height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.container-pai {
+  padding: 20px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cta-start {
@@ -491,37 +614,37 @@ main {
 
 /* Rodape */
 .footer-nav {
-    background: #0a0714f7;
-    color: white;
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    padding: 20px;
-    font-size: 14px;
-    align-items: center;
+  background: #0a0714f7;
+  color: white;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 20px;
+  font-size: 14px;
+  align-items: center;
 }
 
 /*Barra de navegaçao do rodape*/
 .footer-nav a {
-    color: #ccc;
-    text-decoration: none;
-    transition: color 0.3s ease;
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .footer-nav a:hover {
-    color: #f4961e;
+  color: #f4961e;
 }
 
 .footer-nav .social-icons {
-    display: flex;
-    gap: 15px;
+  display: flex;
+  gap: 15px;
 }
 
 .footer-nav .social-icons a {
-    color: #ccc;
-    font-size: 30px;
+  color: #ccc;
+  font-size: 30px;
 }
 
 .footer-nav .social-icons a:hover {
-    color: #f4961e;
+  color: #f4961e;
 }

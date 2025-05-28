@@ -13,16 +13,17 @@
 
 <body>
 
-    <!-- Cabeçalho --> 
+    <!-- Cabeçalho -->
+
     <header>
         <!-- Logo do Ludus -->
-        <div class="logo"> <a href="index.html"><img  src="img/logo.png" alt="Logotipo"></a></div>
+        <div class="logo"> <a href="index.html"><img src="img/logo.png" alt="Logotipo"></a></div>
 
         <!-- Barra de navegaçao -->
-        <nav>
+        <nav id="nav" class="nav-links">
             <!-- Botao de entrar e links -->
-            <a href="login.html" class="a-Button">Entrar</a>  
-            <a href="cadastro.html">Criar uma conta</a> 
+            <a href="login.html" class="a-Button">Entrar</a>
+            <a href="cadastro.html">Criar uma conta</a>
             <a href="catalogo.html">Games</a>
         </nav>
 
@@ -31,6 +32,12 @@
             <input type="text" placeholder="Pesquisar..." />
             <i class="fas fa-search icon"></i>
         </div>
+
+        <!-- Ícone do menu sanduíche -->
+        <div class="hamburger" onclick="toggleMenu()">
+            ☰
+        </div>
+
     </header>
 
     <!-- Parte principal do site -->
@@ -39,53 +46,53 @@
         <!-- Carrosel de imagens (linkado ao JS) -->
         <div class="carousel">
             <button class="nav prev">&#10094;</button>
+
             <!-- Imagens do carrosel -->
             <div class="carousel-images" id="carouselImages">
 
                 <div class="carousel-slide">
-                    <img src="img/Landscape-img.jpeg" alt="Landscape">
+                    <img src="img/Soldier.jpeg" alt="Soldier">
                     <div class="overlay">
-                        <h2 class="h2-overlay">Clique <span>e explore nosso mundo</span></h2>
+                        <h2 class="h2-overlay">Clique <span>para ver mais</span></h2>
                     </div>
                 </div>
 
                 <div class="carousel-slide">
-                    <img src="img/ForestMagic-img.jpeg" alt="Forest">
+                    <img src="img/Everest.jpeg" alt="Everest">
                     <div class="overlay">
-                        <h2 class="h2-overlay">Clique <span>e explore nosso mundo</span></h2>
+                        <h2 class="h2-overlay">Clique <span>para ver mais</span></h2>
                     </div>
                 </div>
 
                 <div class="carousel-slide">
-                    <img src="img/Nocturne-img.jpeg" alt="Nocturne">
+                    <img src="img/Montanhas.jpeg" alt="Desert">
                     <div class="overlay">
-                        <h2 class="h2-overlay">Clique <span>e explore nosso mundo</span></h2>
+                        <h2 class="h2-overlay">Clique <span>para ver mais</span></h2>
                     </div>
                 </div>
 
                 <div class="carousel-slide">
                     <img src="img/Eden-img.jpeg" alt="Eden">
                     <div class="overlay">
-                        <h2 class="h2-overlay">Clique <span>e explore nosso mundo</span></h2>
+                        <h2 class="h2-overlay">Clique <span>para ver mais</span></h2>
                     </div>
                 </div>
             </div>
 
             <button class="nav next">&#10095;</button>
-            <!-- Pontos do slider -->
+            <!-- Pontinhos do slider -->
             <div class="dots" id="dotsContainer"></div>
         </div>
 
         <div class="nav-center">
-            <a href="#SobreIndies">O que são Jogos indie?</a>
-            <a href="#SobreIndies">Nossa Missão</a>
+
         </div>
 
         <!-- Sobre jogos indie -->
 
         <section class="container-pai">
             <section class="cta-start">
-                 <div class="cta-container">
+                <div class="cta-container">
                     <h2>Junte-se ao Ludus</h2>
                     <p>Descubra e avalie os melhores jogos independentes criados por brasileiros.</p>
                     <div class="cta-buttons">
@@ -100,7 +107,7 @@
     <footer class="footer-nav">
         <!-- Redes sociais -->
         <div class="social-icons">
-            <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a> 
+            <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a>
             <a href="https://github.com/LarissaSCordeiro/Ludus" target="_blank" title="GitHub"><i
                     class="fab fa-github"></i></a>
         </div>
