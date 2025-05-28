@@ -1,61 +1,87 @@
-<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="description" content="Ludus">
-<title>Ludus | Site de avaliação de jogos Indie BR</title>
-<link rel="icon" href="./img/Ludus_Favicon.png">
-<link rel="stylesheet" href="./css/style.css"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ludus | Jogos Indie BR</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="icon" href="img/Ludus_Favicon.png" type="image/x-icon" />
+    <script defer src="./js/script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
-<!--Interface-->
-<header>
-<nav class="search">
-<a href="index.html"><img class="logo" src="./img/logo.png" alt="logo"></a>
-<input type="text" id="search" placeholder="Pesquisar..." />
-<i class="fas fa-search icon"></i><br><br>
-</nav>
-<label for="toggle">&#9776;</label>
-<input type="checkbox" id="toggle">
-<menu>
-<a href="catalogo.html"><strong>catalogo</strong></a>
-<!--<a href="#"><strong></strong></a>-->
-<!--<a href="#"><strong></strong></a>-->
-</menu>
-</header>
-<!--apresentacao do site-->
-<main>
-<section class= "cad">
-<article id = "cad">
-<h2 id="titulo">Cadastro</h2>
-<form action="#" method="post">
-<input type="email" name="email" id="email"  placeholder="Digite seu Email" required>
-<br><br>
-<input type="text" name="usuario" id="usuario" placeholder="Digite seu Nome" required>
-<br><br>
-<input type="text" name="senha" id="senha" min="6" placeholder="Digite sua Senha" required>
-<br><br>
-<input type="text" name="senha" id="senha" min="6" placeholder="Confirmar Senha" required>
-<br><br>
-<!--<?php
-if(isset($_POST['cadastro'])){
-$email = $_POST['email'];
-$senha = $_POST['senha'];
-$usuario = $_POST['usuario'];
-require_once("conexao.php");
-$hash = password_hash($_POST['senha'], PASSWORD_BCRYPT);
-$consulta = $mysqli->prepare("INSERT INTO ludus(email, senha, usuario) VALUES (?, ?, ?)");
-$consulta->bind_param("sss", $email, $senha, $usuario);
-$consulta->execute();
-$consulta->close();	
-} ?> -->
-<button type="submit" name="cadastro" id="btn" > <strong>Enviar</strong> </button>
-<br><br>
-<a href="login.html">Fazer Login</a>
-</form>
-</article></section></main>
-<!--Contatos-->
-<footer>
-<h3>Desenvolvedores</h3>
-</footer>
+    <!-- Interface -->
+    <header>
+        <!-- Logo do Ludus -->
+        <div class="logo">
+            <a href="index.html"><img src="img/logo.png" alt="Logotipo"></a>
+        </div>
+
+        <!-- Barra de navegaçao -->
+        <nav>
+            <!-- Botao de entrar e links -->
+            <a href="login.html" class="a-Button">Entrar</a>  
+            <a href="cadastro.html">Criar uma conta</a> 
+            <a href="catalogo.html">Games</a>
+        </nav>
+
+        <!-- Barra de pesquisa personalizada -->
+        <div class="search-container">
+            <input type="text" placeholder="Pesquisar..." />
+            <i class="fas fa-search icon"></i>
+        </div>
+    </header>
+
+    <!-- Apresentacao do site -->
+    <main>
+        <section class="cad">
+            <article id="cad">
+                <h2 id="titulo">Cadastro</h2>
+                <form action="#" method="post">
+                    <input type="email" name="email" id="email" placeholder="Digite seu Email" required>
+                    <br><br>
+                    <input type="text" name="usuario" id="usuario" placeholder="Digite seu Nome" required>
+                    <br><br>
+                    <input type="password" name="senha" id="senha" minlength="6" placeholder="Digite sua Senha" required>
+                    <br><br>
+                    <input type="password" name="confirmar_senha" id="confirmar_senha" minlength="6" placeholder="Confirmar Senha" required>
+                    <br><br>
+                    <!-- 
+                    <?php
+                    if(isset($_POST['cadastro'])){
+                        $email = $_POST['email'];
+                        $senha = $_POST['senha'];
+                        $usuario = $_POST['usuario'];
+                        require_once("conexao.php");
+                        $hash = password_hash($_POST['senha'], PASSWORD_BCRYPT);
+                        $consulta = $mysqli->prepare("INSERT INTO ludus(email, senha, usuario) VALUES (?, ?, ?)");
+                        $consulta->bind_param("sss", $email, $senha, $usuario);
+                        $consulta->execute();
+                        $consulta->close();	
+                    } 
+                    ?> 
+                    -->
+                    <button type="submit" name="cadastro" id="btn"><strong>Enviar</strong></button>
+                    <br><br>
+                    <a href="login.html">Fazer Login</a>
+                </form>
+            </article>
+        </section>
+    </main>
+
+    <!-- Contatos -->
+    <footer class="footer-nav">
+        <!-- Redes sociais -->
+        <div class="social-icons">
+            <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a> 
+            <a href="https://github.com/LarissaSCordeiro/Ludus" target="_blank" title="GitHub"><i
+                    class="fab fa-github"></i></a>
+        </div>
+
+        <span>Ludus • v0.1</span>
+    </footer>
 </body>
+
 </html>
