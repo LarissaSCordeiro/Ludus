@@ -20,6 +20,7 @@ body {
   color: white;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 /* Cabeçalho */
@@ -105,6 +106,16 @@ label {
 }
 
 /* Login e Cadastro */
+.container-text-pai-logpage{
+  display: flex;
+  height: 500px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  background-color: #d9d9d9;
+}
+
+
 .log-page-background{
   background: url('../img/Montanhas.jpeg') no-repeat center center/cover;
       height: 100%;
@@ -137,7 +148,7 @@ label {
   /*section*/
   position: relative;
   height: 100vh;
-  /*background-color: grey; */
+  background-color: grey; 
   width: 50%;
   max-width: 40%;
   /*margin: 100px 5% 5% 1em;*/
@@ -167,7 +178,6 @@ label {
   border-radius: 20px;
   background-color:  #d9d9d9;
   border: 2px solid white;
-  padding: 30px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -177,19 +187,17 @@ label {
 
 #log {
   /*Proporcao do container do login*/
-  height: auto;
-  width: 300px;
+ 
 
 }
 
 #cad {
   /*Proporcao do container do cadastro*/
-  height: auto;
-  width: auto;
-
+  
 }
 
 #email,
+#confirmar_senha,
 #senha,
 #usuario {
   padding: 5%;
@@ -273,9 +281,10 @@ label {
 
 /* final */
 footer {
-  margin-top: auto;
+  margin-top: auto; /* Mágica do flexbox */
   background-color: #070412;
   padding: 20px;
+  width: 100%;
 }
 
 /*Barra de navegaçao do topo*/
@@ -376,8 +385,8 @@ a:hover:not(.a-Button) {
   padding: 8px 30px 8px 10px;
   border-radius: 20px;
   border: none;
-  background: #1b1629;
-  color: white;
+  background: #d9d9d9;
+  color: #666666;
 }
 
 .search-container .icon {
