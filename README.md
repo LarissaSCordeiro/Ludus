@@ -5,10 +5,10 @@
 ## 🎨 Identidade Visual
 
 ### Logo
-![Logo do Ludus](https://drive.google.com/uc?export=view&id=1sVBR9Xrd-SRjq4P7Rl019tZRXmJ3x-EC)
+![Logo do Ludus](https://github.com/LarissaSCordeiro/Ludus/blob/fab4d19b3ea04b5652e6c7231516e948d63f7d08/Imagens/Logotipo%20Ludus.png)
 
 ### Paleta de Cores
-![Paleta de Cores](https://drive.google.com/uc?export=view&id=1LyPiGjpsarDziACfidgyv1Xdx5-apWNE)
+![Paleta de Cores](https://github.com/LarissaSCordeiro/Ludus/blob/fab4d19b3ea04b5652e6c7231516e948d63f7d08/Imagens/Paleta%20de%20Cores%20Ludus.png)
 
 ---
 
