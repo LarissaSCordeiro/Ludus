@@ -15,9 +15,9 @@ html {
 
 /*corpo do site*/
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'comfortaa', sans-serif;
   background: #0e0a1a;
-  color: white;
+  color: #d9d9d9;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -25,17 +25,19 @@ body {
 
 /* Cabeçalho */
 header {
+  display: flex;
   background: #0b0814;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 15px 30px;
   position: relative;
+  gap: 40px;
 }
 
 /*Personalizaçao da logo do Ludus*/
 .logo img {
-  max-height: 30px;
+  max-height: 50px;
   max-width: 100%;
   height: auto;
 }
@@ -106,7 +108,7 @@ label {
 }
 
 /* Login e Cadastro */
-.container-text-pai-logpage{
+.container-text-pai-logpage {
   display: flex;
   height: 500px;
   align-items: center;
@@ -115,107 +117,167 @@ label {
   background-color: #d9d9d9;
 }
 
-.log-page-background{
+.log-page-background {
   background: url('../img/Montanhas.jpeg') no-repeat center center/cover;
   background-attachment: fixed;
   height: 100vh;
   height: 100%;
   display: flex;
-   align-items: center;
-   justify-content: space-between;
-    padding: 0 50px; /* superior | direita | inferior | esquerda */
-	animation: moveBackground 5s infinite alternate ease-in-out;/*Mover a imagem se sair do lugar*/
-} 
-/*Mover a imagem*/
-@keyframes moveBackground {
-    0% { background-size: 100%; }
-    100% { background-size: 105%; }
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  /* superior | direita | inferior | esquerda */
+  animation: moveBackground 5s infinite alternate ease-in-out;
+  /*Mover a imagem se sair do lugar*/
 }
 
-#slogan{
+/*Mover a imagem*/
+@keyframes moveBackground {
+  0% {
+    background-size: 100%;
+  }
+
+  100% {
+    background-size: 105%;
+  }
+}
+
+#slogan {
   z-index: 1;
   width: 500px;
   text-align: justify;
   margin-left: 10%;
   font-size: 36px;
   font-family: 'League Spartan', sans-serif;
-} 
+}
 
 .overlay {
   position: absolute;
   left: 0;
   width: 100%;
-  height: 750px;/* Se mudar aqui mude o log/cad tambem */
-  background-color: rgba(0, 0, 0, 0.5); 
+  height: 750px;
+  /* Se mudar aqui mude o log/cad tambem */
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 0;
-} 
+}
 
 /* Login e Cadastro */
-.log, .cad{ /*section*/
-position:relative;
-height: 100vh;
-/*background-color: grey; */
-width: 100%; max-width: 45%; /*margin: 100px 5% 5% 1em;*/
-height: 750px; /* Se mudar aqui mude o overley tambem */
-float : right;
+.log,
+.cad {
+  /*section*/
+  position: relative;
+  height: 100vh;
+  /*background-color: grey; */
+  width: 100%;
+  max-width: 45%;
+  /*margin: 100px 5% 5% 1em;*/
+  height: 750px;
+  /* Se mudar aqui mude o overley tambem */
+  float: right;
 }
-.log{
-padding: 40px 5% 5% 1em; /* superior | direita | inferior | esquerda */
+
+.log {
+  padding: 40px 5% 5% 1em;
+  /* superior | direita | inferior | esquerda */
 
 }
-.cad{
-padding: 60px 5% 11% 1em;/* superior | direita | inferior | esquerda */
+
+.cad {
+  padding: 60px 5% 11% 1em;
+  /* superior | direita | inferior | esquerda */
 
 }
-#log,#cad { /*article*/
-position:relative;
-text-align: center;
-border-radius: 20px;
-background-color: rgba(0, 0, 0, 0.30);  
-padding: 30px;
-position: absolute;
-top: 50%;
-left: 50%;
-width: 350px;
-transform: translate(-50%, -50%);
- }
-#log{ /*Proporcao do container do login VERTICAL*/
-height: 420px;
 
-}
-#cad{ /*Proporcao do container do cadastro VERTICAL*/
-height: 670px;
-
-}
-#email, #senha, #usuario, #confirmar_senha{
-  padding: 5%; 
-  margin: 1em 0 1em 0; /* superior | direita | inferior | esquerda */		
+#log,
+#cad {
+  /*article*/
+  position: relative;
+  text-align: center;
   border-radius: 20px;
-  border:1px solid white;
+  background-color: rgba(0, 0, 0, 0.30);
+  padding: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 350px;
+  box-shadow: #000000;
+  transform: translate(-50%, -50%);
+}
+
+#log {
+  /*Proporcao do container do login VERTICAL*/
+  height: auto;
+  padding-bottom: 40px;
+
+}
+
+#cad {
+  /*Proporcao do container do cadastro VERTICAL*/
+  height: auto;
+  padding-bottom: 40px;
+
+}
+
+input {
+  padding: 5%;
+  margin: 10px 10px 10px 10px;
+  /* superior | direita | inferior | esquerda */
+  border-radius: 20px;
+  border: 1px solid rgb(153, 153, 153);
   width: 95%;
   box-sizing: border-box;
+  background-color: #26203f;
+  font-size: 15px;
+  color: #d9d9d9;
+  transition: box-shadow 0.3s ease;
 }
-#email{
- margin: 2em 0 1em 0; /* superior | direita | inferior | esquerda */		
+
+input:focus {
+  outline: none;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6),
+    0 0 4px #cd3dff;
 }
-#titulo{/*titulo de cadastro e login*/
-height: 70px;
-width: 100% ;
-padding:  6% 0 6% 0; /* superior | direita | inferior | esquerda */
-margin: 0;
-border-radius: 50px;
-background-color: #100a27; 	
+
+input::placeholder {
+  color: #afafaf;
 }
-#btn{/*botao de cadastro e login*/
-  padding: 5%; 
-  margin: 4%;	
+
+#titulo {
+  /*titulo de cadastro e login*/
+  height: 70px;
+  width: 100%;
+  padding: 8% 0 6% 0;
+  /* superior | direita | inferior | esquerda */
+  margin: 0 0 2e0px;
+  border-radius: 50px;
+  background-color: #100a27;
+}
+
+#btn {
+  /*botao de cadastro e login*/
+  padding: 5%;
+  margin: 4%;
   border-radius: 5px;
-  border:0 ;
-  color:white;
+  border: 0;
+  color: white;
+  font-size: 18px;
   width: 90%;
   box-sizing: border-box;
   background-color: #cd3dff;
-  margin: 1em 0 2em 0; /* superior | direita | inferior | esquerda */	
+  margin: 1em 0 2em 0;
+  /* superior | direita | inferior | esquerda */
+  font-family: 'comfortaa', sans-serif;
+}
+
+.login-return,
+.cadastro-return,
+.forgot-password {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #a86cf7;
+  text-decoration: none;
+  font-size: 0.95rem;
 }
 
 /* Dashboard */
@@ -263,7 +325,8 @@ background-color: #100a27;
 
 /* final */
 footer {
-  margin-top: auto; /* Mágica do flexbox */
+  margin-top: auto;
+  /* Mágica do flexbox */
   background-color: #070412;
   padding: 20px;
   width: 100%;
@@ -283,6 +346,10 @@ footer {
   display: flex;
   gap: 80px;
   align-items: center;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 60px;
 }
 
 .nav-links a {
@@ -325,12 +392,11 @@ nav {
 
 /*Estilizaçao de links*/
 nav a {
-  color: white;
+  color: #d9d9d9;
   text-decoration: none;
 }
 
 a:not(.a-Button) {
-  font-family: 'comfortaa', sans-serif;
   transition: color 0.3s ease;
 }
 
@@ -347,8 +413,6 @@ a:hover:not(.a-Button) {
   border-radius: 20px;
   cursor: pointer;
   font-weight: bold;
-  font-size: large;
-  font-family: 'League Spartan', sans-serif;
   transition: 0.5s ease all;
 }
 
@@ -359,7 +423,7 @@ a:hover:not(.a-Button) {
 /*barra de pesquisa*/
 .search-container {
   position: relative;
-  width: 200px;
+  width: 300px;
 }
 
 .search-container input {
@@ -367,8 +431,6 @@ a:hover:not(.a-Button) {
   padding: 8px 30px 8px 10px;
   border-radius: 20px;
   border: none;
-  background: #d9d9d9;
-  color: #666666;
 }
 
 .search-container .icon {
@@ -438,7 +500,6 @@ span {
 }
 
 .h2-overlay {
-  font-family: 'Segoe UI', sans-serif;
   font-size: 50px;
   color: #f4961e;
 }
@@ -514,6 +575,7 @@ span {
   padding: 20px;
   font-size: 14px;
   align-items: center;
+  flex: 1;
 }
 
 .nav-center a {
@@ -602,6 +664,137 @@ main {
   font-size: 16px;
   line-height: 1.6;
 }
+
+/* Sessão de Catálogo ----------*/
+.categoria {
+  padding: 2rem;
+}
+
+.categoria h2 {
+  color: #cd3dff;
+  margin-bottom: 1rem;
+  font-family: "League Spartan", sans-serif;
+  font-size: 2em;
+}
+
+.jogos {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.jogo-card {
+  background-color: #1f1b2e;
+  border-radius: 10px;
+  padding: 1rem;
+  width: 300px;
+  text-align: center;
+}
+
+.jogo-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.jogo-card span {
+  font-size: 0.75rem;
+  background-color: #333;
+  border-radius: 5px;
+  padding: 0.2rem 0.4rem;
+  margin: 0.2rem;
+  display: inline-block;
+}
+
+.avaliacoes,
+.generos {
+  padding: 2rem;
+}
+
+.avaliacao {
+  background-color: #1f1b2e;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+}
+
+/* Layout principal com 2 colunas */
+.conteudo {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+/* Coluna de conteúdo principal (jogos) */
+.coluna-principal {
+  flex: 3;
+}
+
+/* Coluna lateral direita */
+.coluna-lateral {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Título da lateral */
+.titulo-lateral {
+  font-size: 2rem;
+  color: #cd3dff;
+  margin-bottom: 1rem;
+  font-family: "League Spartan", sans-serif;
+}
+
+/* Avaliação Card */
+.avaliacao-card {
+  display: flex;
+  background-color: #1a132d;
+  border-radius: 10px;
+  padding: 1rem;
+  gap: 1rem;
+  color: #eee;
+  margin-bottom: 1rem;
+}
+
+.avaliacao-card img {
+  width: 70px;
+  height: 100px;
+  border-radius: 6px;
+}
+
+.avaliacao-texto {
+  flex: 1;
+  font-size: 0.8rem;
+  line-height: 2em;
+}
+
+.meta {
+  display: flex;
+  gap: 10px;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #aaa;
+}
+
+/* Gênero Recomendado */
+.genero-card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.genero-card img:hover {
+  transform: scale(1.03);
+}
+
+@media (max-width: 768px) {
+  .conteudo {
+    flex-direction: column;
+  }
+}
+/*--------------------------*/
+
 
 /* Rodape */
 .footer-nav {

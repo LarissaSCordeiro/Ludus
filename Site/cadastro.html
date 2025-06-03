@@ -15,15 +15,13 @@
     <!-- Interface -->
     <header>
         <!-- Logo do Ludus -->
-        <div class="logo">
-            <a href="index.html"><img src="img/logo.png" alt="Logotipo"></a>
-        </div>
+        <div class="logo"> <a href="index.html"><img src="img/logo.png" alt="Logotipo"></a></div>
 
         <!-- Barra de navegaçao -->
-        <nav>
+        <nav id="nav" class="nav-links">
             <!-- Botao de entrar e links -->
-            <a href="login.html" class="a-Button">Entrar</a>  
-            <a href="cadastro.html">Criar uma conta</a> 
+            <a href="login.html" class="a-Button">Entrar</a>
+            <a href="cadastro.html">Criar uma conta</a>
             <a href="catalogo.html">Games</a>
         </nav>
 
@@ -32,6 +30,12 @@
             <input type="text" placeholder="Pesquisar..." />
             <i class="fas fa-search icon"></i>
         </div>
+
+        <!-- Ícone do menu sanduíche -->
+        <div class="hamburger" onclick="toggleMenu()">
+            ☰
+        </div>
+
     </header>
 
     <!-- Apresentacao do site -->
@@ -48,14 +52,10 @@
             <article id="cad">
                 <h2 id="titulo">Cadastro</h2>
                 <form action="#" method="post">
-                    <input type="email" name="email" id="email" placeholder="Digite seu Email" required>
-                    <br><br>
-                    <input type="text" name="usuario" id="usuario" placeholder="Digite seu Nome" required>
-                    <br><br>
-                    <input type="password" name="senha" id="senha" minlength="6" placeholder="Digite sua Senha" required>
-                    <br><br>
+                    <input type="email" name="email" id="email" placeholder="Email" required>
+                    <input type="text" name="usuario" id="usuario" placeholder="Usuário" required>
+                    <input type="password" name="senha" id="senha" minlength="6" placeholder="Senha" required>
                     <input type="password" name="confirmar_senha" id="confirmar_senha" minlength="6" placeholder="Confirmar Senha" required>
-                    <br><br>
                     <!-- 
                     <?php
                     if(isset($_POST['cadastro'])){
@@ -72,8 +72,7 @@
                     ?> 
                     -->
                     <button type="submit" name="cadastro" id="btn"><strong>Enviar</strong></button>
-                    <br><br>
-                    <a href="login.html">Fazer Login</a>
+                    <a class="login-return" href="login.html">Já tem uma conta? Faça Login.</a>
                 </form>
             </article>
         </section>

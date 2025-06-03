@@ -1,34 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="description" content="Ludus">
-<title>Ludus | Site de avaliação de jogos Indie BR</title>
-<link rel="icon" href="./img/Ludus_Favicon.png">
-<link rel="stylesheet" href="./css/style.css"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, max-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ludus | Jogos Indie BR</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="icon" href="img/Ludus_Favicon.png" type="image/x-icon" />
+    <script defer src="./js/script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 <!--Interface-->
 <header>
-<nav class="search">
-<a href="index.html"><img class="logo" src="./img/logo.png" alt="logo" width="170" height="70"></a>
-<input type="text" id="search" placeholder="Pesquisar..." />
-<i class="fas fa-search icon"></i><br><br>
-</nav>
+        <!-- Logo do Ludus -->
+        <section class="logo">
+            <a href="index.html"><img src="img/logo.png" alt="Logotipo"></a>
+        </section>
 
-<label for="toggle">&#9776;</label>
-<input type="checkbox" id="toggle">
-<menu>
-<a href="catalogo.html"><strong>catalogo</strong></a>
-<!--<a href="#"><strong></strong></a>-->
-<!--<a href="#"><strong></strong></a>-->
-</menu>
-</header>
+        <!-- Barra de navegaçao -->
+        <nav id="nav" class="nav-links">
+            <!-- Botao de entrar e links -->
+            <a href="cadastro.html" class="a-Button">Criar uma conta</a>
+            <a href="catalogo.html">Games</a>
+        </nav>
+
+        <!-- Barra de pesquisa personalizada -->
+        <section class="search-container">
+            <input type="text" placeholder="Pesquisar..." />
+            <i class="fas fa-search icon"></i>
+        </section>
+
+        <!-- Ícone do menu sanduíche -->
+        <div class="hamburger" onclick="toggleMenu()">
+            ☰
+        </div>
+    </header>
 <!--apresentacao do site-->
 <main>
 <article>
-<a href="dashboard.html"><img class="#" src="./img/#" alt="#" ></a>
+<a href="dashboard.html"><img class="#" src="./img/NewGameVertical.png" alt="Capa Jogo" width="300" ></a>
 <ul class="avaliacao">
 <li class="star-icon ativo" data-avaliacao="1"></li>
 <li class="star-icon" data-avaliacao="2"></li>

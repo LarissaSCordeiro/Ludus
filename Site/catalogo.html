@@ -10,18 +10,18 @@
     <script defer src="./js/script.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
-<!--Interface-->
-<header>
+    <!--Interface-->
+    <header>
         <!-- Logo do Ludus -->
-        <div class="logo"> <a href="index.html"><img  src="img/logo.png" alt="Logotipo"></a></div>
+        <div class="logo"> <a href="index.html"><img src="img/NewLudusLogo.png" alt="Logotipo"></a></div>
 
         <!-- Barra de navegaçao -->
         <nav>
             <!-- Botao de entrar e links -->
-            <a href="login.html" class="a-Button">Entrar</a>  
-            <a href="cadastro.html">Criar uma conta</a> 
-            <a href="catalogo.html">Games</a>
+            <a href="login.html" class="a-Button">Entrar</a>
+            <a href="cadastro.html">Criar uma conta</a>
         </nav>
 
         <!-- Barra de pesquisa personalizada -->
@@ -30,11 +30,185 @@
             <i class="fas fa-search icon"></i>
         </div>
     </header>
-<main></main>
-<footer class="footer-nav">
+
+    <main>
+        <div class="carousel">
+            <button class="nav prev">&#10094;</button>
+
+            <!-- Imagens do carrosel -->
+            <div class="carousel-images" id="carouselImages">
+
+                <div class="carousel-slide">
+                    <img src="img/Soldier.jpeg" alt="Soldier">
+                    <div class="overlay">
+                        <h2 class="h2-overlay">Clique <span>para ver mais</span></h2>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <img src="img/Everest.jpeg" alt="Everest">
+                    <div class="overlay">
+                        <h2 class="h2-overlay">Clique <span>para ver mais</span></h2>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <img src="img/Montanhas.jpeg" alt="Desert">
+                    <div class="overlay">
+                        <h2 class="h2-overlay">Clique <span>para ver mais</span></h2>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <img src="img/Eden-img.jpeg" alt="Eden">
+                    <div class="overlay">
+                        <h2 class="h2-overlay">Clique <span>para ver mais</span></h2>
+                    </div>
+                </div>
+            </div>
+
+            <button class="nav next">&#10095;</button>
+            <!-- Pontinhos do slider -->
+            <div class="dots" id="dotsContainer"></div>
+        </div>
+
+        <div class="nav-center">
+
+        </div>
+
+        <div class="conteudo">
+           <!-- Catálogo cards e comentários (coluna principal) -->
+            <div class="coluna-principal">
+                <section class="categoria">
+                    <h2>Em Alta</h2>
+                    <div class="jogos">
+                        <!-- Cartões de jogo -->
+                        <div class="jogo-card">
+                            <img src="./img/NewGameVertical.png" alt="NewGame" />
+                            <p>Jogo 1</p>
+                            <span>RPG</span><span>2D</span>
+                        </div>
+                        <div class="jogo-card">
+                            <img src="./img/NewGameVertical.png" alt="NewGame" />
+                            <p>Jogo 1</p>
+                            <span>RPG</span><span>2D</span>
+                        </div>
+                        <div class="jogo-card">
+                            <img src="./img/NewGameVertical.png" alt="NewGame" />
+                            <p>Jogo 1</p>
+                            <span>RPG</span><span>2D</span>
+                        </div>
+                        <!-------------------->
+                    </div>
+                </section>
+
+                <!-- Jogos populares -->
+                <section class="categoria">
+                    <h2>Populares</h2>
+                    <div class="jogos">
+                        <div class="jogo-card">
+                            <img src="./img/NewGameVertical.png" alt="NewGame" />
+                            <p>Jogo 1</p>
+                            <span>RPG</span><span>2D</span>
+                        </div>
+                        <div class="jogo-card">
+                            <img src="./img/NewGameVertical.png" alt="NewGame" />
+                            <p>Jogo 1</p>
+                            <span>RPG</span><span>2D</span>
+                        </div>
+                        <div class="jogo-card">
+                            <img src="./img/NewGameVertical.png" alt="NewGame" />
+                            <p>Jogo 1</p>
+                            <span>RPG</span><span>2D</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Coluna lateral direita (comentários e jogos recomendados) -->
+            <aside class="coluna-lateral">
+                <!-- Avaliações Populares -->
+                <section class="avaliacoes">
+                    <h2 class="titulo-lateral">Avaliações Populares</h2>
+
+                    <div class="avaliacao-card">
+                        <img src="./img/NewGameVertical.png" alt="Capa Jogo" />
+                        <div class="avaliacao-texto">
+                            <p><strong>Nome do Jogo</strong></p>
+                            <p><small>@PoerreGameplays</small></p>
+                            <p>“Esse jogo é incrível! Ambientação linda e história envolvente.”</p>
+                            <div class="meta">
+                                <span>❤️ 0</span>
+                                <span>💬 0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="avaliacao-card">
+                        <img src="./img/NewGameVertical.png" alt="Capa Jogo" />
+                        <div class="avaliacao-texto">
+                            <p><strong>Nome do Jogo</strong></p>
+                            <p><small>@LarissaSonic_exe</small></p>
+                            <p>“Gostei, jogaria mais 1000 vezes!”</p>
+                            <div class="meta">
+                                <span>❤️ 0</span>
+                                <span>💬 0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="avaliacao-card">
+                        <img src="./img/NewGameVertical.png" alt="Capa Jogo" />
+                        <div class="avaliacao-texto">
+                            <p><strong>Nome do Jogo</strong></p>
+                            <p><small>@JheniferDevilMayCry99</small></p>
+                            <p>“Foda demais!”</p>
+                            <div class="meta">
+                                <span>❤️ 0</span>
+                                <span>💬 0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="avaliacao-card">
+                        <img src="./img/NewGameVertical.png" alt="Capa Jogo" />
+                        <div class="avaliacao-texto">
+                            <p><strong>Nome do Jogo</strong></p>
+                            <p><small>@ElianaMegaman</small></p>
+                            <p>“Não posso descrever a incrivel magnetude de tal obra.”</p>
+                            <div class="meta">
+                                <span>❤️ 0</span>
+                                <span>💬 0</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Gêneros Recomendados -->
+                <section class="generos">
+                    <h2 class="titulo-lateral">Gêneros Recomendados</h2>
+
+                    <div class="genero-card">
+                        <img src="./img/NewGameH.png" alt="Banner Gênero" />
+                    </div>
+                    <div class="genero-card">
+                        <img src="./img/NewGameH.png" alt="Banner Gênero" />
+                    </div>
+                    <div class="genero-card">
+                        <img src="./img/NewGameH.png" alt="Banner Gênero" />
+                    </div>
+                    <div class="genero-card">
+                        <img src="./img/NewGameH.png" alt="Banner Gênero" />
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="footer-nav">
         <!-- Redes sociais -->
         <div class="social-icons">
-            <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a> 
+            <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a>
             <a href="https://github.com/LarissaSCordeiro/Ludus" target="_blank" title="GitHub"><i
                     class="fab fa-github"></i></a>
         </div>
@@ -42,4 +216,5 @@
         <span>Ludus • v0.1</span>
     </footer>
 </body>
+
 </html>
