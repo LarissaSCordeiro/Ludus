@@ -14,7 +14,7 @@
 <header>
         <!-- Logo do Ludus -->
         <section class="logo">
-            <a href="index.html"><img src="img/logo.png" alt="Logotipo"></a>
+           <a href="index.html"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
         </section>
 
         <!-- Barra de navegaçao -->
@@ -36,9 +36,10 @@
         </div>
     </header>
 <!--apresentacao do site-->
-<main>
-<article>
-<a href="dashboard.html"><img class="#" src="./img/NewGameVertical.png" alt="Capa Jogo" width="300" ></a>
+<main id="dash_main">
+<figure class="dash_img">
+<img src="./img/NewGameVertical.png" alt="Capa Jogo" >
+</figure>
 <ul class="avaliacao">
 <li class="star-icon ativo" data-avaliacao="1"></li>
 <li class="star-icon" data-avaliacao="2"></li>
@@ -70,8 +71,15 @@ classStar.add('ativo');
 </script></article>
 </main>
 <!--Contatos-->
-<footer>
-<h3>Desenvolvedores</h3>
-</footer>
+ <footer class="footer-nav">
+        <!-- Redes sociais -->
+        <div class="social-icons">
+            <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://github.com/LarissaSCordeiro/Ludus" target="_blank" title="GitHub"><i
+                    class="fab fa-github"></i></a>
+        </div>
+
+        <span>Ludus • v0.1</span>
+    </footer>
 </body>
 </html>
