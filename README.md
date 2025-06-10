@@ -126,7 +126,7 @@ Criar uma plataforma acessível e intuitiva que valorize os jogos independentes 
 
 ### 🎲 Modelagem Conceitual do Banco de Dados
 
-📄 [Modelagem Conceitual - BRMW](https://app.brmodeloweb.com/#!/publicview/682fa3cf3f13e92855006cfa)
+📄 [Modelagem Conceitual - BRMW](https://app.brmodeloweb.com/#!/publicview/68424336adc033f78f1a6684)
 
 ---
 
