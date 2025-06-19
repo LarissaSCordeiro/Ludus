@@ -214,6 +214,14 @@ label {
 
 }
 
+.error-message{
+  background-color: #ff4d4d; 
+  padding: 10px; 
+  border-radius: 8px; 
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
 input {
   padding: 5%;
   margin: 10px 10px 10px 10px;
@@ -244,7 +252,7 @@ input::placeholder {
   width: 100%;
   padding: 8% 0 6% 0;
   /* superior | direita | inferior | esquerda */
-  margin: 0 0 2e0px;
+  margin-bottom: 15px;
   border-radius: 50px;
   background-color: #100a27;
 }
