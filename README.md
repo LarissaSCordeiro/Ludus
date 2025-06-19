@@ -120,14 +120,24 @@ Criar uma plataforma acessível e intuitiva que valorize os jogos independentes 
 
 ### 🚶‍♂️ Diagramas
 
+#### Diagrama de Atividades
+
 📄 [Diagrama de Atividades](https://github.com/LarissaSCordeiro/Ludus/tree/5fc98394d2e716202f6a2578954c2847ba7d3af9/Documentos/Diagramas/Diagrama%20de%20Atividades)
-📄 [Diagrama de Caso de Uso](https://github.com/LarissaSCordeiro/Ludus/blob/a0830e4233d8d5bd50b0cfa6850e882b63221c55/Documentos/Diagramas/Diagrama%20de%20Casos%20de%20Uso%20-%20Ludus.pdf)
+
+#### Diagrama de Casos de Uso
+
+📄 [Diagrama de Casos de Uso](https://github.com/LarissaSCordeiro/Ludus/blob/a0830e4233d8d5bd50b0cfa6850e882b63221c55/Documentos/Diagramas/Diagrama%20de%20Casos%20de%20Uso%20-%20Ludus.pdf)
 
 ---
 
 ### 🎲 Modelagens do Banco de Dados
 
+#### Modelagem Conceitual
+
 📄 [Modelagem Conceitual - BRMW](https://app.brmodeloweb.com/#!/publicview/68424336adc033f78f1a6684)
+
+#### Modelagem Lógica
+
 📄 [Modelagem Lógica - BRMW](https://app.brmodeloweb.com/#!/publicview/6849851f5f7c40653b620124)
 
 ---
