@@ -142,6 +142,6 @@ Criar uma plataforma acessível e intuitiva que valorize os jogos independentes 
 
 ---
 
-### 🔎 Tarefas do projeto Ludus
+### 🔎 Tarefas do Projeto
 
-📄 [Tarefas do projeto Ludus - Trello](https://trello.com/invite/b/683359db20f1ee4069dbd58c/ATTI3837de042cc65c0fa5809bb590371ec8FA985B46/tarefas-do-projeto-ludus)
+📄 [Tarefas do Projeto - Trello](https://trello.com/invite/b/683359db20f1ee4069dbd58c/ATTI3837de042cc65c0fa5809bb590371ec8FA985B46/tarefas-do-projeto-ludus)
