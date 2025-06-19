@@ -5,7 +5,7 @@
 ## 🎨 Identidade Visual
 
 ### Logo
-![Logo do Ludus](https://github.com/LarissaSCordeiro/Ludus/blob/fab4d19b3ea04b5652e6c7231516e948d63f7d08/Imagens/Logotipo%20Ludus.png)
+![Logo do Ludus](https://github.com/LarissaSCordeiro/Ludus/blob/5fc98394d2e716202f6a2578954c2847ba7d3af9/Imagens/Logotipo%20Ludus%20(atualizada).png)
 
 ### Paleta de Cores
 ![Paleta de Cores](https://github.com/LarissaSCordeiro/Ludus/blob/fab4d19b3ea04b5652e6c7231516e948d63f7d08/Imagens/Paleta%20de%20Cores%20Ludus.png)
@@ -14,9 +14,9 @@
 
 ## 👥 Membros
 
-- **Jhenifer** – Design e Identidade Visual
-- **Larissa** – Desenvolvimento geral
-- **Pierre** – Planejamento e conteúdo
+- @JheniferBender – Design e Identidade Visual
+- @LarissaSCordeiro – Desenvolvimento geral
+- @pierrehneppel – Planejamento e conteúdo
 
 ---
 
@@ -118,15 +118,17 @@ Criar uma plataforma acessível e intuitiva que valorize os jogos independentes 
 
 ---
 
-### 🚶‍♂️ Diagrama de Atividades e Caso de Uso 
+### 🚶‍♂️ Diagramas
 
-📄 [Diagrama de Atividades e Caso de Uso - Google Drive](https://drive.google.com/drive/folders/1wXgwPCqXjYATQi1murx55JZmZDHpLBA5?usp=sharing)
+📄 [Diagrama de Atividades](https://github.com/LarissaSCordeiro/Ludus/tree/5fc98394d2e716202f6a2578954c2847ba7d3af9/Documentos/Diagramas/Diagrama%20de%20Atividades)
+📄 [Diagrama de Caso de Uso](https://github.com/LarissaSCordeiro/Ludus/blob/a0830e4233d8d5bd50b0cfa6850e882b63221c55/Documentos/Diagramas/Diagrama%20de%20Casos%20de%20Uso%20-%20Ludus.pdf)
 
 ---
 
-### 🎲 Modelagem Conceitual do Banco de Dados
+### 🎲 Modelagens do Banco de Dados
 
 📄 [Modelagem Conceitual - BRMW](https://app.brmodeloweb.com/#!/publicview/68424336adc033f78f1a6684)
+📄 [Modelagem Lógica - BRMW](https://app.brmodeloweb.com/#!/publicview/6849851f5f7c40653b620124)
 
 ---
 
