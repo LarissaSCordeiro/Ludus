@@ -1,3 +1,4 @@
+// ======================== Carrossel ========================
 const carousel = document.getElementById('carouselImages');
 const images = carousel.querySelectorAll('img');
 const dotsContainer = document.getElementById('dotsContainer');
@@ -41,7 +42,7 @@ document.querySelector('.next').addEventListener('click', nextSlide);
 document.querySelector('.prev').addEventListener('click', prevSlide);
 
 const startAutoplay = () => {
-  interval = setInterval(nextSlide, 8000); // 5 segundos
+  interval = setInterval(nextSlide, 8000);
 };
 
 const resetAutoplay = () => {
@@ -51,9 +52,66 @@ const resetAutoplay = () => {
 
 startAutoplay();
 
-// menu sanduíche do nav em telas pequenas
+// =================== Menu Sanduíche ===================
 function toggleMenu() {
   const nav = document.getElementById('nav');
   nav.classList.toggle('show');
 }
+// =================== Bloqueio ao atualizar a página(filtro) ===================
+ document.addEventListener("DOMContentLoaded", function () {
+    const generoForm = document.querySelector(".categoria_genero form");
+    const jogosContainer = document.querySelector(".jogos");
+    const tituloSeletor = document.querySelector(".categoria h2");
+
+    generoForm.addEventListener("click", function (e) {
+      if (e.target.tagName === "BUTTON") {
+        e.preventDefault();
+        const genero = e.target.value;
+
+        fetch("filtragem.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: "btn=" + encodeURIComponent(genero)
+        })
+        .then(response => response.text())
+        .then(data => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(data, "text/html");
+          const novosJogos = doc.querySelector(".jogos");
+          const novoTitulo = doc.querySelector(".categoria h2");
+
+          if (novosJogos && jogosContainer) {
+            jogosContainer.innerHTML = novosJogos.innerHTML;
+          }
+          if (novoTitulo && tituloSeletor) {
+            tituloSeletor.textContent = novoTitulo.textContent;
+          }
+        })
+        .catch(error => {
+          console.error("Erro ao filtrar:", error);
+        })
+      }
+    })
+  })
+// =================== Menu da pagina filtro botoes ===================
+ document.addEventListener("DOMContentLoaded", function () {
+  const toggle = document.querySelector(".menu-toggle");
+  const opcoes = document.querySelector(".menu-opcoes");
+
+  toggle.addEventListener("click", function () {
+    const isOpen = opcoes.style.display === "block";
+    opcoes.style.display = isOpen ? "none" : "block";
+  });
+  document.addEventListener("click", function (e) {
+    if (!toggle.contains(e.target) && !opcoes.contains(e.target)) {
+      opcoes.style.display = "none";
+    }
+  });
+  opcoes.addEventListener("click", function (e) {
+    if (e.target.tagName === "BUTTON") {
+      opcoes.style.display = "none";
+    }
+  })
+})
+
 

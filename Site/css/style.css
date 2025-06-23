@@ -807,6 +807,69 @@ main {
     flex-direction: column;
   }
 }
+/* Botoes da selecao de genero */
+.categoria_genero {
+  position: relative;
+  width: 220px;
+  font-family: sans-serif;
+}
+
+.menu-toggle {
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #26203f;
+  color: #d9d9d9;
+  border: 3px solid #26203f;
+  border-radius: 40px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.menu-opcoes {
+  display: none;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  background-color: #26203f;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  margin-top: 5px;
+  z-index: 100;
+}
+
+.menu-opcoes button {
+  width: 100%;
+  padding: 10px 15px;
+  border: none;
+  background-color: transparent;
+  color: #d9d9d9;
+  text-align: left;
+  font-size: 16px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.menu-opcoes button:hover {
+  background-color: #3a2f5c;
+}
+/*Alinhando imagens dos botoes*/
+
+.btn_img {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.btn_img img {
+  display: block;
+  width: 260px;   /* aumenta a largura */
+  height: 370px;  /* aumenta a altura */
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+
 /*--------------------------*/
 
 
