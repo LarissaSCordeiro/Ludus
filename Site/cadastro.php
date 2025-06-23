@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <!-- Botao de entrar e links -->
             <a href="login.php" class="a-Button">Entrar</a>
             <a href="cadastro.php">Criar uma conta</a>
-            <a href="catalogo.html">Games</a>
+            <a href="filtragem.php">Games</a>
         </nav>
 
         <!-- Barra de pesquisa personalizada -->

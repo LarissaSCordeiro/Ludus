@@ -17,8 +17,8 @@
     </div>
 
     <nav>
-      <a href="login.html" class="a-Button">Entrar</a>
-      <a href="cadastro.html">Criar uma conta</a>
+      <a href="login.php" class="a-Button">Entrar</a>
+      <a href="cadastro.php">Criar uma conta</a>
     </nav>
 
     <div class="search-container">

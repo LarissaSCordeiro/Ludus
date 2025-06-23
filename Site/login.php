@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <nav id="nav" class="nav-links">
             <!-- Botao de entrar e links -->
             <a href="cadastro.php" class="a-Button">Criar uma conta</a>
-            <a href="catalogo.html">Games</a>
+            <a href="filtragem.php">Games</a>
         </nav>
 
         <!-- Barra de pesquisa personalizada -->

@@ -20,8 +20,8 @@
         </section>
 
         <nav id="nav" class="nav-links">
-            <a href="cadastro.html" class="a-Button">Criar uma conta</a>
-            <a href="catalogo.html">Games</a>
+            <a href="cadastro.php" class="a-Button">Criar uma conta</a>
+            <a href="filtragem.php">Games</a>
         </nav>
 
         <section class="search-container">
