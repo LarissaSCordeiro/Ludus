@@ -680,6 +680,15 @@ main {
 }
 
 /* Sessão de Catálogo ----------*/
+.filtro-pesquisa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
 .categoria {
   padding: 2rem;
 }

@@ -61,9 +61,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Interface -->
     <header>
         <!-- Logo do Ludus -->
-        <section class="logo">
-            <a href="index.html"><img src="img/logo.png" alt="Logotipo"></a>
-        </section>
+        <div class="logo">
+            <a href="index.html"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
+        </div>
 
         <!-- Barra de navegaçao -->
         <nav id="nav" class="nav-links">
@@ -73,10 +73,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </nav>
 
         <!-- Barra de pesquisa personalizada -->
-        <section class="search-container">
-            <input type="text" placeholder="Pesquisar..." />
-            <i class="fas fa-search icon"></i>
-        </section>
+        <div class="search-container">
+            <form action="filtragem.php" method="GET">
+                <input type="text" name="pesquisa" placeholder="Pesquisar..." required>
+                <i class="fas fa-search icon"></i>
+            </form>
+        </div>
 
         <!-- Ícone do menu sanduíche -->
         <div class="hamburger" onclick="toggleMenu()">
@@ -88,18 +90,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <main>
 
         <!-- Section do background atrás do container de login -->
-       <section class="log-page-background">
-        
+        <section class="log-page-background">
+
             <section class="overlay">
             </section>
 
-           <section id="slogan">
+            <section id="slogan">
                 <h1>A comunidade de quem cria com paixão e quem joga com propósito</h1>
             </section>
             <!-- Section do container de login -->
             <section class="log">
                 <article id="log">
-                    <?php if (!empty($erro)) : ?>
+                    <?php if (!empty($erro)): ?>
                         <div class="error-message">
                             <p><?php echo $erro; ?></p>
                         </div>
@@ -114,16 +116,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </form>
                 </article>
             </section>
-       
- </main>
-         <section class="nav-center">
 
-         </section>
+    </main>
+    <section class="nav-center">
 
-        <section class="container-text-pai-logpage">
-            <h1>Sessão de textos</h1>
-        </section>
-    
+    </section>
+
+    <section class="container-text-pai-logpage">
+        <h1>Sessão de textos</h1>
+    </section>
+
 
     <!-- Contatos -->
     <footer class="footer-nav">

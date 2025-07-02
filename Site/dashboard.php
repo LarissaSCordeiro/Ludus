@@ -24,10 +24,12 @@
             <a href="filtragem.php">Games</a>
         </nav>
 
-        <section class="search-container">
-            <input type="text" placeholder="Pesquisar..." />
-            <i class="fas fa-search icon"></i>
-        </section>
+        <div class="search-container">
+            <form action="filtragem.php" method="GET">
+                <input type="text" name="pesquisa" placeholder="Pesquisar..." required>
+                <i class="fas fa-search icon"></i>
+            </form>
+        </div>
 
         <div class="hamburger" onclick="toggleMenu()">
             ☰

@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!preg_match('/^[a-zA-Z0-9_]+$/', $usuario)) {
-    $erros[] = 'O nome de usuário deve conter apenas letras, números e underline.';
+        $erros[] = 'O nome de usuário deve conter apenas letras, números e underline.';
     }
 
     if (strlen($senha) < 6) {
@@ -95,7 +95,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Interface -->
     <header>
         <!-- Logo do Ludus -->
-        <div class="logo"> <a href="index.html"><img src="img/logo.png" alt="Logotipo"></a></div>
+        <div class="logo">
+            <a href="index.html"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
+        </div>
 
         <!-- Barra de navegaçao -->
         <nav id="nav" class="nav-links">
@@ -107,8 +109,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <!-- Barra de pesquisa personalizada -->
         <div class="search-container">
-            <input type="text" placeholder="Pesquisar..." />
-            <i class="fas fa-search icon"></i>
+            <form action="filtragem.php" method="GET">
+                <input type="text" name="pesquisa" placeholder="Pesquisar..." required>
+                <i class="fas fa-search icon"></i>
+            </form>
         </div>
 
         <!-- Ícone do menu sanduíche -->
@@ -119,45 +123,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </header>
 
     <!-- Apresentacao do site -->
-	 <section class="log-page-background">
-        
-            <section class="overlay">
-            </section>
+    <section class="log-page-background">
 
-           <section id="slogan">
-                <h1>A comunidade de quem cria com paixão e quem joga com propósito</h1>
-            </section>
-    
+        <section class="overlay">
+        </section>
+
+        <section id="slogan">
+            <h1>A comunidade de quem cria com paixão e quem joga com propósito</h1>
+        </section>
+
         <section class="cad">
-    <article id="cad">
-        <h2 id="titulo">Cadastro</h2>
+            <article id="cad">
+                <h2 id="titulo">Cadastro</h2>
 
-        <!-- Exibição de erros -->
-        <?php if (!empty($erros)) : ?>
-            <div class="error-message">
-                <?php foreach ($erros as $erro) : ?>
-                    <p><?php echo $erro; ?></p>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
+                <!-- Exibição de erros -->
+                <?php if (!empty($erros)): ?>
+                    <div class="error-message">
+                        <?php foreach ($erros as $erro): ?>
+                            <p><?php echo $erro; ?></p>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
 
-        <form action="cadastro.php" method="post">
-            <input type="email" name="email" id="email" placeholder="Email" required
-                value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
+                <form action="cadastro.php" method="post">
+                    <input type="email" name="email" id="email" placeholder="Email" required
+                        value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
 
-            <input type="text" name="usuario" id="usuario" placeholder="Usuário" required
-                value="<?php echo isset($_POST['usuario']) ? htmlspecialchars($_POST['usuario']) : ''; ?>">
+                    <input type="text" name="usuario" id="usuario" placeholder="Usuário" required
+                        value="<?php echo isset($_POST['usuario']) ? htmlspecialchars($_POST['usuario']) : ''; ?>">
 
-            <input type="password" name="senha" id="senha" minlength="6" placeholder="Senha" required>
+                    <input type="password" name="senha" id="senha" minlength="6" placeholder="Senha" required>
 
-            <input type="password" name="confirmar_senha" id="confirmar_senha" minlength="6"
-                placeholder="Confirmar Senha" required>
+                    <input type="password" name="confirmar_senha" id="confirmar_senha" minlength="6"
+                        placeholder="Confirmar Senha" required>
 
-            <button type="submit" id="btn"><strong>Enviar</strong></button>
-            <a class="login-return" href="login.php">Já tem uma conta? Faça Login.</a>
-        </form>
-    </article>
-</section>
+                    <button type="submit" id="btn"><strong>Enviar</strong></button>
+                    <a class="login-return" href="login.php">Já tem uma conta? Faça Login.</a>
+                </form>
+            </article>
+        </section>
 
     </section>
 
@@ -165,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <footer class="footer-nav">
         <!-- Redes sociais -->
         <div class="social-icons">
-            <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a> 
+            <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a>
             <a href="https://github.com/LarissaSCordeiro/Ludus" target="_blank" title="GitHub"><i
                     class="fab fa-github"></i></a>
         </div>

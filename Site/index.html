@@ -17,8 +17,10 @@
 
     <header>
         <!-- Logo do Ludus -->
-        <div class="logo"> <a href="index.html"><img src="img/logo.png" alt="Logotipo"></a></div>
-
+        <div class="logo">
+            <a href="index.html"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
+        </div>
+        
         <!-- Barra de navegaçao -->
         <nav id="nav" class="nav-links">
             <!-- Botao de entrar e links -->
@@ -29,9 +31,12 @@
 
         <!-- Barra de pesquisa personalizada -->
         <div class="search-container">
-            <input type="text" placeholder="Pesquisar..." />
-            <i class="fas fa-search icon"></i>
+            <form action="filtragem.php" method="GET">
+                <input type="text" name="pesquisa" placeholder="Pesquisar..." required>
+                <i class="fas fa-search icon"></i>
+            </form>
         </div>
+
 
         <!-- Ícone do menu sanduíche -->
         <div class="hamburger" onclick="toggleMenu()">
