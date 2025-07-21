@@ -33,6 +33,23 @@ header {
   gap: 40px;
 }
 
+.user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 1rem;
+  cursor: pointer;
+  border: 2px solid #fff; /* Borda branca pra destacar */
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.user-avatar:hover {
+  transform: scale(1.05);
+}
+
+
 /*Personalizaçao da logo do Ludus*/
 .logo img {
   max-height: 50px;

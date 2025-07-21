@@ -15,7 +15,7 @@
 <body>
   <header>
     <div class="logo">
-      <a href="index.html"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
+      <a href="index.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
     </div>
 
     <nav>

@@ -2,7 +2,7 @@
 // // ========== Conexão ============
 $_DB['server'] = 'localhost'; // Servidor MySQL
 $_DB['user'] = 'root'; // Usuário MySQL
-$_DB['password'] = '1234'; // Senha MySQL
+$_DB['password'] = ''; // Senha MySQL
 $_DB['database'] = 'ludus'; // Banco de dados MySQL
 // ==============================
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // Desativa relatórios de erros

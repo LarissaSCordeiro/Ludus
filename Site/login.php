@@ -5,7 +5,7 @@ require_once 'config.php';
 $erro = '';
 
 if (isset($_SESSION['user_id'])) {
-    header('Location: paginainicial.html');
+    header('Location: paginainicial.php');
     exit();
 }
 
@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <header>
         <!-- Logo do Ludus -->
         <div class="logo">
-            <a href="index.html"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
+            <a href="index.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
         </div>
 
         <!-- Barra de navegaçao -->
