@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_email'] = $email;
             $_SESSION['user_tipo'] = $tipo;
 
-            header('Location: paginainicial.html');
+            header('Location: paginainicial.php');
             exit();
         } else {
             $erros[] = 'Erro ao cadastrar. Tente novamente.';

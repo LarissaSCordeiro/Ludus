@@ -2,13 +2,15 @@
 session_start();
 require_once("config.php");
 
-//if (!isset($_SESSION['id_usuario'])) {
-//  header("Location: login.php");
-//  exit();
-//}
+// Verifica se o usuário está logado
+if (!isset($_SESSION['id_usuario'])) {
+  header("Location: login.php");
+  exit();
+}
+
+$id_usuario = $_SESSION['id_usuario'];
 
 // Pega os dados do usuário
-$id_usuario = $_SESSION['id_usuario'];
 $stmt = $mysqli->prepare("SELECT nome, foto_perfil FROM usuario WHERE id = ?");
 $stmt->bind_param("i", $id_usuario);
 $stmt->execute();
@@ -23,20 +25,20 @@ $usuario = $resultado->fetch_assoc();
 $nomeUsuario = $usuario['nome'];
 $foto_perfilPerfil = $usuario['foto_perfil'] ?: 'img/usuarios/default.png';
 
-// Pega as 3 avaliações mais recentes do usuário
-$avaliacoesStmt = $mysqli->prepare("
-  SELECT j.nome AS nome_jogo, j.imagem AS foto_perfil_jogo, a.texto
-  FROM avaliacao a
+// Pega as avaliações curtidas pelo usuário
+$curtidasStmt = $mysqli->prepare("
+  SELECT j.nome AS nome_jogo, j.imagem AS imagem_jogo, a.texto, u.nome AS nome_autor
+  FROM usuario_curte_avaliacao uc
+  JOIN avaliacao a ON uc.id_avaliacao = a.id
   JOIN jogo j ON a.id_jogo = j.id
-  WHERE a.id_usuario = ?
+  JOIN usuario u ON a.id_usuario = u.id
+  WHERE uc.id_usuario = ?
   ORDER BY a.data_avaliacao DESC
-  LIMIT 3
 ");
-$avaliacoesStmt->bind_param("i", $id_usuario);
-$avaliacoesStmt->execute();
-$avaliacoes = $avaliacoesStmt->get_result();
+$curtidasStmt->bind_param("i", $id_usuario);
+$curtidasStmt->execute();
+$curtidas = $curtidasStmt->get_result();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -44,7 +46,7 @@ $avaliacoes = $avaliacoesStmt->get_result();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perfil | Ludus</title>
+  <title>Curtidas | Ludus</title>
   <link rel="stylesheet" href="./css/style.css">
   <link rel="icon" href="img/Ludus_Favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -56,7 +58,6 @@ $avaliacoes = $avaliacoesStmt->get_result();
             <a href="paginainicial.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
         </div>
 
-        <!-- Navegação do usuário logado -->
         <nav id="nav" class="nav-links">
             <a href="filtragem.php">Games</a>
             <a href="perfil.php">
@@ -64,7 +65,6 @@ $avaliacoes = $avaliacoesStmt->get_result();
             </a>
         </nav>
 
-        <!-- Barra de pesquisa -->
         <div class="search-container">
             <form action="filtragem.php" method="GET">
                 <input type="text" name="pesquisa" placeholder="Pesquisar..." required>
@@ -72,15 +72,11 @@ $avaliacoes = $avaliacoesStmt->get_result();
             </form>
         </div>
 
-        <!-- Menu sanduíche -->
-        <div class="hamburger" onclick="toggleMenu()">
-            ☰
-        </div>
-    </header>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+  </header>
 
   <main class="perfil-container">
     <section class="perfil-top">
-      
       <div class="perfil-info">
         <img src="<?php echo htmlspecialchars($foto_perfilPerfil); ?>" alt="Foto de perfil" class="foto-perfil">
         <h1 class="perfil-nome"><?php echo htmlspecialchars($nomeUsuario); ?></h1>
@@ -89,28 +85,28 @@ $avaliacoes = $avaliacoesStmt->get_result();
     </section>
 
     <nav class="perfil-nav">
-      <a href="perfil.php" class="ativo">Perfil</a>
+      <a href="perfil.php">Perfil</a>
       <a href="perfil_avaliacoes.php">Avaliações</a>
       <a href="perfil_favoritos.php">Favoritos</a>
-      <a href="perfil_curtidas.php">Curtidas</a>
+      <a href="perfil_curtidas.php" class="ativo">Curtidas</a>
     </nav>
 
     <section class="recentes">
-      <h2 class="recently-reviewed-title">Avaliações Recentes</h2>
       <div class="avaliacoes-recentes">
-        <?php while ($row = $avaliacoes->fetch_assoc()): ?>
-  <div class="avaliacao">
-    <img src="<?php echo htmlspecialchars($row['foto_perfil_jogo']); ?>" alt="<?php echo htmlspecialchars($row['nome_jogo']); ?>">
-    <div class="avaliacao-info">
-      <h3><?php echo htmlspecialchars($row['nome_jogo']); ?></h3>
-      <p>"<?php echo htmlspecialchars($row['comentario']); ?>"</p>
-    </div>
-  </div>
-<?php endwhile; ?>
+        <?php while ($row = $curtidas->fetch_assoc()): ?>
+          <div class="avaliacao">
+            <img src="<?php echo htmlspecialchars($row['imagem_jogo']); ?>" alt="<?php echo htmlspecialchars($row['nome_jogo']); ?>">
+            <div class="avaliacao-info">
+              <h3><?php echo htmlspecialchars($row['nome_jogo']); ?> <span style="color:#888;">por <?php echo htmlspecialchars($row['nome_autor']); ?></span></h3>
+              <p>"<?php echo htmlspecialchars(mb_strimwidth($row['texto'], 0, 100, "...")); ?>"</p>
+            </div>
+          </div>
+        <?php endwhile; ?>
 
-<?php if ($avaliacoes->num_rows === 0): ?>
-  <p style="color: #888; text-align: center;">Nenhuma avaliação feita ainda.</p>
-<?php endif; ?>
+        <?php if ($curtidas->num_rows === 0): ?>
+          <p style="color: #888; text-align: center;">Você ainda não curtiu nenhuma avaliação.</p>
+        <?php endif; ?>
+      </div>
     </section>
   </main>
 
@@ -124,4 +120,3 @@ $avaliacoes = $avaliacoesStmt->get_result();
 </body>
 
 </html>
-

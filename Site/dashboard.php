@@ -164,7 +164,7 @@
     <!-- Interface -->
     <header>
         <section class="logo">
-            <a href="index.html">
+            <a href="index.php">
                 <img src="img/NewLudusLogo.png" alt="Logotipo">
             </a>
         </section>

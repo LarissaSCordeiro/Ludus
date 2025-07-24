@@ -4,7 +4,7 @@ require_once 'config.php';
 
 $erro = '';
 
-if (isset($_SESSION['user_id'])) {
+if (isset($_SESSION['id_usuario'])) {
     header('Location: paginainicial.php');
     exit();
 }
@@ -26,12 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->fetch();
 
             if (password_verify($senha, $hashed_password)) {
-                $_SESSION['user_id'] = $user_id;
-                $_SESSION['user_nome'] = $user_nome;
-                $_SESSION['user_email'] = $email;
-                $_SESSION['user_tipo'] = $user_tipo;
+                $_SESSION['id_usuario'] = $user_id;
+                $_SESSION['nome'] = $user_nome;
+                $_SESSION['email'] = $email;
+                $_SESSION['tipo'] = $user_tipo;
 
-                header("Location: paginainicial.html");
+                header("Location: paginainicial.php");
                 exit();
             } else {
                 $erro = "E-mail ou senha incorretos.";

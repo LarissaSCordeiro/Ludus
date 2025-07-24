@@ -1,10 +1,9 @@
-<?php 
-
-if (isset($_SESSION['user_id'])) {
-    header('Location: paginainicial.php');
-    exit();
+<?php
+session_start();
+if (isset($_SESSION['usuario'])) {
+    header("Location: paginainicial.php");
+    exit;
 }
-
 ?>
 
 <!DOCTYPE html>
