@@ -2,6 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=League+Spartan:wght@100..900&display=swap');
 
 /*aplica em toda a pagina*/
+html {
+  margin: 0;
+  padding: 0;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -21,9 +26,6 @@ body {
   min-height: 100vh;
 }
 
-a{
-  text-decoration: none;
-}
 
 /* Cabeçalho */
 header {
@@ -143,8 +145,10 @@ label {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 50px;/* superior | direita | inferior | esquerda */
-  animation: moveBackground 5s infinite alternate ease-in-out;/*Mover a imagem sem sair do lugar*/
+  padding: 0 50px;
+  /* superior | direita | inferior | esquerda */
+  animation: moveBackground 5s infinite alternate ease-in-out;
+  /*Mover a imagem sem sair do lugar*/
 }
 
 /*Mover a imagem*/
@@ -234,10 +238,10 @@ label {
 
 }
 
-.error-message{
-  background-color: #ff4d4d; 
-  padding: 10px; 
-  border-radius: 8px; 
+.error-message {
+  background-color: #ff4d4d;
+  padding: 10px;
+  border-radius: 8px;
   margin-bottom: 15px;
   margin-top: 15px;
 }
@@ -304,10 +308,51 @@ input::placeholder {
   font-size: 0.95rem;
 }
 
+/* --- Perfil jogos ----------------------------------------------------------(DASHBOARD) */
+
+.p2 {
+  /* section comentarios  */
+  background-color: #1a132d;
+  width: 1000px;
+  border-radius: 10px;
+  margin: 4em 0 1em 0;
+  padding: 2em 2em 2em 2em;
+  /* superior | direita | inferior | esquerda */
+}
+
+#dash_main {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.dash_img {
+  display: flex;
+  width: 250px;
+  height: 400px;
+  border-radius: 10px;
+}
+
+.dash_img img {
+  width: 250px;
+  height: 400px;
+  border-radius: 10px;
+}
+
+.coment_usu {
+  border-radius: 10px;
+  width: 900px;
+  background-color: rgba(40, 19, 45, 0.7);
+  margin: 1em 1em 1em 1em;
+  padding: 2em 2em 2em 2em;
+  /* superior | direita | inferior | esquerda */
+}
+
+/* --- Perfil jogos ----------------------------------------------------------(DASHBOARD) */
 
 /*avaliacao de estrelas*/
 .avaliacao {
- display: flex;
+  display: flex;
   width: 100px;
   height: 50px;
 }
@@ -819,6 +864,7 @@ main {
     flex-direction: column;
   }
 }
+
 /* Botoes da selecao de genero */
 .categoria_genero {
   position: relative;
@@ -845,7 +891,7 @@ main {
   width: 100%;
   background-color: #26203f;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
   margin-top: 5px;
   z-index: 100;
 }
@@ -859,12 +905,13 @@ main {
   text-align: left;
   font-size: 16px;
   cursor: pointer;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .menu-opcoes button:hover {
   background-color: #3a2f5c;
 }
+
 /*Alinhando imagens dos botoes*/
 
 .btn_img {
@@ -875,8 +922,10 @@ main {
 
 .btn_img img {
   display: block;
-  width: 260px;   /* aumenta a largura */
-  height: 370px;  /* aumenta a altura */
+  width: 260px;
+  /* aumenta a largura */
+  height: 370px;
+  /* aumenta a altura */
   object-fit: cover;
   border-radius: 8px;
 }
@@ -894,6 +943,7 @@ main {
   font-size: 14px;
   align-items: center;
 }
+
 /* final */
 footer {
   margin-top: auto;
@@ -902,6 +952,7 @@ footer {
   padding: 20px;
   width: 100%;
 }
+
 /*Barra de navegaçao do rodape*/
 .footer-nav a {
   color: #ccc;
@@ -926,152 +977,3 @@ footer {
 .footer-nav .social-icons a:hover {
   color: #f4961e;
 }
-
-/* ===================== */
-/* PERFIL DO USUÁRIO     */
-/* ===================== */
-
-/* Container principal do perfil */
-.perfil-container {
-  width: 100%;
-  max-width: 1000px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #1f1b2e;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-/* Topo com avatar + nome + botão */
-.perfil-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-  padding-bottom: 1rem;
-  padding: 20px;
-}
-
-.perfil-info{
-  display: flex;
-}
-
-.perfil-top img.foto-perfil {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.perfil-nome {
-  flex-grow: 1;
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #eee;
-  margin-left: 20px;
-}
-
-.btn-editar {
-  background-color: #cd3dff;
-  color: #fff;
-  padding: 0.5rem 1.2rem;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.btn-editar:hover {
-  background-color: #b600e2;
-}
-
-/* Navegação das abas do perfil */
-.perfil-nav {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin: 2rem 0 1rem;
-  border-bottom: 1px solid #bfa9c9;
-}
-
-.perfil-nav a {
-  text-decoration: none;
-  color: #ccc;
-  padding: 0.5rem 1rem;
-  font-weight: bold;
-  border-bottom: 3px solid transparent;
-  transition: all 0.3s ease;
-}
-
-.perfil-nav a:hover,
-.perfil-nav a.ativo {
-  color: #cd3dff;
-  border-color: #cd3dff;
-}
-
-/* Seção de conteúdo (Recently Reviewed) */
-.recentes {
-  margin-top: 2rem;
-  text-align: center;
-  font-size: 1rem;
-  color: #666;
-}
-
-.recently-reviewed-title {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #cd3dff;
-  margin: 3rem 0 2rem;
-  text-align: center;
-}
-
-/* Cartões de avaliação */
-.avaliacao {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 2rem;
-  background-color: #1a132d;
-  padding: 1rem;
-  border-radius: 10px;
-  max-width: 700px;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.avaliacao:hover {
-  background-color: #2a1f3f;
-  transform: scale(1.02);
-}
-
-.avaliacao img {
-  width: 70px;
-  height: 100px;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
-.avaliacao-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  color: #ccc;
-}
-
-.avaliacao-info h4 {
-  font-size: 1.1rem;
-  color: #fff;
-  margin: 0;
-}
-
-.avaliacao-info p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #aaa;
-}
-
-
-

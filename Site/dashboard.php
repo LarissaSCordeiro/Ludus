@@ -1,3 +1,50 @@
+<?php
+/* comentado para quando 
+posteriormente a funcionalidade 
+de avaliações seja implementada
+
+require_once("config.php");
+session_start();
+
+$user_id = $_SESSION['user_id'];
+$id = isset($_POST['id']) ? (int) $_POST['id'] : (isset($_GET['id']) ? (int) $_GET['id'] : 0);
+
+if (isset($_POST['enviar_comentario']) && isset($_SESSION['user_id'])) {
+
+    $comentario = trim($_POST['comentario']);
+    $id_usuario = $_SESSION['user_id'];
+    $id_avaliacao = isset($_POST['id_avaliacao']) ? (int) $_POST['id_avaliacao'] : 0;
+
+    $inserir = $mysqli->prepare("INSERT INTO comentario (id_usuario, texto, id_avaliacao) VALUES (?, ?, ?)");
+    $inserir->bind_param("isi", $id_usuario, $comentario, $id_avaliacao);
+
+    if (!$inserir->execute()) {
+
+    } else {
+        header("Location: dashboard.php?id=" . $id);
+        exit();
+    }
+}
+
+$stmt = $mysqli->prepare("SELECT nome, email, foto_perfil FROM usuario WHERE id = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$resultado = $stmt->get_result();
+$usuario = $resultado->fetch_assoc();
+
+$consulta = $mysqli->prepare("SELECT jogo.nome, jogo.descricao, jogo.imagem, jogo.data_lancamento, jogo.estudio, jogo.desenvolvedor, GROUP_CONCAT(DISTINCT genero.nome ORDER BY genero.nome SEPARATOR ', ') AS genero, GROUP_CONCAT(DISTINCT plataforma.nome ORDER BY plataforma.nome SEPARATOR ', ') AS plataforma FROM jogo LEFT JOIN jogo_possui_genero ON jogo.id = jogo_possui_genero.id_jogo LEFT JOIN genero ON genero.id = jogo_possui_genero.id_genero LEFT JOIN jogo_possui_plataforma ON jogo.id = jogo_possui_plataforma.id_jogo LEFT JOIN plataforma ON plataforma.id = jogo_possui_plataforma.id_plataforma WHERE jogo.id = ? GROUP BY jogo.id");
+$consulta->bind_param("i", $id);
+$consulta->execute();
+$resultado = $consulta->get_result();
+$jogo = $resultado->fetch_assoc();
+
+$consulta = $mysqli->prepare("SELECT comentario.data_comentario, comentario.texto, usuario.nome AS nome_usuario, usuario.email, usuario.foto_perfil, avaliacao.nota FROM comentario INNER JOIN usuario ON comentario.id_usuario = usuario.id INNER JOIN avaliacao ON comentario.id_avaliacao = avaliacao.id WHERE avaliacao.id_jogo = ?");
+$consulta->bind_param("i", $id);
+$consulta->execute();
+$resultado = $consulta->get_result();
+*/
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -11,7 +58,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
-
         /* Alinhamento visual do container principal */
         #dash_main {
             display: flex;
@@ -120,7 +166,7 @@
             font-size: 0.95rem;
         }
 
-        /* ícones personalizados das plataformas e gêneros dos jogos*/ 
+        /* ícones personalizados das plataformas e gêneros dos jogos*/
         .icon-tags {
             display: flex;
             flex-wrap: wrap;
@@ -154,7 +200,6 @@
 
         /*OBS: por enquanto, se tentar colocar esse CSS
          em um arquivo externo ele não irá funcionar!*/
-
     </style>
 
 </head>
@@ -291,6 +336,44 @@
             </div>
         </article>
 
+
+
+
+        <article class="p2">
+            <h2>Comentários</h2>
+            <?php while ($coment = $resultado->fetch_assoc()) { ?>
+                <section class="coment_usu">
+                    <img src="<?php echo $usuario["foto_perfil"]; ?>" alt="img">
+                    <h4><?php echo $coment["nome_usuario"]; ?></h4>
+                    <p><?php echo $coment["data_comentario"]; ?>     <?php echo $coment["nota"]; ?></p>
+                    <p class="caixa_texto"><?php echo $coment["email"]; ?></p>
+                    <p><?php echo $coment["texto"]; ?></p>
+                </section>
+            <?php } ?>
+            <?php if (isset($_SESSION['user_id']) && $usuario): ?>
+                <section class="coment_usu">
+                    <img src="<?php echo $usuario["foto_perfil"]; ?>" alt="img">
+                    <h4><?php echo $usuario["nome"]; ?></h4>
+                    <p><?php echo $usuario["email"]; ?></p>
+                    <form method="POST" id="comentarioForm">
+                        <textarea name="comentario" placeholder="Comentário..." required></textarea><br>
+                        <input type="hidden" name="id" value="<?php echo $id; ?>">
+                        <input type="hidden" name="id_avaliacao" value="0">
+                        <button type="submit">Enviar</button>
+                    </form>
+                    <div id="msg-feedback"></div>
+                </section>
+            <?php else: ?>
+                <section class="coment_usu">
+                    <p class="msg-erro">Faça <a href="login.php">login</a> para comentar ou <a
+                            href="cadastro.php">cadastre-se</a></p>
+                </section>
+            <?php endif; ?>
+        </article>
+
+
+
+
     </main>
 
     <footer class="footer-nav">
@@ -301,21 +384,6 @@
         </div>
         <span>Ludus • v0.1</span>
     </footer>
-
-    <!-- JavaScript / Animação que deixa os cards 3D ao passar o mouse -->
-    <script>
-        document.querySelectorAll('.info-card').forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.transform = `perspective(500px) rotateX(${-(y - rect.height / 2) / 20}deg) rotateY(${(x - rect.width / 2) / 20}deg) scale(1.05)`;
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = "scale(1)";
-            });
-        });
-    </script>
 
 </body>
 
