@@ -1,8 +1,4 @@
 <?php
-/* comentado para quando 
-posteriormente a funcionalidade 
-de avaliações seja implementada
-
 require_once("config.php");
 session_start();
 
@@ -42,7 +38,7 @@ $consulta = $mysqli->prepare("SELECT comentario.data_comentario, comentario.text
 $consulta->bind_param("i", $id);
 $consulta->execute();
 $resultado = $consulta->get_result();
-*/
+
 ?>
 
 <!DOCTYPE html>
@@ -232,19 +228,6 @@ $resultado = $consulta->get_result();
     </header>
 
     <main id="dash_main">
-        <?php
-        require_once("config.php");
-        $id = $_POST['id'];
-
-        $consulta = $mysqli->prepare("SELECT jogo.nome, jogo.descricao, jogo.imagem, jogo.data_lancamento, jogo.estudio, jogo.desenvolvedor, GROUP_CONCAT(DISTINCT genero.nome ORDER BY genero.nome SEPARATOR ', ') AS genero, GROUP_CONCAT(DISTINCT plataforma.nome ORDER BY plataforma.nome SEPARATOR ', ') AS plataforma FROM jogo LEFT JOIN jogo_possui_genero ON jogo.id = jogo_possui_genero.id_jogo LEFT JOIN genero ON genero.id = jogo_possui_genero.id_genero LEFT JOIN jogo_possui_plataforma ON jogo.id = jogo_possui_plataforma.id_jogo LEFT JOIN plataforma ON plataforma.id = jogo_possui_plataforma.id_plataforma WHERE jogo.id = ? GROUP BY jogo.id");
-
-        $consulta->bind_param("i", $id);
-        $consulta->execute();
-        $resultado = $consulta->get_result();
-        $jogo = $resultado->fetch_assoc();
-        ?>
-
-
         <figure class="dash_img">
             <img src="<?php echo $jogo["imagem"]; ?>" alt="Capa Jogo">
         </figure>
@@ -338,10 +321,16 @@ $resultado = $consulta->get_result();
 
 
 
-
+        <!-- Parte dos Comentarios -->
         <article class="p2">
-            <h2>Comentários</h2>
-            <?php while ($coment = $resultado->fetch_assoc()) { ?>
+            <?php
+			$count = $resultado->num_rows;
+			echo "<h2>Comentários ($count)</h2> ";
+			if ($count == 0) { ?>
+		         <section class="coment_usu">
+			          <p>Ninguém comentou aqui ainda, seja o primeiro a comentar !</p>
+			     </section> 
+			<?php } while ($coment = $resultado->fetch_assoc()) { ?>
                 <section class="coment_usu">
                     <img src="<?php echo $usuario["foto_perfil"]; ?>" alt="img">
                     <h4><?php echo $coment["nome_usuario"]; ?></h4>
@@ -349,18 +338,18 @@ $resultado = $consulta->get_result();
                     <p class="caixa_texto"><?php echo $coment["email"]; ?></p>
                     <p><?php echo $coment["texto"]; ?></p>
                 </section>
-            <?php } ?>
-            <?php if (isset($_SESSION['user_id']) && $usuario): ?>
+            <?php } if (isset($_SESSION['user_id']) && $usuario): ?>
                 <section class="coment_usu">
-                    <img src="<?php echo $usuario["foto_perfil"]; ?>" alt="img">
-                    <h4><?php echo $usuario["nome"]; ?></h4>
+				<figure class="usu_foto">
+                    <img src="<?php echo $usuario["foto_perfil"]; ?>" alt="img" class= "img_coment">
+                    <h4><?php echo $usuario["nome"]; ?></h4></figure>
+					<div class="form_com">
                     <p><?php echo $usuario["email"]; ?></p>
                     <form method="POST" id="comentarioForm">
-                        <textarea name="comentario" placeholder="Comentário..." required></textarea><br>
+                        <textarea name="comentario" placeholder="Adicione seu comentário..." required></textarea><br>
                         <input type="hidden" name="id" value="<?php echo $id; ?>">
-                        <input type="hidden" name="id_avaliacao" value="0">
-                        <button type="submit">Enviar</button>
-                    </form>
+                        <button type="submit"  id="btn_comentario" >Enviar</button>
+                    </form> </div>
                     <div id="msg-feedback"></div>
                 </section>
             <?php else: ?>

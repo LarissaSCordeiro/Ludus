@@ -344,44 +344,63 @@ input::placeholder {
   width: 900px;
   background-color: rgba(40, 19, 45, 0.7);
   margin: 1em 1em 1em 1em;
-  padding: 2em 2em 2em 2em;
+  padding: 1em;
   /* superior | direita | inferior | esquerda */
 }
 
-/* --- Perfil jogos ----------------------------------------------------------(DASHBOARD) */
+#comentarioForm textarea {
+  width: 80%;
+  height: 120px;
+  border-radius: 10px;
+  padding: 12px;
+   box-sizing: border-box;
+  background-color: #26203f;
+  font-size: 15px;
+  color: #d9d9d9;
+  transition: box-shadow 0.3s ease;
+}
 
-/*avaliacao de estrelas*/
-.avaliacao {
+#comentarioForm textarea:focus {
+  outline: none;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6),
+    0 0 4px #cd3dff;
+}
+
+#btn_comentario {
+  border-radius: 5px;
+  border: 0;
+  color: white;
+  font-size: 15px;
+  width: 10%;
+  height:40px;
+  box-sizing: border-box;
+  background-color: #cd3dff;
+  margin: 1em 0 2em 0;
+  /* superior | direita | inferior | esquerda */
+  font-family: 'comfortaa', sans-serif;
+}
+#btn_comentario:hover  {
+  color:#f4961e;
+}
+#btn_comentario:active  {
+ background-color: #b600e2;
+}
+
+.img_coment {
+  width: 40px;       
+  height: 40px;
+  object-fit: cover;  
+  border-radius: 50%; 
+}
+
+.usu_foto {
   display: flex;
-  width: 100px;
-  height: 50px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
 }
-
-.star-icon {
-  list-style-type: none;
-  /*border:1px solid #fff;*/
-  cursor: pointer;
-  color: yellow;
-}
-
-.star-icon::before {
-  /*cheio*/
-  content: "\2605";
-}
-
-.star-icon.ativo~.star-icon::before {
-  /*vazio*/
-  content: "\2606";
-}
-
-.avaliacao:hover .star-icon::before {
-  /*cheio*/
-  content: "\2605";
-}
-
-.star-icon:hover~.star-icon::before {
-  /*vazio*/
-  content: "\2606";
+.form_com{
+  margin-left: 50px;	
 }
 
 /* pesquisa */
@@ -727,7 +746,7 @@ main {
   line-height: 1.6;
 }
 
-/* Sessão de Catálogo ----------*/
+/* Sessão de Catálogo ----------------------------------------------------------------------------------------------------------------------------------*/
 .filtro-pesquisa {
   display: flex;
   flex-wrap: wrap;
@@ -774,6 +793,44 @@ main {
   padding: 0.2rem 0.4rem;
   margin: 0.2rem;
   display: inline-block;
+}
+
+/*Alinhando imagens dos botoes*/
+
+.btn_img {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.btn_img img {
+  display: block;
+  width: 260px;
+  /* aumenta a largura */
+  height: 370px;
+  /* aumenta a altura */
+  object-fit: cover;
+  border-radius: 8px;
+} 
+
+.btn_img:hover {
+	transform: scale(1.05); 
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+} 
+
+/* botao que envia para a dashboard (nome do jogo abaixo da img) */
+.jogo-nome {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: default;
+  padding: 1em;
+}
+
+.jogo-nome:hover {
+  color: #cd3dff;
 }
 
 .avaliacoes,
@@ -910,24 +967,6 @@ main {
 
 .menu-opcoes button:hover {
   background-color: #3a2f5c;
-}
-
-/*Alinhando imagens dos botoes*/
-
-.btn_img {
-  padding: 0;
-  border: none;
-  background: none;
-}
-
-.btn_img img {
-  display: block;
-  width: 260px;
-  /* aumenta a largura */
-  height: 370px;
-  /* aumenta a altura */
-  object-fit: cover;
-  border-radius: 8px;
 }
 
 

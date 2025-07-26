@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (isset($_SESSION['user_id'])) {
+ $foto_perfil = isset($_SESSION['user_foto']) && !empty($_SESSION['user_foto']) ? $_SESSION['user_foto'] : 'img/usuarios/default.png';   
+}
+
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -13,6 +21,7 @@
 </head>
 
 <body>
+<header>
   <!-- Logo do Ludus -->
   <div class="logo">
     <a href="index.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
@@ -24,17 +33,12 @@
     <a href="login.php" class="a-Button">Entrar</a>
     <a href="cadastro.php">Criar uma conta</a>
     <a href="filtragem.php">Games</a>
+	<?php if(isset($_SESSION['user_id'])){ ?>
+	<a href="perfil.php"><img src="img/usuarios/default.png" alt="Perfil do usuário" class="user-avatar"></a>
+	<?php }?>
   </nav>
-
-  <!-- Barra de pesquisa personalizada -->
-  <div class="search-container">
-    <form action="filtragem.php" method="GET">
-      <input type="text" name="pesquisa" placeholder="Pesquisar..." required>
-      <i class="fas fa-search icon"></i>
-    </form>
-  </div>
-
-
+  
+ 
   <!-- Ícone do menu sanduíche -->
   <div class="hamburger" onclick="toggleMenu()">
     ☰
@@ -177,7 +181,7 @@
                       <img src="<?php echo htmlspecialchars($jogo['imagem']); ?>"
                         alt="Capa do jogo <?php echo htmlspecialchars($jogo['nome']); ?>">
                     </button>
-                    <p class="jogo-nome"><?php echo htmlspecialchars($jogo['nome']); ?></p>
+                   <button type="submit" class="jogo-nome"><h3><?php echo htmlspecialchars($jogo['nome']); ?></h3></button>
                   </form>
                 </div>
                 <?php
