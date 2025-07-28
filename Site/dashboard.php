@@ -1,9 +1,11 @@
+<!-------------------------------------------------------------------------------- PHP -------------------------------------------------------------------------------------------->
 <?php
 require_once("config.php");
 session_start();
 
+if (!empty($_SESSION['user_id'])){
+
 $user_id = $_SESSION['user_id'];
-$id = isset($_POST['id']) ? (int) $_POST['id'] : (isset($_GET['id']) ? (int) $_GET['id'] : 0);
 
 if (isset($_POST['enviar_comentario']) && isset($_SESSION['user_id'])) {
 
@@ -14,13 +16,15 @@ if (isset($_POST['enviar_comentario']) && isset($_SESSION['user_id'])) {
     $inserir = $mysqli->prepare("INSERT INTO comentario (id_usuario, texto, id_avaliacao) VALUES (?, ?, ?)");
     $inserir->bind_param("isi", $id_usuario, $comentario, $id_avaliacao);
 
-    if (!$inserir->execute()) {
+  if (!$inserir->execute()) {
 
     } else {
         header("Location: dashboard.php?id=" . $id);
         exit();
     }
 }
+}
+$id = isset($_POST['id']) ? (int) $_POST['id'] : (isset($_GET['id']) ? (int) $_GET['id'] : 0);
 
 $stmt = $mysqli->prepare("SELECT nome, email, foto_perfil FROM usuario WHERE id = ?");
 $stmt->bind_param("i", $user_id);
@@ -40,7 +44,7 @@ $consulta->execute();
 $resultado = $consulta->get_result();
 
 ?>
-
+<!-------------------------------------------------------------------------------- HTML ------------------------------------------------------------------------------------------->
 <!DOCTYPE html>
 <html>
 
@@ -202,15 +206,19 @@ $resultado = $consulta->get_result();
 
 <body>
 
-    <!-- Interface -->
+<!-------------------------------------------------------------------------------- Interface -------------------------------------------------------------------------------------->
     <header>
         <section class="logo">
-            <a href="index.php">
-                <img src="img/NewLudusLogo.png" alt="Logotipo">
-            </a>
-        </section>
+         <?php if(isset($_SESSION['user_id'])){ ?>
+         <a href="paginainicial.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a> <?php } else {?>
+         <a href="index.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a> <?php }?>
+         </section>
 
         <nav id="nav" class="nav-links">
+		    <?php if(isset($_SESSION['user_id'])){ ?>
+	        <a href="perfil.php"><img src="img/usuarios/default.png" alt="Perfil do usuário" class="user-avatar"></a>
+	        <?php } else {?>
+            <a href="login.php" class="a-Button">Entrar</a> <?php }?>
             <a href="cadastro.php" class="a-Button">Criar uma conta</a>
             <a href="filtragem.php">Games</a>
         </nav>
@@ -226,13 +234,11 @@ $resultado = $consulta->get_result();
             ☰
         </div>
     </header>
-
+<!--------------------------------------------------------------------------- Infos do Jogo --------------------------------------------------------------------------------------->
     <main id="dash_main">
         <figure class="dash_img">
             <img src="<?php echo $jogo["imagem"]; ?>" alt="Capa Jogo">
         </figure>
-
-
         <article class="info-grid">
             <h1 class="titulo-jogo"><?php echo $jogo["nome"]; ?></h1>
 
@@ -315,13 +321,9 @@ $resultado = $consulta->get_result();
                     }
                     ?>
                 </div>
-
             </div>
         </article>
-
-
-
-        <!-- Parte dos Comentarios -->
+<!-------------------------------------------------------------------------------- Comentarios ------------------------------------------------------------------------------------>
         <article class="p2">
             <?php
 			$count = $resultado->num_rows;
@@ -332,12 +334,19 @@ $resultado = $consulta->get_result();
 			     </section> 
 			<?php } while ($coment = $resultado->fetch_assoc()) { ?>
                 <section class="coment_usu">
-                    <img src="<?php echo $usuario["foto_perfil"]; ?>" alt="img">
-                    <h4><?php echo $coment["nome_usuario"]; ?></h4>
-                    <p><?php echo $coment["data_comentario"]; ?>     <?php echo $coment["nota"]; ?></p>
-                    <p class="caixa_texto"><?php echo $coment["email"]; ?></p>
+				<figure class="usu_foto">
+                    <img src="<?php echo $coment["foto_perfil"]; ?>" alt="img" class= "img_coment">
+                     <h4><?php echo $coment["nome_usuario"]; ?></h4>
+					
+					  <p><?php
+                       $data_comentario = new DateTime($coment["data_comentario"]);
+                       $data = $data_comentario->format('d/m \à\s H\hi');
+					   echo $data; ?></p>
+					  
+					  <p><?php echo "nota ". $coment["nota"]; ?></p></figure>
+                   <div class="form_com">
                     <p><?php echo $coment["texto"]; ?></p>
-                </section>
+                </section></div>
             <?php } if (isset($_SESSION['user_id']) && $usuario): ?>
                 <section class="coment_usu">
 				<figure class="usu_foto">
@@ -359,12 +368,8 @@ $resultado = $consulta->get_result();
                 </section>
             <?php endif; ?>
         </article>
-
-
-
-
     </main>
-
+<!-------------------------------------------------------------------------------- Contatos --------------------------------------------------------------------------------------->
     <footer class="footer-nav">
         <div class="social-icons">
             <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a>

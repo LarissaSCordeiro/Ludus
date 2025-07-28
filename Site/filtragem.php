@@ -4,7 +4,6 @@ session_start();
 if (isset($_SESSION['user_id'])) {
  $foto_perfil = isset($_SESSION['user_foto']) && !empty($_SESSION['user_foto']) ? $_SESSION['user_foto'] : 'img/usuarios/default.png';   
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -23,19 +22,21 @@ if (isset($_SESSION['user_id'])) {
 <body>
 <header>
   <!-- Logo do Ludus -->
-  <div class="logo">
-    <a href="index.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
-  </div>
+  <section class="logo">
+     <?php if(isset($_SESSION['user_id'])){ ?>
+     <a href="paginainicial.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a> <?php } else {?>
+     <a href="index.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a> <?php }?>
+  </section>
 
   <!-- Barra de navegaçao -->
   <nav id="nav" class="nav-links">
     <!-- Botao de entrar e links -->
-    <a href="login.php" class="a-Button">Entrar</a>
+	<?php if(!empty($_SESSION['user_id'])){ ?>
+	<a href="perfil.php"><img src="img/usuarios/default.png" alt="Perfil do usuário" class="user-avatar"></a>
+	<?php } else {?>
+    <a href="login.php" class="a-Button">Entrar</a> <?php }?>
     <a href="cadastro.php">Criar uma conta</a>
     <a href="filtragem.php">Games</a>
-	<?php if(isset($_SESSION['user_id'])){ ?>
-	<a href="perfil.php"><img src="img/usuarios/default.png" alt="Perfil do usuário" class="user-avatar"></a>
-	<?php }?>
   </nav>
   
  

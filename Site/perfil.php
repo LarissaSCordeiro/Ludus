@@ -8,7 +8,7 @@ require_once("config.php");
 //}
 
 // Pega os dados do usuário
-$id_usuario = $_SESSION['id_usuario'];
+$id_usuario = $_SESSION['user_id'];
 $stmt = $mysqli->prepare("SELECT nome, foto_perfil FROM usuario WHERE id = ?");
 $stmt->bind_param("i", $id_usuario);
 $stmt->execute();
