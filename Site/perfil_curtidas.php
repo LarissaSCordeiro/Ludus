@@ -3,12 +3,12 @@ session_start();
 require_once("config.php");
 
 // Verifica se o usuário está logado
-if (!isset($_SESSION['id_usuario'])) {
+if (!isset($_SESSION['user_id'])) {
   header("Location: login.php");
   exit();
 }
 
-$id_usuario = $_SESSION['id_usuario'];
+$id_usuario = $_SESSION['user_id'];
 
 // Pega os dados do usuário
 $stmt = $mysqli->prepare("SELECT nome, foto_perfil FROM usuario WHERE id = ?");

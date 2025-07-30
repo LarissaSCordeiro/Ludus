@@ -1,0 +1,443 @@
+body {
+    color: #f0f0f5;
+    margin: 0;
+    padding: 0;
+    z-index: 0;
+}
+
+
+/* Área de conteúdo do card */
+.card-content {
+    padding: 16px;
+}
+
+/* Container principal do card */
+#dash_main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    overflow: hidden;
+    padding: 10px;
+}
+
+main.dash-main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: stretch;
+    position: relative;
+}
+
+/* CARD UNIFICADO */
+.game-card-full {
+    border-radius: 14px;
+    padding: 24px;
+    margin: auto;
+    max-width: 900px;
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* HEADER */
+.card-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-title {
+    font-size: 2rem;
+    color: #fff;
+}
+
+/* IMAGEM */
+.card-image-wrapper img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* GRID DE INFORMAÇÕES */
+.card-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.info-bloco {
+    background: rgba(59, 59, 94, 0.9);
+    border-radius: 10px;
+    padding: 16px;
+}
+
+/* Título com efeito glow */
+.titulo-jogo {
+    font-weight: bold;
+    font-size: 2rem;
+    color: transparent;
+    background: linear-gradient(90deg, #ffe066, #ffbb33);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 0 0 8px rgba(255, 224, 102, 0.3), 0 0 12px rgba(255, 153, 0, 0.2);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Cards individuais */
+.info-card {
+    background: linear-gradient(145deg, rgba(43, 43, 68, 0.9), rgba(30, 30, 48, 0.95));
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid #2f2f4f;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.info-card::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(120deg, transparent 0%, rgba(216, 140, 229, 0.05) 50%, transparent 100%);
+    transform: rotate(25deg);
+    animation: shine 5s infinite;
+}
+
+.coluna-direita>.info-card {
+    margin-bottom: 20px;
+}
+
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) rotate(25deg);
+        opacity: 0;
+    }
+
+    40%,
+    60% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(100%) rotate(25deg);
+        opacity: 0;
+    }
+}
+
+.info-card:hover {
+    transform: translateY(-4px);
+}
+
+.info-card h3 {
+    color: #a6a6f2;
+    margin-bottom: 8px;
+}
+
+.info-card p {
+    color: #e0e0ff;
+    font-size: 0.95rem;
+}
+
+.icon-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.tag {
+    background-color: #3a3a5c;
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: #f0f0f0;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.tag i {
+    font-size: 1rem;
+    color: #ffe066;
+}
+
+.tag:hover i {
+    transform: scale(1.2) rotate(-5deg);
+    transition: transform 0.3s ease;
+    color: #f4961e;
+}
+
+/* Card de avaliação (orbes) */
+.info-card.avaliacao-card {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.avaliacoes-gerais {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.avaliacao-card.nova {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 16px;
+    padding: 20px;
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
+    color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.03);
+}
+
+.avaliacao-card.nova .orbe {
+    width: 80px;
+    height: 80px;
+    background: #222;
+    font-size: 1.6rem;
+    font-weight: bold;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.orbe.media {
+    background-color: #4444aa;
+}
+
+.orbe.usuario {
+    background-color: #888;
+    transition: background-color 0.3s;
+}
+
+.estrelas {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.estrelas i {
+    color: #888;
+    transition: color 0.3s;
+}
+
+.estrelas i.filled {
+    color: #ffa600ff;
+}
+
+.estrelas i.half-filled::before {
+    content: "\f089";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: #ffa600ff;
+}
+
+.btn-favorito {
+    background-color: #ff3636;
+    color: rgb(124, 28, 28);
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-favorito.favoritado {
+    background-color: #3d3d3d;
+    color: rgb(0, 0, 0);
+}
+
+.btn-favorito .icone-coracao {
+    transition: color 0.3s;
+    color: white;
+}
+
+.btn-favorito.favoritado .icone-coracao {
+    color: rgb(179, 51, 51);
+}
+
+/* Container do botão */
+.container-btn-fav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estrelas de avaliação */
+.avaliacao-container .estrelas i {
+    color: #888;
+    font-size: 1.2rem;
+    margin: 0 2px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+
+    /* Garante que o card principal se ajuste à tela sem cortes */
+    .game-card-full {
+        max-width: 100%;
+        width: 100%;
+        padding: 16px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+
+    /* Reorganiza o header */
+    .card-header {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* Reduz altura da imagem */
+    .card-image-wrapper img {
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    /* Quebra a grid de informações para uma coluna */
+    .card-info-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    /* Avaliações em coluna no mobile */
+    .avaliacoes-gerais {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .avaliacao-card.nova {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    /* Tamanho menor nas tags */
+    .tag {
+        font-size: 0.8rem;
+        padding: 4px 10px;
+    }
+
+    .info-bloco {
+        padding: 12px;
+    }
+
+    .titulo-jogo {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .btn-favorito {
+        align-self: center;
+    }
+
+    .estrelas {
+        font-size: 1.5rem;
+    }
+}
+
+.avaliacao-estrelas {
+    display: flex;
+    gap: 8px;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+/* Estilo base */
+.estrelas i {
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+/* Estrela preenchida */
+.avaliacao-container .estrelas i.filled {
+    color: gold;
+}
+
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #207744;
+    color: #222;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+}
+
+.toast.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(-10px);
+}
+
+.toast.error {
+    background-color: #c07a1f;
+    color: #222;
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toast-icon {
+    font-size: 20px;
+    animation: pop 0.3s ease;
+}
+
+/* Animação do ícone */
+@keyframes pop {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
