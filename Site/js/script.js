@@ -1,105 +1,114 @@
 // ======================== Carrossel ========================
+// =================== Carrossel ===================
 const carousel = document.getElementById('carouselImages');
-const images = carousel.querySelectorAll('img');
-const dotsContainer = document.getElementById('dotsContainer');
-const total = images.length;
-let index = 0;
-let interval;
 
-// Criar os dots
-for (let i = 0; i < total; i++) {
-  const dot = document.createElement('div');
-  dot.classList.add('dot');
-  if (i === 0) dot.classList.add('active');
-  dot.addEventListener('click', () => goToSlide(i));
-  dotsContainer.appendChild(dot);
-}
+if (carousel) {
+  const images = carousel.querySelectorAll('img');
+  const dotsContainer = document.getElementById('dotsContainer');
+  const total = images.length;
+  let index = 0;
+  let interval;
 
-const updateDots = () => {
-  document.querySelectorAll('.dot').forEach((dot, i) => {
-    dot.classList.toggle('active', i === index);
-  });
-};
+  // Criar os dots
+  for (let i = 0; i < total; i++) {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsContainer.appendChild(dot);
+  }
 
-const goToSlide = (i) => {
-  index = i;
-  carousel.style.transform = `translateX(-${index * 100}vw)`;
-  updateDots();
-  resetAutoplay();
-};
+  const updateDots = () => {
+    document.querySelectorAll('.dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === index);
+    });
+  };
 
-const nextSlide = () => {
-  index = (index + 1) % total;
-  goToSlide(index);
-};
+  const goToSlide = (i) => {
+    index = i;
+    carousel.style.transform = `translateX(-${index * 100}vw)`;
+    updateDots();
+    resetAutoplay();
+  };
 
-const prevSlide = () => {
-  index = (index - 1 + total) % total;
-  goToSlide(index);
-};
+  const nextSlide = () => {
+    index = (index + 1) % total;
+    goToSlide(index);
+  };
 
-document.querySelector('.next').addEventListener('click', nextSlide);
-document.querySelector('.prev').addEventListener('click', prevSlide);
+  const prevSlide = () => {
+    index = (index - 1 + total) % total;
+    goToSlide(index);
+  };
 
-const startAutoplay = () => {
-  interval = setInterval(nextSlide, 8000);
-};
+  document.querySelector('.next')?.addEventListener('click', nextSlide);
+  document.querySelector('.prev')?.addEventListener('click', prevSlide);
 
-const resetAutoplay = () => {
-  clearInterval(interval);
+  const startAutoplay = () => {
+    interval = setInterval(nextSlide, 8000);
+  };
+
+  const resetAutoplay = () => {
+    clearInterval(interval);
+    startAutoplay();
+  };
+
   startAutoplay();
-};
-
-startAutoplay();
+} else {
+  console.warn('Elemento #carouselImages não encontrado nesta página.');
+}
 
 // =================== Menu Sanduíche ===================
 function toggleMenu() {
   const nav = document.getElementById('nav');
-  nav.classList.toggle('show');
+  if (nav) {
+    nav.classList.toggle('show');
+  }
 }
-// =================== Bloqueio ao atualizar a página(filtro) ===================
+
+// =================== Filtro com AJAX ===================
 document.addEventListener("DOMContentLoaded", function () {
   const generoForm = document.querySelector(".categoria_genero form");
   const jogosContainer = document.querySelector(".jogos");
   const tituloSeletor = document.querySelector(".categoria h2");
 
-  generoForm.addEventListener("click", function (e) {
-    if (e.target.tagName === "BUTTON") {
-      e.preventDefault();
-      const genero = e.target.value;
+  if (generoForm && jogosContainer && tituloSeletor) {
+    generoForm.addEventListener("click", function (e) {
+      if (e.target.tagName === "BUTTON") {
+        e.preventDefault();
+        const genero = e.target.value;
 
-      fetch("filtragem.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: "btn=" + encodeURIComponent(genero)
-      })
-        .then(response => response.text())
-        .then(data => {
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(data, "text/html");
-          const novosJogos = doc.querySelector(".jogos");
-          const novoTitulo = doc.querySelector(".categoria h2");
-
-          if (novosJogos && jogosContainer) {
-            jogosContainer.innerHTML = novosJogos.innerHTML;
-          }
-          if (novoTitulo && tituloSeletor) {
-            tituloSeletor.textContent = novoTitulo.textContent;
-          }
+        fetch("filtragem.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: "btn=" + encodeURIComponent(genero)
         })
-        .catch(error => {
-          console.error("Erro ao filtrar:", error);
-        })
-    }
-  })
-})
+          .then(response => response.text())
+          .then(data => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data, "text/html");
+            const novosJogos = doc.querySelector(".jogos");
+            const novoTitulo = doc.querySelector(".categoria h2");
 
-// =================== Dashboard não reeviar comentarios ao recarregar ===================
+            if (novosJogos && novoTitulo) {
+              jogosContainer.innerHTML = novosJogos.innerHTML;
+              tituloSeletor.textContent = novoTitulo.textContent;
+            }
+          })
+          .catch(error => {
+            console.error("Erro ao filtrar:", error);
+          });
+      }
+    });
+  }
+});
+
+// =================== Comentários com AJAX ===================
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("comentarioForm");
   const msgBox = document.getElementById("msg-feedback");
 
-  if (form) {
+  if (form && msgBox) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
@@ -125,25 +134,41 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// =================== Menu da pagina filtro botoes ===================
+// =================== Menu da página de filtros ===================
 document.addEventListener("DOMContentLoaded", function () {
   const toggle = document.querySelector(".menu-toggle");
   const opcoes = document.querySelector(".menu-opcoes");
 
-  toggle.addEventListener("click", function () {
-    const isOpen = opcoes.style.display === "block";
-    opcoes.style.display = isOpen ? "none" : "block";
-  });
-  document.addEventListener("click", function (e) {
-    if (!toggle.contains(e.target) && !opcoes.contains(e.target)) {
-      opcoes.style.display = "none";
-    }
-  });
-  opcoes.addEventListener("click", function (e) {
-    if (e.target.tagName === "BUTTON") {
-      opcoes.style.display = "none";
-    }
-  })
-})
+  if (toggle && opcoes) {
+    toggle.addEventListener("click", function () {
+      const isOpen = opcoes.style.display === "block";
+      opcoes.style.display = isOpen ? "none" : "block";
+    });
 
+    document.addEventListener("click", function (e) {
+      if (!toggle.contains(e.target) && !opcoes.contains(e.target)) {
+        opcoes.style.display = "none";
+      }
+    });
+
+    opcoes.addEventListener("click", function (e) {
+      if (e.target.tagName === "BUTTON") {
+        opcoes.style.display = "none";
+      }
+    });
+  }
+});
+
+// =================== Alerta de comentário ===================
+window.addEventListener("DOMContentLoaded", () => {
+  const alertBox = document.querySelector(".mensagem-alerta");
+
+  if (alertBox) {
+    setTimeout(() => {
+      alertBox.style.opacity = "0";
+      alertBox.style.transform = "translateY(-10px)";
+      setTimeout(() => alertBox.style.display = "none", 500);
+    }, 10000);
+  }
+});
 

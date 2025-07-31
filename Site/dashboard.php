@@ -1,39 +1,51 @@
 <!-------------------------------------------------------------------------------- PHP -------------------------------------------------------------------------------------------->
 <?php
-require_once("config.php");
 session_start();
+require_once "config.php";
 
-if (!empty($_SESSION['user_id'])) {
-
-    $user_id = $_SESSION['user_id'];
-
-    if (isset($_POST['enviar_comentario']) && isset($_SESSION['user_id'])) {
-
-        $comentario = trim($_POST['comentario']);
-        $id_usuario = $_SESSION['user_id'];
-        $id_avaliacao = isset($_POST['id_avaliacao']) ? (int) $_POST['id_avaliacao'] : 0;
-
-        $inserir = $mysqli->prepare("INSERT INTO comentario (id_usuario, texto, id_avaliacao) VALUES (?, ?, ?)");
-        $inserir->bind_param("isi", $id_usuario, $comentario, $id_avaliacao);
-
-        if (!$inserir->execute()) {
-
-        } else {
-            header("Location: dashboard.php?id=" . $id);
-            exit();
-        }
-    }
-}
 $id = isset($_POST['id']) ? (int) $_POST['id'] : (isset($_GET['id']) ? (int) $_GET['id'] : 0);
 
+if (!empty($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+
+    if (isset($_POST['enviar_comentario'])) {
+        $comentario = trim($_POST['comentario']);
+
+        $stmt = $mysqli->prepare("SELECT id FROM avaliacao WHERE id_usuario = ? AND id_jogo = ?");
+        $stmt->bind_param("ii", $user_id, $id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+
+        if ($avaliacao = $resultado->fetch_assoc()) {
+            $id_avaliacao = $avaliacao['id'];
+
+            $inserir = $mysqli->prepare("INSERT INTO comentario (id_usuario, texto, id_avaliacao) VALUES (?, ?, ?)");
+            $inserir->bind_param("isi", $user_id, $comentario, $id_avaliacao);
+
+            if ($inserir->execute()) {
+                header("Location: dashboard.php?id=" . $id);
+                exit();
+            } else {
+                $mensagem = "Não foi possível enviar seu comentário.";
+            }
+
+            $inserir->close();
+        } else {
+            unset($_POST['comentario']);
+            unset($_POST['enviar_comentario']);
+            $mensagem = "Você precisa avaliar o jogo antes de comentar...";
+        }
+
+        $stmt->close();
+    }
+} 
 $stmt = $mysqli->prepare("SELECT nome, email, foto_perfil FROM usuario WHERE id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $resultado = $stmt->get_result();
 $usuario = $resultado->fetch_assoc();
 
-$consulta = $mysqli->prepare("
-    SELECT 
+$consulta = $mysqli->prepare("SELECT 
         jogo.id AS id_jogo,
         jogo.nome, 
         jogo.descricao, 
@@ -97,7 +109,7 @@ $stmtCountAvaliacoes->close();
 ?>
 <!-------------------------------------------------------------------------------- HTML ------------------------------------------------------------------------------------------->
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8" />
@@ -106,7 +118,7 @@ $stmtCountAvaliacoes->close();
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/dash.css" />
     <link rel="icon" href="img/Ludus_Favicon.png" type="image/x-icon" />
-    <script src="./js/script.js"></script>
+    <script defer src="./js/script.js"> </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
@@ -293,11 +305,39 @@ $stmtCountAvaliacoes->close();
             </div>
         </div>
 
-        <!-------------------------------------------------------------------------------- Comentarios ------------------------------------------------------------------------------------>
+<!-------------------------------------------------------------------------------- Comentarios ------------------------------------------------------------------------------------>
         <article class="p2">
-            <?php
+            <?php 
             $count = $resultado->num_rows;
             echo "<h2>Comentários ($count)</h2> ";
+			 if (!empty($mensagem)) : ?>
+        <div class="mensagem-alerta">
+            <?php echo htmlspecialchars($mensagem); ?>
+        </div>
+        <?php endif; 
+            if (isset($_SESSION['user_id'])): ?>
+                <section class="coment_usu">
+                    <figure class="usu_foto">
+                        <img src="<?php echo $usuario["foto_perfil"]; ?>" alt="img" class="img_coment">
+                        <h4><?php echo $usuario["nome"]; ?></h4>
+                    </figure>
+                    <div class="form_com">
+                        <p><?php echo $usuario["email"]; ?></p>
+                        <form method="POST" id="comentarioForm">
+                             <textarea name="comentario" placeholder="Adicione seu comentário..." required></textarea><br>
+							 <input type="hidden" name="id" value="<?php echo $id; ?>">
+                             <input type="hidden" name="enviar_comentario" value="1">
+                             <button type="submit" id="btn_comentario">Enviar</button>
+                        </form>
+                    </div>
+                </section>
+            <?php else: ?>
+                <section class="coment_usu">
+                    <p>Faça <a href="login.php">login</a> para comentar ou <a
+                            href="cadastro.php">cadastre-se</a>
+                    </p>
+                </section>
+            <?php endif;
             if ($count == 0) { ?>
                 <section class="coment_usu">
                     <p>Ninguém comentou aqui ainda, seja o primeiro a comentar !</p>
@@ -316,34 +356,11 @@ $stmtCountAvaliacoes->close();
 
                         <p><?php echo "nota " . $coment["nota"]; ?></p>
                     </figure>
-                    <div class="form_com">
-                        <p><?php echo $coment["texto"]; ?></p>
+                        <p class="form_com" ><?php echo $coment["texto"]; ?></p> 
                 </section>
-                </div>
-            <?php }
-            if (isset($_SESSION['user_id']) && $usuario): ?>
-                <section class="coment_usu">
-                    <figure class="usu_foto">
-                        <img src="<?php echo $usuario["foto_perfil"]; ?>" alt="img" class="img_coment">
-                        <h4><?php echo $usuario["nome"]; ?></h4>
-                    </figure>
-                    <div class="form_com">
-                        <p><?php echo $usuario["email"]; ?></p>
-                        <form method="POST" id="comentarioForm">
-                            <textarea name="comentario" placeholder="Adicione seu comentário..." required></textarea><br>
-                            <input type="hidden" name="id" value="<?php echo $id; ?>">
-                            <button type="submit" id="btn_comentario">Enviar</button>
-                        </form>
-                    </div>
-                    <div id="msg-feedback"></div>
-                </section>
-            <?php else: ?>
-                <section class="coment_usu">
-                    <p class="msg-erro">Faça <a href="login.php">login</a> para comentar ou <a
-                            href="cadastro.php">cadastre-se</a>
-                    </p>
-                </section>
-            <?php endif; ?>
+            <?php } ?>
+			
+        </div>
         </article>
     </main>
     <!-------------------------------------------------------------------------------- Contatos --------------------------------------------------------------------------------------->
