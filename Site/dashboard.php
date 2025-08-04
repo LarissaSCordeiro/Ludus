@@ -38,7 +38,7 @@ if (!empty($_SESSION['user_id'])) {
 
         $stmt->close();
     }
-} 
+}
 $stmt = $mysqli->prepare("SELECT nome, email, foto_perfil FROM usuario WHERE id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -63,6 +63,7 @@ $consulta = $mysqli->prepare("SELECT
     WHERE jogo.id = ? 
     GROUP BY jogo.id
 ");
+
 $consulta->bind_param("i", $id);
 $consulta->execute();
 $resultado = $consulta->get_result();
@@ -72,19 +73,32 @@ $consulta = $mysqli->prepare("SELECT comentario.data_comentario, comentario.text
 $consulta->bind_param("i", $id);
 $consulta->execute();
 $resultado = $consulta->get_result();
+$comentarios = [];
+while ($linha = $resultado->fetch_assoc()) {
+    $comentarios[] = $linha;
+}
 
 
+// avaliações do jogo
 // Busca a nota do usuário logado para este jogo
-$nota_usuario = null;
+$nota_usuario = 0.0;
 
 if (!empty($user_id)) {
     $stmt = $mysqli->prepare("SELECT nota FROM avaliacao WHERE id_jogo = ? AND id_usuario = ?");
     $stmt->bind_param("ii", $id, $user_id);
     $stmt->execute();
-    $stmt->bind_result($nota_usuario);
-    $stmt->fetch();
+    $resultado = $stmt->get_result();
+
+    if ($avaliacao = $resultado->fetch_assoc()) {
+        $nota_usuario = floatval($avaliacao['nota']);
+    } else {
+        $nota_usuario = 0.0; // Usuário ainda não avaliou
+    }
+
     $stmt->close();
 }
+
+
 
 // Calcula a média das avaliações da comunidade
 $media_comunidade = null;
@@ -247,7 +261,7 @@ $stmtCountAvaliacoes->close();
                                     id="nota-comunidade"><?= number_format(floatval($media_comunidade ?? 0), 1) ?></span>
                             </div>
                             <h4>Média da Comunidade</h4>
-                            <small>Baseada em <?= $totalAvaliacoes ?? 0 ?> avaliações</small>
+                            <small id="total-avaliacoes">Baseada em <?= $totalAvaliacoes ?? 0 ?> avaliações</small>
                         </div>
 
                         <?php
@@ -305,16 +319,53 @@ $stmtCountAvaliacoes->close();
             </div>
         </div>
 
-<!-------------------------------------------------------------------------------- Comentarios ------------------------------------------------------------------------------------>
+        <!-------------------------------------------------------------------------------- Comentarios ------------------------------------------------------------------------------------>
         <article class="p2">
-            <?php 
-            $count = $resultado->num_rows;
-            echo "<h2>Comentários ($count)</h2> ";
-			 if (!empty($mensagem)) : ?>
-        <div class="mensagem-alerta">
-            <?php echo htmlspecialchars($mensagem); ?>
-        </div>
-        <?php endif; 
+            <?php
+            // Se houve envio de comentário, insira no banco e recarregue os dados
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar_comentario'])) {
+                $comentario = trim($_POST['comentario']);
+                $id_jogo = $_POST['id'];
+                $id_usuario = $_SESSION['user_id'];
+
+                if (!empty($comentario)) {
+                    $stmt = $mysqli->prepare("INSERT INTO comentario (id_jogo, id_usuario, texto, data_comentario) VALUES (?, ?, ?, NOW())");
+                    $stmt->bind_param("iis", $id_jogo, $id_usuario, $comentario);
+                    if ($stmt->execute()) {
+                        $mensagem = "Comentário enviado com sucesso!";
+                    } else {
+                        $mensagem = "Erro ao enviar comentário.";
+                    }
+                    $stmt->close();
+                }
+            }
+
+            // Após possível envio, busque os comentários atualizados
+            // Após possível envio, busque os comentários atualizados
+            $stmt = $mysqli->prepare("
+                SELECT c.data_comentario, c.texto, u.nome AS nome_usuario, u.email, u.foto_perfil, a.nota
+                FROM comentario c
+                JOIN usuario u ON c.id_usuario = u.id
+                JOIN avaliacao a ON c.id_avaliacao = a.id
+                WHERE a.id_jogo = ?
+                ORDER BY c.data_comentario DESC
+");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $resultado = $stmt->get_result();
+            $comentarios = $resultado->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+
+
+            $count = count($comentarios);
+            echo "<h2>Comentários ($count)</h2>";
+
+            if (!empty($mensagem)): ?>
+                <div class="mensagem-alerta">
+                    <?php echo htmlspecialchars($mensagem); ?>
+                </div>
+            <?php endif;
+
             if (isset($_SESSION['user_id'])): ?>
                 <section class="coment_usu">
                     <figure class="usu_foto">
@@ -324,43 +375,41 @@ $stmtCountAvaliacoes->close();
                     <div class="form_com">
                         <p><?php echo $usuario["email"]; ?></p>
                         <form method="POST" id="comentarioForm">
-                             <textarea name="comentario" placeholder="Adicione seu comentário..." required></textarea><br>
-							 <input type="hidden" name="id" value="<?php echo $id; ?>">
-                             <input type="hidden" name="enviar_comentario" value="1">
-                             <button type="submit" id="btn_comentario">Enviar</button>
+                            <textarea name="comentario" placeholder="Adicione seu comentário..." required></textarea><br>
+                            <input type="hidden" name="id" value="<?php echo $id; ?>">
+                            <input type="hidden" name="enviar_comentario" value="1">
+                            <button type="submit" id="btn_comentario">Enviar</button>
                         </form>
                     </div>
                 </section>
             <?php else: ?>
                 <section class="coment_usu">
-                    <p>Faça <a href="login.php">login</a> para comentar ou <a
-                            href="cadastro.php">cadastre-se</a>
-                    </p>
+                    <p>Faça <a href="login.php">login</a> para comentar ou <a href="cadastro.php">cadastre-se</a></p>
                 </section>
             <?php endif;
-            if ($count == 0) { ?>
+
+            if ($count === 0): ?>
                 <section class="coment_usu">
                     <p>Ninguém comentou aqui ainda, seja o primeiro a comentar !</p>
                 </section>
-            <?php }
-            while ($coment = $resultado->fetch_assoc()) { ?>
-                <section class="coment_usu">
-                    <figure class="usu_foto">
-                        <img src="<?php echo $coment["foto_perfil"]; ?>" alt="img" class="img_coment">
-                        <h4><?php echo $coment["nome_usuario"]; ?></h4>
-
-                        <p><?php
-                        $data_comentario = new DateTime($coment["data_comentario"]);
-                        $data = $data_comentario->format('d/m \à\s H\hi');
-                        echo $data; ?></p>
-
-                        <p><?php echo "nota " . $coment["nota"]; ?></p>
-                    </figure>
-                        <p class="form_com" ><?php echo $coment["texto"]; ?></p> 
-                </section>
-            <?php } ?>
-			
-        </div>
+            <?php else: ?>
+                <?php foreach ($comentarios as $coment): ?>
+                    <section class="coment_usu">
+                        <figure class="usu_foto">
+                            <img src="<?php echo htmlspecialchars($coment["foto_perfil"]); ?>" alt="img" class="img_coment">
+                            <h4><?php echo htmlspecialchars($coment["nome_usuario"]); ?></h4>
+                            <p>
+                                <?php
+                                $data_comentario = new DateTime($coment["data_comentario"]);
+                                echo $data_comentario->format('d/m \à\s H\hi');
+                                ?>
+                            </p>
+                            <p><?php echo "nota " . htmlspecialchars($coment["nota"] ?? '—'); ?></p>
+                        </figure>
+                        <p class="form_com"><?php echo nl2br(htmlspecialchars($coment["texto"])); ?></p>
+                    </section>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </article>
     </main>
     <!-------------------------------------------------------------------------------- Contatos --------------------------------------------------------------------------------------->
@@ -378,12 +427,14 @@ $stmtCountAvaliacoes->close();
     const usuarioLogado = <?= isset($_SESSION['user_id']) ? 'true' : 'false' ?>;
     const notaUsuario = <?= json_encode($nota_usuario ?? 0) ?>;
     const mediaComunidad = <?= json_encode(round($media_comunidade ?? 0, 1)) ?>;
+    const totalAvaliacoes = <?= json_encode($totalAvaliacoes ?? 0) ?>; // valor inicial vindo do PHP
     const estrelas = document.querySelectorAll('.estrelas i');
     const orbe = document.getElementById('orbe');
     const notaTexto = document.getElementById('nota-texto');
     const labelNota = document.getElementById('label-nota');
     const orbeComunidade = document.getElementById('orbe-comunidade');
     const notaTextoComunidade = document.getElementById('nota-comunidade');
+    const totalAvaliacoesElemento = document.getElementById('total-avaliacoes'); // elemento para o texto "Baseada em x avaliações"
 
     let notaAtual = 0;
     let cooldown = false;
@@ -395,6 +446,13 @@ $stmtCountAvaliacoes->close();
     const cores = [
         "#5e5e5e", "#da5959ff", "#4fff3fff", "#00ffffff", "#00b3e0ff", "#d15cffff"
     ];
+
+    // Função para pluralizar a palavra "avaliação"
+    function pluralizarAvaliacao(qtd) {
+        const texto = qtd === 1 ? 'avaliação' : 'avaliações';
+        return `Baseada em ${qtd} ${texto}`;
+    }
+
 
     function atualizarOrbe(nota, orbeElement = orbe, notaElement = notaTexto) {
         if (!orbeElement || !notaElement) return;
@@ -428,9 +486,29 @@ $stmtCountAvaliacoes->close();
         });
     }
 
-    notaAtual = usuarioLogado && notaUsuario > 0 ? notaUsuario : mediaComunidad;
-    atualizarOrbe(notaAtual);
-    preencherEstrelas(notaAtual);
+    // Atualiza a orbe da comunidade e o texto "Baseada em X avaliações" ao carregar
+    if (orbeComunidade && notaTextoComunidade) {
+        atualizarOrbe(parseFloat(mediaComunidad) || 0, orbeComunidade, notaTextoComunidade);
+    }
+    if (totalAvaliacoesElemento) {
+        totalAvaliacoesElemento.textContent = pluralizarAvaliacao(totalAvaliacoes);
+    }
+
+    // Inicialização do estado visual do usuário
+    if (usuarioLogado) {
+        notaAtual = notaUsuario; // Pode ser 0, o que indica "ainda não avaliou"
+        if (notaAtual > 0) {
+            atualizarOrbe(notaAtual);
+            preencherEstrelas(notaAtual);
+        } else {
+            atualizarOrbe(0);
+            preencherEstrelas(0);
+        }
+    } else {
+        notaAtual = mediaComunidad;
+        atualizarOrbe(mediaComunidad);
+        preencherEstrelas(mediaComunidad);
+    }
 
     estrelas.forEach((estrela) => {
         estrela.addEventListener('mousemove', (e) => {
@@ -472,7 +550,7 @@ $stmtCountAvaliacoes->close();
         atualizarOrbe(notaAtual);
     });
 
-    // Função para enviar a nota via AJAX
+    // Envio da avaliação via AJAX
     function enviarAvaliacao(nota) {
         cooldown = true;
         mostrarToast("Enviando avaliação...", "info");
@@ -486,13 +564,20 @@ $stmtCountAvaliacoes->close();
                 cooldown = false;
                 if (xhr.status === 200) {
                     const resposta = JSON.parse(xhr.responseText);
-                    if (resposta.sucesso) {
+                    if (resposta.status === "ok") {
                         mostrarToast("Avaliação salva com sucesso!", "success");
 
                         // Atualiza orbe da comunidade (nota e cor)
                         if (resposta.media_comunidade && orbeComunidade && notaTextoComunidade) {
                             atualizarOrbe(parseFloat(resposta.media_comunidade), orbeComunidade, notaTextoComunidade);
                         }
+                        // Atualiza texto "Baseada em X avaliações"
+                        // Atualiza texto "Baseada em X avaliações"
+                        const totalAvaliacoesElemento = document.getElementById('total-avaliacoes');
+                        if (resposta.total_avaliacoes !== undefined && totalAvaliacoesElemento) {
+                            totalAvaliacoesElemento.textContent = pluralizarAvaliacao(resposta.total_avaliacoes);
+                        }
+
 
                     } else {
                         mostrarToast("Erro ao salvar avaliação: " + resposta.mensagem, "error");
@@ -506,7 +591,7 @@ $stmtCountAvaliacoes->close();
         xhr.send("nota=" + nota + "&id_jogo=" + jogoID + "&user_id=" + usuarioID);
     }
 
-    // Toast
+    // Toast para mensagens na tela
     let toastAtivo = false;
 
     function mostrarToast(mensagem, tipo = 'error') {
@@ -540,7 +625,7 @@ $stmtCountAvaliacoes->close();
         }, 3000);
     }
 
-    // Favoritar
+    // Botão Favoritar
     document.querySelectorAll('.btn-favorito').forEach(btn => {
         btn.addEventListener('click', () => {
             const jogoId = btn.dataset.jogoId;
@@ -580,7 +665,5 @@ $stmtCountAvaliacoes->close();
         });
     });
 </script>
-
-
 
 </html>

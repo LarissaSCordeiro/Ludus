@@ -18,6 +18,8 @@ html {
 
 /*corpo do site*/
 body {
+  margin: 0;
+  padding: 0;
   font-family: 'comfortaa', sans-serif;
   background: #0e0a1a;
   color: #d9d9d9;
@@ -379,47 +381,6 @@ input::placeholder {
 	text-align:center;
 }
 
-/* --- Gerenciamento de usuarios ---------------------------------------------------------- */
-
-.section_gerencia{
-  display: flex;
-  align-items: center;
-  width : 100%; 
-  height: 60%;   
-  gap: 4%;
-  margin-bottom: 15px;
-  background-color:#19162b;
-  padding: 0 1em 0 1em;
-}
-
-#main_gerencia {
-  width: 60%;         
-  margin: 0 auto;
-  border-radius:10px;  
-  padding: 1em 0 1em 0 ;/* superior | direita | inferior | esquerda */
-}
-#main_gerencia h2, h4{
-text-align: center;}
-
-.nav_buttons form {
-  display: flex;
-  gap: 10px; 
-}
-#bt_excluir {
-  background-color:red;
-}
-.dados_u {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-  gap:6%;
-}
-#nome_jogo {
-	width:100%;
-	color:#f4961e;
-	text-align: center;
-}
-
 /*Menu hamburguer para dispositivos móveis*/
 .hamburger {
   font-size: 1.8rem;
@@ -779,7 +740,6 @@ main {
 }
 
 .jogo-card {
-  background-color: #1f1b2e;
   border-radius: 10px;
   padding: 1rem;
   width: 300px;
@@ -798,44 +758,6 @@ main {
   padding: 0.2rem 0.4rem;
   margin: 0.2rem;
   display: inline-block;
-}
-
-/*Alinhando imagens dos botoes*/
-
-.btn_img {
-  padding: 0;
-  border: none;
-  background: none;
-}
-
-.btn_img img {
-  display: block;
-  width: 260px;
-  /* aumenta a largura */
-  height: 370px;
-  /* aumenta a altura */
-  object-fit: cover;
-  border-radius: 8px;
-} 
-
-.btn_img:hover {
-	transform: scale(1.05); 
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-} 
-
-/* botao que envia para a dashboard (nome do jogo abaixo da img) */
-.jogo-nome {
-  background: none;
-  border: none;
-  padding: 0;
-  color: inherit;
-  font: inherit;
-  cursor: default;
-  padding: 1em;
-}
-
-.jogo-nome:hover {
-  color: #cd3dff;
 }
 
 .avaliacoes,

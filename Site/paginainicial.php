@@ -8,8 +8,8 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Define a imagem de perfil
-$foto_perfil = isset($_SESSION['user_foto']) && !empty($_SESSION['user_foto']) 
-    ? $_SESSION['user_foto'] 
+$foto_perfil = isset($_SESSION['user_foto']) && !empty($_SESSION['user_foto'])
+    ? $_SESSION['user_foto']
     : 'img/usuarios/default.png';
 ?>
 <!DOCTYPE html>
@@ -61,37 +61,34 @@ $foto_perfil = isset($_SESSION['user_foto']) && !empty($_SESSION['user_foto'])
         <!-- Carrossel -->
         <div class="carousel">
             <button class="nav prev">&#10094;</button>
-
             <div class="carousel-images" id="carouselImages">
-                <div class="carousel-slide">
-                    <img src="img/Soldier.jpeg" alt="Soldier">
+                <div class="carousel-slide" onclick="irParaDashboard(1)">
+                    <img src="img/EnigmaBanner.jpg" alt="Enigma do Medo">
                     <div class="overlay">
-                        <h2 class="h2-overlay">Clique <span>para ver mais</span></h2>
+                        <a>
+                            <h2 class="h2-overlay">E<span>nigma do Medo</span></h2>
+                        </a>
                     </div>
                 </div>
-
-                <div class="carousel-slide">
-                    <img src="img/Everest.jpeg" alt="Everest">
+                <div class="carousel-slide" onclick="irParaDashboard(2)">
+                    <img src="img/DandaraBanner.avif" alt="Dandara">
                     <div class="overlay">
-                        <h2 class="h2-overlay">Clique <span>para ver mais</span></h2>
+                        <h2 class="h2-overlay">D<span>andara</span></h2>
                     </div>
                 </div>
-
-                <div class="carousel-slide">
-                    <img src="img/Montanhas.jpeg" alt="Montanhas">
+                <div class="carousel-slide" onclick="irParaDashboard(9)">
+                    <img src="img/KazeBanner.jpg" alt="Kaze and the wild Masks">
                     <div class="overlay">
-                        <h2 class="h2-overlay">Clique <span>para ver mais</span></h2>
+                        <h2 class="h2-overlay">K<span>aze and the wild Masks</span></h2>
                     </div>
                 </div>
-
-                <div class="carousel-slide">
-                    <img src="img/Eden-img.jpeg" alt="Eden">
+                <div class="carousel-slide" onclick="irParaDashboard(3)">
+                    <img src="img/AdoreBanner.jpg" alt="Adore">
                     <div class="overlay">
-                        <h2 class="h2-overlay">Clique <span>para ver mais</span></h2>
+                        <h2 class="h2-overlay">A<span>dore</span></h2>
                     </div>
                 </div>
             </div>
-
             <button class="nav next">&#10095;</button>
             <div class="dots" id="dotsContainer"></div>
         </div>
@@ -124,5 +121,12 @@ $foto_perfil = isset($_SESSION['user_foto']) && !empty($_SESSION['user_foto'])
         <span>Ludus • v0.1</span>
     </footer>
 
+    <script>
+        function irParaDashboard(idJogo) {
+            window.location.href = 'dashboard.php?id=' + idJogo;
+        }
+    </script>
+
 </body>
+
 </html>
