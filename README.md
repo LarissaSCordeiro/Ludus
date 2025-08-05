@@ -152,3 +152,12 @@ Criar uma plataforma acessível e intuitiva que valorize os jogos independentes 
 
 📄 [Relatório Técnico de Design - Docs](https://docs.google.com/document/d/1oMJe90ux9ovuCe4i9T89w1CSWyW5A8smjiuWQpmG4Sk/edit?usp=sharing)
 
+---
+
+### Relatório Lições Aprendidas
+
+📄 [Relatório Lições Aprendidas - Docs](https://docs.google.com/document/d/1w1GoujQIEhakpGTIowcEpFMmT5DfaRJW/edit?usp=sharing&ouid=104092952947185357370&rtpof=true&sd=true)
+
+
+
+
