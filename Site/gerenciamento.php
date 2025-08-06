@@ -7,11 +7,11 @@ $query_usu = "SELECT * FROM usuario";
 $query_coment = "SELECT comentario.id AS id_comentario,comentario.data_comentario, comentario.texto, usuario.nome AS nome_usuario, usuario.email, usuario.foto_perfil, avaliacao.nota, jogo.nome AS nome_jogo FROM
  comentario INNER JOIN usuario ON comentario.id_usuario = usuario.id INNER JOIN avaliacao ON comentario.id_avaliacao = avaliacao.id INNER JOIN jogo ON avaliacao.id_jogo = jogo.id";
 
-if (isset($_POST['excluir_usu']) && is_numeric($_POST['excluir_usu'])) {
-    $id_usu = (int) $_POST['excluir_usu'];
+if (isset($_POST['excluir_usu'])) {
+    $id_usu = $_POST['excluir_usu'];
 
-    $mysqli->query("DELETE FROM avaliacao WHERE id_usuario = $id_usu");
     $mysqli->query("DELETE FROM comentario WHERE id_usuario = $id_usu");
+    $mysqli->query("DELETE FROM avaliacao WHERE id_usuario = $id_usu");
     $mysqli->query("DELETE FROM usuario_favorita_jogo WHERE id_usuario = $id_usu");
     $mysqli->query("DELETE FROM usuario_curte_avaliacao WHERE id_usuario = $id_usu");
 
@@ -27,38 +27,38 @@ if (isset($_POST['excluir_usu']) && is_numeric($_POST['excluir_usu'])) {
 
     $query_u = "DELETE FROM usuario WHERE id = $id_usu";
     if ($mysqli->query($query_u)) {
-        session_destroy();
+		session_destroy();
         echo "<p>Usuario excluido</p>";
     } else {
-        echo $mysqli->error;
+        echo $mysqli->error ;
     }
 }
 
-if (isset($_POST['excluir_coment']) && is_numeric($_POST['excluir_coment'])) {
-    $id_coment = (int) $_POST['excluir_coment'];
-
+if (!empty($_POST['excluir_coment'])) {
+    $id_coment = $_POST['excluir_coment']; 
+	
     $query_u = "DELETE FROM comentario WHERE id = $id_coment";
     if ($mysqli->query($query_u)) {
         echo "<p>Comentario excluido</p>";
     } else {
-        echo $mysqli->error;
+        echo $mysqli->error ;
     }
-
+	
 }
-$usuario = $mysqli->query($query_usu);
-$comentario = $mysqli->query($query_coment);
-
-$count_usu = $usuario->num_rows;
-$count_coment = $comentario->num_rows;
+    $usuario = $mysqli->query($query_usu);
+	$comentario = $mysqli->query($query_coment);
+	
+	$count_usu = $usuario->num_rows;
+	$count_coment = $comentario->num_rows;	
 ?>
 <html>
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ludus | Jogos Indie BR</title>
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/gerenc.css" />
+	<script defer src="./js/script.js"> </script>
     <link rel="icon" href="img/Ludus_Favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -191,34 +191,5 @@ $count_coment = $comentario->num_rows;
     </div>
 
 </body>
-
-<script>
-    document.querySelectorAll('.abrir-modal').forEach(botao => {
-        botao.addEventListener('click', function () {
-            const id = this.getAttribute('data-id');
-            const tipo = this.getAttribute('data-tipo');
-
-            const modal = document.getElementById('modal-confirmacao');
-            const inputUsu = document.getElementById('input-excluir-usu');
-            const inputComent = document.getElementById('input-excluir-coment');
-
-            inputUsu.value = '';
-            inputComent.value = '';
-
-            if (tipo === 'usuario') {
-                inputUsu.value = id;
-            } else if (tipo === 'comentario') {
-                inputComent.value = id;
-            }
-
-            modal.classList.remove('hidden-force');
-        });
-    });
-
-    function fecharModal() {
-        const modal = document.getElementById('modal-confirmacao');
-        modal.classList.add('hidden-force');
-    }
-</script>
 
 </html>
