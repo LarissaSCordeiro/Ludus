@@ -122,7 +122,7 @@ Criar uma plataforma acessível e intuitiva que valorize os jogos independentes 
 
 #### Diagrama de Atividades
 
-📄 [Diagrama de Atividades](https://github.com/LarissaSCordeiro/Ludus/tree/5fc98394d2e716202f6a2578954c2847ba7d3af9/Documentos/Diagramas/Diagrama%20de%20Atividades)
+📄 [Diagrama de Atividades](https://github.com/LarissaSCordeiro/Ludus/tree/69a2a325bdedc7b94d7d14ee18372186e1e1ec51/Documentos/Diagramas/Diagrama%20de%20Atividades)
 
 #### Diagrama de Casos de Uso
 
