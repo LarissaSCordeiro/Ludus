@@ -1,9 +1,12 @@
 <?php
 session_start();
+require_once("config.php");
+
 
 if (isset($_SESSION['user_id'])) {
   $foto_perfil = isset($_SESSION['user_foto']) && !empty($_SESSION['user_foto']) ? $_SESSION['user_foto'] : 'img/usuarios/default.png';
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -15,6 +18,7 @@ if (isset($_SESSION['user_id'])) {
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="icon" href="img/Ludus_Favicon.png" type="image/x-icon" />
   <script defer src="./js/script.js"></script>
+  <script defer src="./js/carousel.js"></script>
   <script defer src="./js/pesquisa.ajax.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -373,8 +377,9 @@ if (isset($_SESSION['user_id'])) {
       <?php if (!empty($_SESSION['user_id'])) { ?>
         <a href="perfil.php"><img src="img/usuarios/default.png" alt="Perfil do usuário" class="user-avatar"></a>
       <?php } else { ?>
-        <a href="login.php" class="a-Button">Entrar</a> <?php } ?>
-      <a href="cadastro.php">Criar uma conta</a>
+        <a href="login.php" class="a-Button">Entrar</a> 
+		 <a href="cadastro.php">Criar uma conta</a>
+		<?php } ?>
       <a href="filtragem.php">Games</a>
     </nav>
 
@@ -434,7 +439,7 @@ if (isset($_SESSION['user_id'])) {
                 <div class="menu-opcoes">
                   <form method="POST">
                     <?php
-                    require_once("config.php");
+                    
                     $consulta = $mysqli->prepare("SELECT nome FROM genero");
                     $consulta->execute();
                     $resultado = $consulta->get_result();
@@ -464,7 +469,6 @@ if (isset($_SESSION['user_id'])) {
           </div>
 
           <?php
-          require_once("config.php");
 
           if ($_SERVER['REQUEST_METHOD'] === 'GET' && !empty($_GET['pesquisa'])) {
             $termoBruto = trim($_GET['pesquisa']);
@@ -532,10 +536,9 @@ if (isset($_SESSION['user_id'])) {
           <div class="jogos">
             <?php
             if ($resultado->num_rows > 0) {
-              while ($jogo = $resultado->fetch_assoc()) {
-                ?>
+              while ($jogo = $resultado->fetch_assoc()) { ?>
                 <div class="jogo-card">
-                  <form action="dashboard.php" method="POST">
+                  <form action="dashboard.php" method="GET">
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($jogo['id']); ?>">
                     <button type="submit" class="btn_img">
                       <img src="<?php echo htmlspecialchars($jogo['imagem']); ?>"
@@ -572,8 +575,6 @@ if (isset($_SESSION['user_id'])) {
       </div>
     </div>
   </main>
-
-
   <footer class="footer-nav">
     <figure class="social-icons">
       <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a>
@@ -582,33 +583,7 @@ if (isset($_SESSION['user_id'])) {
     </figure>
     <span>Ludus • v0.1</span>
   </footer>
-
-  <script>
-    function irParaDashboard(idJogo) {
-      window.location.href = 'dashboard.php?id=' + idJogo;
-    }
-
-    window.addEventListener('load', () => {
-      const input = document.getElementById('searchInput');
-
-      if (!sessionStorage.getItem('searchLoaded')) {
-        // Primeira vez na página: mantém valor do PHP
-        sessionStorage.setItem('searchLoaded', 'true');
-      } else {
-        // Recarregou a página: limpa o input
-        input.value = '';
-      }
-    });
-
-    if (window.history.replaceState) {
-      const url = new URL(window.location.href);
-      if (url.searchParams.has('pesquisa')) {
-        url.searchParams.delete('pesquisa');
-        window.history.replaceState({}, document.title, url.pathname);
-      }
-    }
-
-  </script>
+  
 </body>
 
 </html>

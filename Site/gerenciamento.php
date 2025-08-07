@@ -1,14 +1,24 @@
 <!-------------------------------------------------------------------------------- PHP -------------------------------------------------------------------------------------------->
 <?php
-require_once("config.php");
 session_start();
+require_once("config.php");
 
 $query_usu = "SELECT * FROM usuario";
-$query_coment = "SELECT comentario.id AS id_comentario,comentario.data_comentario, comentario.texto, usuario.nome AS nome_usuario, usuario.email, usuario.foto_perfil, avaliacao.nota, jogo.nome AS nome_jogo FROM
+$query_coment = "SELECT comentario.id AS id_comentario, comentario.data_comentario, comentario.texto, usuario.nome AS nome_usuario, usuario.email, usuario.foto_perfil, avaliacao.nota, jogo.nome AS nome_jogo FROM
  comentario INNER JOIN usuario ON comentario.id_usuario = usuario.id INNER JOIN avaliacao ON comentario.id_avaliacao = avaliacao.id INNER JOIN jogo ON avaliacao.id_jogo = jogo.id";
 
-if (isset($_POST['excluir_usu'])) {
-    $id_usu = $_POST['excluir_usu'];
+
+function excluirComentario($mysqli, $id_coment) {
+    $query_u = "DELETE FROM comentario WHERE id = $id_coment";
+    if ($mysqli->query($query_u)) {
+        echo "<p>Comentário excluído</p>";
+    } else {
+        echo $mysqli->error;
+    }
+}
+
+if (isset($_POST['excluir_usu']) && is_numeric($_POST['excluir_usu'])) {
+    $id_usu = intval($_POST['excluir_usu']);
 
     $mysqli->query("DELETE FROM comentario WHERE id_usuario = $id_usu");
     $mysqli->query("DELETE FROM avaliacao WHERE id_usuario = $id_usu");
@@ -27,30 +37,27 @@ if (isset($_POST['excluir_usu'])) {
 
     $query_u = "DELETE FROM usuario WHERE id = $id_usu";
     if ($mysqli->query($query_u)) {
-		session_destroy();
-        echo "<p>Usuario excluido</p>";
+        session_destroy();
+        echo "<p>Usuário excluído</p>";
     } else {
-        echo $mysqli->error ;
+        echo $mysqli->error;
     }
 }
 
-if (!empty($_POST['excluir_coment'])) {
-    $id_coment = $_POST['excluir_coment']; 
-	
-    $query_u = "DELETE FROM comentario WHERE id = $id_coment";
-    if ($mysqli->query($query_u)) {
-        echo "<p>Comentario excluido</p>";
-    } else {
-        echo $mysqli->error ;
-    }
-	
+
+elseif (isset($_POST['excluir_coment']) && is_numeric($_POST['excluir_coment'])) {
+    $id_coment = intval($_POST['excluir_coment']);
+    excluirComentario($mysqli, $id_coment);
 }
-    $usuario = $mysqli->query($query_usu);
-	$comentario = $mysqli->query($query_coment);
-	
-	$count_usu = $usuario->num_rows;
-	$count_coment = $comentario->num_rows;	
+
+
+$usuario = $mysqli->query($query_usu);
+$comentario = $mysqli->query($query_coment);
+
+$count_usu = $usuario->num_rows;
+$count_coment = $comentario->num_rows;
 ?>
+
 <html>
 <head>
     <meta charset="UTF-8" />

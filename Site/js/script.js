@@ -1,61 +1,4 @@
-// =================== Carrossel ===================
-const carousel = document.getElementById('carouselImages');
-
-if (carousel) {
-  const images = carousel.querySelectorAll('img');
-  const dotsContainer = document.getElementById('dotsContainer');
-  const total = images.length;
-  let index = 0;
-  let interval;
-
-  // Criar os dots
-  for (let i = 0; i < total; i++) {
-    const dot = document.createElement('div');
-    dot.classList.add('dot');
-    if (i === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => goToSlide(i));
-    dotsContainer.appendChild(dot);
-  }
-
-  const updateDots = () => {
-    document.querySelectorAll('.dot').forEach((dot, i) => {
-      dot.classList.toggle('active', i === index);
-    });
-  };
-
-  const goToSlide = (i) => {
-    index = i;
-    carousel.style.transform = `translateX(-${index * 100}vw)`;
-    updateDots();
-    resetAutoplay();
-  };
-
-  const nextSlide = () => {
-    index = (index + 1) % total;
-    goToSlide(index);
-  };
-
-  const prevSlide = () => {
-    index = (index - 1 + total) % total;
-    goToSlide(index);
-  };
-
-  document.querySelector('.next')?.addEventListener('click', nextSlide);
-  document.querySelector('.prev')?.addEventListener('click', prevSlide);
-
-  const startAutoplay = () => {
-    interval = setInterval(nextSlide, 8000);
-  };
-
-  const resetAutoplay = () => {
-    clearInterval(interval);
-    startAutoplay();
-  };
-
-  startAutoplay();
-} else {
-  console.warn('Elemento #carouselImages não encontrado nesta página.');
-}
+//Java Script de todas para todas as páginas
 
 // =================== Menu Sanduíche ===================
 function toggleMenu() {
@@ -102,37 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// =================== Comentários com AJAX ===================
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("comentarioForm");
-  const msgBox = document.getElementById("msg-feedback");
-
-  if (form && msgBox) {
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const data = new FormData(form);
-
-      fetch("salvar_comentario.php", {
-        method: "POST",
-        body: data,
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          msgBox.textContent = res.mensagem;
-          msgBox.style.color = res.status === "sucesso" ? "green" : "red";
-          if (res.status === "sucesso") {
-            form.reset();
-          }
-        })
-        .catch(() => {
-          msgBox.textContent = "Erro ao conectar com o servidor.";
-          msgBox.style.color = "red";
-        });
-    });
-  }
-});
-
 // =================== Menu da página de filtros ===================
 document.addEventListener("DOMContentLoaded", function () {
   const toggle = document.querySelector(".menu-toggle");
@@ -158,9 +70,47 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+//=================== PESQUISA DE JOGOS (filtragem) ===================
+ function irParaDashboard(idJogo) {
+      window.location.href = 'dashboard.php?id=' + idJogo;
+    }
+
+    window.addEventListener('load', () => {
+      const input = document.getElementById('searchInput');
+
+      if (!sessionStorage.getItem('searchLoaded')) {
+        // Primeira vez na página: mantém valor do PHP
+        sessionStorage.setItem('searchLoaded', 'true');
+      } else {
+        // Recarregou a página: limpa o input
+        input.value = '';
+      }
+    });
+
+    if (window.history.replaceState) {
+      const url = new URL(window.location.href);
+      if (url.searchParams.has('pesquisa')) {
+        url.searchParams.delete('pesquisa');
+        window.history.replaceState({}, document.title, url.pathname);
+      }
+    }
+
+
 // =================== Alerta de comentário ===================
 window.addEventListener("DOMContentLoaded", () => {
   const alertBox = document.querySelector(".mensagem-alerta");
+
+  if (alertBox) {
+    setTimeout(() => {
+      alertBox.style.opacity = "0";
+      alertBox.style.transform = "translateY(-10px)";
+      setTimeout(() => alertBox.style.display = "none", 500);
+    }, 10000);
+  }
+});
+// =================== Envio de comentário ===================
+window.addEventListener("DOMContentLoaded", () => {
+  const alertBox = document.querySelector(".mensagem-envio");
 
   if (alertBox) {
     setTimeout(() => {
