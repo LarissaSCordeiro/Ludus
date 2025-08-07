@@ -1,10 +1,10 @@
--- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `ludus` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `ludus`;
+-- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: localhost    Database: ludus
 -- ------------------------------------------------------
--- Server version	9.1.0
-create database ludus ;
-use ludus;
+-- Server version	8.3.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -231,7 +231,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `nome` (`nome`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -240,7 +240,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'dev_teste','dev@email.com','desenvolvedor','1234senha_hashada','img/usuarios/default.png','2025-06-13 11:07:37');
+INSERT INTO `usuario` VALUES (1,'dev_teste','dev@email.com','desenvolvedor','1234senha_hashada','img/usuarios/default.png','2025-06-13 11:07:37'),(2,'illpirox','pierrehenriquedemirandaneppel@gmail.com','jogador','$2y$10$1.7c3eQN2D91NYRo9Txx1.b0zdunRRPr44ZGr1bZQUEF7IUG.ymxq','img/usuarios/gatofofo.jpg','2025-07-21 19:22:52'),(3,'teste123','teste@gmail.com','jogador','$2y$10$MdRoKggRlnT8/aaqDFY6aemc10RAdo.FdFmCMHsf/wgg9MxDnZXA6','img/usuarios/default.png','2025-07-24 16:47:56');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -295,10 +295,6 @@ LOCK TABLES `usuario_favorita_jogo` WRITE;
 /*!40000 ALTER TABLE `usuario_favorita_jogo` DISABLE KEYS */;
 /*!40000 ALTER TABLE `usuario_favorita_jogo` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping events for database 'ludus'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -309,4 +305,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-06-19 17:00:39
+-- Dump completed on 2025-08-07 19:02:22
