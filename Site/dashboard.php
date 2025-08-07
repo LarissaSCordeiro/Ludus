@@ -1,14 +1,15 @@
 <!-------------------------------------------------------------------------------- PHP -------------------------------------------------------------------------------------------->
 <?php
+ob_start(); 
 session_start();
 require_once "config.php";
 
-$id = isset($_POST['id']) ? (int) $_POST['id'] : (isset($_GET['id']) ? (int) $_GET['id'] : 0);
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if (!empty($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 
-    if (isset($_POST['enviar_comentario'])) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar_comentario'])) {
         $comentario = trim($_POST['comentario']);
 
         $stmt = $mysqli->prepare("SELECT id FROM avaliacao WHERE id_usuario = ? AND id_jogo = ?");
@@ -24,52 +25,39 @@ if (!empty($_SESSION['user_id'])) {
 
             if ($inserir->execute()) {
                 header("Location: dashboard.php?id=" . $id);
-                exit();
+                exit(); 
             } else {
-                $mensagem = "Não foi possível enviar seu comentário.";
+                $msg_erro  = "Não foi possível enviar seu comentário.";
             }
 
             $inserir->close();
         } else {
             unset($_POST['comentario']);
             unset($_POST['enviar_comentario']);
-            $mensagem = "Você precisa avaliar o jogo antes de comentar...";
+            $msg_erro = "Você precisa avaliar o jogo antes de comentar...";
         }
 
         $stmt->close();
     }
 }
+
 $stmt = $mysqli->prepare("SELECT nome, email, foto_perfil FROM usuario WHERE id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $resultado = $stmt->get_result();
 $usuario = $resultado->fetch_assoc();
 
-$consulta = $mysqli->prepare("SELECT 
-        jogo.id AS id_jogo,
-        jogo.nome, 
-        jogo.descricao, 
-        jogo.imagem, 
-        jogo.data_lancamento, 
-        jogo.estudio, 
-        jogo.desenvolvedor, 
-        GROUP_CONCAT(DISTINCT genero.nome ORDER BY genero.nome SEPARATOR ', ') AS genero, 
-        GROUP_CONCAT(DISTINCT plataforma.nome ORDER BY plataforma.nome SEPARATOR ', ') AS plataforma 
-    FROM jogo 
-    LEFT JOIN jogo_possui_genero ON jogo.id = jogo_possui_genero.id_jogo 
-    LEFT JOIN genero ON genero.id = jogo_possui_genero.id_genero 
-    LEFT JOIN jogo_possui_plataforma ON jogo.id = jogo_possui_plataforma.id_jogo 
-    LEFT JOIN plataforma ON plataforma.id = jogo_possui_plataforma.id_plataforma 
-    WHERE jogo.id = ? 
-    GROUP BY jogo.id
-");
-
+$consulta = $mysqli->prepare("SELECT jogo.id AS id_jogo, jogo.nome, jogo.descricao, jogo.imagem, jogo.data_lancamento, jogo.estudio, jogo.desenvolvedor, GROUP_CONCAT(DISTINCT 
+genero.nome ORDER BY genero.nome SEPARATOR ', ') AS genero, GROUP_CONCAT(DISTINCT plataforma.nome ORDER BY plataforma.nome SEPARATOR ', ') AS plataforma FROM jogo LEFT JOIN
+jogo_possui_genero ON jogo.id = jogo_possui_genero.id_jogo LEFT JOIN genero ON genero.id = jogo_possui_genero.id_genero LEFT JOIN jogo_possui_plataforma ON jogo.id = jogo_possui_plataforma.id_jogo 
+LEFT JOIN plataforma ON plataforma.id = jogo_possui_plataforma.id_plataforma WHERE jogo.id = ? GROUP BY jogo.id");
 $consulta->bind_param("i", $id);
 $consulta->execute();
 $resultado = $consulta->get_result();
 $jogo = $resultado->fetch_assoc();
 
-$consulta = $mysqli->prepare("SELECT comentario.data_comentario, comentario.texto, usuario.nome AS nome_usuario, usuario.email, usuario.foto_perfil, avaliacao.nota FROM comentario INNER JOIN usuario ON comentario.id_usuario = usuario.id INNER JOIN avaliacao ON comentario.id_avaliacao = avaliacao.id WHERE avaliacao.id_jogo = ?");
+$consulta = $mysqli->prepare("SELECT comentario.data_comentario, comentario.texto, usuario.nome AS nome_usuario, usuario.email, usuario.foto_perfil, avaliacao.nota FROM comentario
+INNER JOIN usuario ON comentario.id_usuario = usuario.id INNER JOIN avaliacao ON comentario.id_avaliacao = avaliacao.id WHERE avaliacao.id_jogo = ?");
 $consulta->bind_param("i", $id);
 $consulta->execute();
 $resultado = $consulta->get_result();
@@ -77,7 +65,6 @@ $comentarios = [];
 while ($linha = $resultado->fetch_assoc()) {
     $comentarios[] = $linha;
 }
-
 
 // avaliações do jogo
 // Busca a nota do usuário logado para este jogo
@@ -153,8 +140,8 @@ $stmtCountAvaliacoes->close();
             <a href="perfil.php"><img src="img/usuarios/default.png" alt="Perfil do usuário" class="user-avatar"></a>
             <?php } else { ?>
             <a href="login.php" class="a-Button">Entrar</a>
+			 <a href="cadastro.php" class="a-Button">Criar uma conta</a>
             <?php } ?>
-            <a href="cadastro.php" class="a-Button">Criar uma conta</a>
             <a href="filtragem.php">Games</a>
         </nav>
 
@@ -320,52 +307,19 @@ $stmtCountAvaliacoes->close();
         </div>
 
         <!-------------------------------------------------------------------------------- Comentarios ------------------------------------------------------------------------------------>
-        <article class="p2">
-            <?php
-            // Se houve envio de comentário, insira no banco e recarregue os dados
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar_comentario'])) {
-                $comentario = trim($_POST['comentario']);
-                $id_jogo = $_POST['id'];
-                $id_usuario = $_SESSION['user_id'];
-
-                if (!empty($comentario)) {
-                    $stmt = $mysqli->prepare("INSERT INTO comentario (id_jogo, id_usuario, texto, data_comentario) VALUES (?, ?, ?, NOW())");
-                    $stmt->bind_param("iis", $id_jogo, $id_usuario, $comentario);
-                    if ($stmt->execute()) {
-                        $mensagem = "Comentário enviado com sucesso!";
-                    } else {
-                        $mensagem = "Erro ao enviar comentário.";
-                    }
-                    $stmt->close();
-                }
-            }
-
-            // Após possível envio, busque os comentários atualizados
-            // Após possível envio, busque os comentários atualizados
-            $stmt = $mysqli->prepare("
-                SELECT c.data_comentario, c.texto, u.nome AS nome_usuario, u.email, u.foto_perfil, a.nota
-                FROM comentario c
-                JOIN usuario u ON c.id_usuario = u.id
-                JOIN avaliacao a ON c.id_avaliacao = a.id
-                WHERE a.id_jogo = ?
-                ORDER BY c.data_comentario DESC
-");
-            $stmt->bind_param("i", $id);
-            $stmt->execute();
-            $resultado = $stmt->get_result();
-            $comentarios = $resultado->fetch_all(MYSQLI_ASSOC);
-            $stmt->close();
-
-
-            $count = count($comentarios);
-            echo "<h2>Comentários ($count)</h2>";
-
-            if (!empty($mensagem)): ?>
-                <div class="mensagem-alerta">
-                    <?php echo htmlspecialchars($mensagem); ?>
-                </div>
-            <?php endif;
-
+       <article class="p2">
+            <?php 
+            $count = $resultado->num_rows;
+            echo "<h2>Comentários ($count)</h2> ";
+			 if (!empty($msg_erro)) { ?>
+        <div class="mensagem-alerta">
+            <?php echo htmlspecialchars($msg_erro); ?>
+        </div> 
+			 <?php }  if (!empty($msg_envio)) { ?>
+		<div class="mensagem-envio">
+            <?php echo htmlspecialchars($msg_envio); ?>
+        </div> 
+			 <?php } 
             if (isset($_SESSION['user_id'])): ?>
                 <section class="coment_usu">
                     <figure class="usu_foto">
@@ -375,41 +329,43 @@ $stmtCountAvaliacoes->close();
                     <div class="form_com">
                         <p><?php echo $usuario["email"]; ?></p>
                         <form method="POST" id="comentarioForm">
-                            <textarea name="comentario" placeholder="Adicione seu comentário..." required></textarea><br>
-                            <input type="hidden" name="id" value="<?php echo $id; ?>">
-                            <input type="hidden" name="enviar_comentario" value="1">
-                            <button type="submit" id="btn_comentario">Enviar</button>
+                             <textarea name="comentario" placeholder="Adicione seu comentário..." required></textarea><br>
+							 <input type="hidden" name="id" value="<?php echo $id; ?>">
+                             <input type="hidden" name="enviar_comentario" value="1">
+                             <button type="submit" id="btn_comentario">Enviar</button>
                         </form>
                     </div>
                 </section>
             <?php else: ?>
                 <section class="coment_usu">
-                    <p>Faça <a href="login.php">login</a> para comentar ou <a href="cadastro.php">cadastre-se</a></p>
+                    <p>Faça <a href="login.php">login</a> para comentar ou <a
+                            href="cadastro.php">cadastre-se</a>
+                    </p>
                 </section>
             <?php endif;
+            
+            while ($coment = $resultado->fetch_assoc()) { ?>
+                <section class="coment_usu">
+                    <figure class="usu_foto">
+                        <img src="<?php echo $coment["foto_perfil"]; ?>" alt="img" class="img_coment">
+                        <h4><?php echo $coment["nome_usuario"]; ?></h4>
 
-            if ($count === 0): ?>
+                        <p><?php
+                        $data_comentario = new DateTime($coment["data_comentario"]);
+                        $data = $data_comentario->format('d/m \à\s H\hi');
+                        echo $data; ?></p>
+
+                        <p><?php echo "nota " . $coment["nota"]; ?></p>
+                    </figure>
+                        <p class="form_com" ><?php echo $coment["texto"]; ?></p> 
+                </section>
+            <?php }
+			if ($count == 0) { ?>
                 <section class="coment_usu">
                     <p>Ninguém comentou aqui ainda, seja o primeiro a comentar !</p>
-                </section>
-            <?php else: ?>
-                <?php foreach ($comentarios as $coment): ?>
-                    <section class="coment_usu">
-                        <figure class="usu_foto">
-                            <img src="<?php echo htmlspecialchars($coment["foto_perfil"]); ?>" alt="img" class="img_coment">
-                            <h4><?php echo htmlspecialchars($coment["nome_usuario"]); ?></h4>
-                            <p>
-                                <?php
-                                $data_comentario = new DateTime($coment["data_comentario"]);
-                                echo $data_comentario->format('d/m \à\s H\hi');
-                                ?>
-                            </p>
-                            <p><?php echo "nota " . htmlspecialchars($coment["nota"] ?? '—'); ?></p>
-                        </figure>
-                        <p class="form_com"><?php echo nl2br(htmlspecialchars($coment["texto"])); ?></p>
-                    </section>
-                <?php endforeach; ?>
-            <?php endif; ?>
+                </section> <?php }?>
+			
+        </div>
         </article>
     </main>
     <!-------------------------------------------------------------------------------- Contatos --------------------------------------------------------------------------------------->
