@@ -310,6 +310,31 @@ input::placeholder {
   padding: 1em ;
   /* superior | direita | inferior | esquerda */
 }
+.coment_usu_pb {
+  width: 100%;
+   max-height: 520px;
+  overflow-x: auto;
+}
+.coment_usu_pb {
+  /* Firefox */
+  scrollbar-color: #888 #1b1730;
+}
+
+/* WebKit (Chrome, Edge, Safari) */
+.coment_usu_pb::-webkit-scrollbar {
+  height: 12px;
+}
+
+.coment_usu_pb::-webkit-scrollbar-track {
+  background: #1b1730;
+}
+
+.coment_usu_pb::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 6px;
+  border: 2px solid #1b1730;
+}
+
 
 #comentarioForm textarea {
   width: 80%;
@@ -724,6 +749,7 @@ main {
 }
 
 /* Sessão de Catálogo ----------------------------------------------------------------------------------------------------------------------------------*/
+
 .filtro-pesquisa {
   display: flex;
   flex-wrap: wrap;
@@ -731,10 +757,6 @@ main {
   justify-content: start;
   gap: 1rem;
   margin-bottom: 1.5rem;
-}
-
-.categoria {
-  padding: 2rem;
 }
 
 .categoria h2 {
@@ -787,7 +809,9 @@ main {
 .conteudo {
   display: flex;
   gap: 2rem;
-  padding: 2rem;
+  padding: 1em 6em 1em 6em;/* superior | direita | inferior | esquerda */
+}
+  
 }
 
 /* Coluna de conteúdo principal (jogos) */
@@ -889,6 +913,8 @@ main {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
   margin-top: 5px;
   z-index: 100;
+   height: 180px;
+  overflow-y: scroll;
 }
 
 .menu-opcoes button {
@@ -906,6 +932,29 @@ main {
 .menu-opcoes button:hover {
   background-color: #3a2f5c;
 }
+
+.menu-opcoes {
+  /* Firefox */
+  scrollbar-color: #888 #1b1730;
+  
+}
+
+/* WebKit (Chrome, Edge, Safari) */
+.menu-opcoes::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.menu-opcoes::-webkit-scrollbar-track {
+  background: #1b1730;
+}
+
+.menu-opcoes::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 6px;
+  border: 2px solid #1b1730;
+}
+
 
 
 /*--------------------------*/

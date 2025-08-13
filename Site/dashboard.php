@@ -56,11 +56,14 @@ $consulta->execute();
 $resultado = $consulta->get_result();
 $jogo = $resultado->fetch_assoc();
 
+
+
 $consulta = $mysqli->prepare("SELECT comentario.data_comentario, comentario.texto, usuario.nome AS nome_usuario, usuario.email, usuario.foto_perfil, avaliacao.nota FROM comentario
 INNER JOIN usuario ON comentario.id_usuario = usuario.id INNER JOIN avaliacao ON comentario.id_avaliacao = avaliacao.id WHERE avaliacao.id_jogo = ?");
 $consulta->bind_param("i", $id);
 $consulta->execute();
 $resultado = $consulta->get_result();
+
 $comentarios = [];
 while ($linha = $resultado->fetch_assoc()) {
     $comentarios[] = $linha;
@@ -306,21 +309,16 @@ $stmtCountAvaliacoes->close();
             </div>
         </div>
 
-        <!-------------------------------------------------------------------------------- Comentarios ------------------------------------------------------------------------------------>
-       <article class="p2">
+<!-------------------------------------------------------------------------------- Comentarios ------------------------------------------------------------------------------------>
+        <article class="p2">
             <?php 
-            $count = $resultado->num_rows;
+            $count = count($comentarios);
             echo "<h2>Comentários ($count)</h2> ";
 			 if (!empty($msg_erro)) { ?>
-        <div class="mensagem-alerta">
-            <?php echo htmlspecialchars($msg_erro); ?>
-        </div> 
-			 <?php }  if (!empty($msg_envio)) { ?>
-		<div class="mensagem-envio">
-            <?php echo htmlspecialchars($msg_envio); ?>
-        </div> 
-			 <?php } 
-            if (isset($_SESSION['user_id'])): ?>
+            <div class="mensagem-alerta">
+              <?php echo htmlspecialchars($msg_erro); ?>
+			 </div> <?php }
+            if (isset($_SESSION['user_id'])){ ?>
                 <section class="coment_usu">
                     <figure class="usu_foto">
                         <img src="<?php echo $usuario["foto_perfil"]; ?>" alt="img" class="img_coment">
@@ -332,19 +330,20 @@ $stmtCountAvaliacoes->close();
                              <textarea name="comentario" placeholder="Adicione seu comentário..." required></textarea><br>
 							 <input type="hidden" name="id" value="<?php echo $id; ?>">
                              <input type="hidden" name="enviar_comentario" value="1">
-                             <button type="submit" id="btn_comentario">Enviar</button>
+                             <button type="button" id="btn_comentario">Enviar</button>
                         </form>
                     </div>
                 </section>
-            <?php else: ?>
+            <?php } else { ?>
                 <section class="coment_usu">
                     <p>Faça <a href="login.php">login</a> para comentar ou <a
                             href="cadastro.php">cadastre-se</a>
                     </p>
-                </section>
-            <?php endif;
-            
-            while ($coment = $resultado->fetch_assoc()) { ?>
+                </section> <?php }?>
+			 <div class="coment_usu_pb">	
+            <?php 
+           foreach ($comentarios as $coment) { ?>
+		  
                 <section class="coment_usu">
                     <figure class="usu_foto">
                         <img src="<?php echo $coment["foto_perfil"]; ?>" alt="img" class="img_coment">
@@ -358,17 +357,15 @@ $stmtCountAvaliacoes->close();
                         <p><?php echo "nota " . $coment["nota"]; ?></p>
                     </figure>
                         <p class="form_com" ><?php echo $coment["texto"]; ?></p> 
-                </section>
-            <?php }
-			if ($count == 0) { ?>
+                </section> 
+            <?php } ?>  </div>
+			<?php if ($count == 0) { ?>
                 <section class="coment_usu">
                     <p>Ninguém comentou aqui ainda, seja o primeiro a comentar !</p>
                 </section> <?php }?>
-			
-        </div>
         </article>
     </main>
-    <!-------------------------------------------------------------------------------- Contatos --------------------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------------- Contatos --------------------------------------------------------------------------------------->
     <footer class="footer-nav">
         <div class="social-icons">
             <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a>

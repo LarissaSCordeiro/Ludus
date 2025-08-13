@@ -148,3 +148,19 @@ window.addEventListener("DOMContentLoaded", () => {
         const modal = document.getElementById('modal-confirmacao');
         modal.classList.add('hidden-force');
     }
+//================= DASHBOARD =======================  (Apos carregar volta aonde o usuario estava)
+
+document.addEventListener('DOMContentLoaded', function () {
+    const scrollY = localStorage.getItem('scrollY');
+    if (scrollY !== null) {
+        window.scrollTo(0, parseInt(scrollY));
+        localStorage.removeItem('scrollY');
+    }
+
+    document.getElementById('btn_comentario').addEventListener('click', function () {
+        localStorage.setItem('scrollY', window.scrollY);
+        document.getElementById('comentarioForm').submit();
+    });
+});
+
+
