@@ -8,7 +8,7 @@ require_once("config.php");
 //}
 
 // Pega os dados do usuário
-$id_usuario = $_SESSION['user_id'];
+$id_usuario = $_SESSION['id_usuario'];
 $stmt = $mysqli->prepare("SELECT nome, foto_perfil FROM usuario WHERE id = ?");
 $stmt->bind_param("i", $id_usuario);
 $stmt->execute();
@@ -87,6 +87,7 @@ $avaliacoes = $avaliacoesStmt->get_result();
         <h1 class="perfil-nome"><?php echo htmlspecialchars($nomeUsuario); ?></h1>
       </div>
       <a href="editar_perfil.php" class="btn-editar">Editar perfil</a>
+      <a href="cadastro_jogo.php" class="btn-editar">Cadastrar jogo</a>
     </section>
 
     <nav class="perfil-nav">
