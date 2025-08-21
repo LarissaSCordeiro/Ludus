@@ -96,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </section>
 
             <section id="slogan">
-                <h1>A comunidade de quem cria com paixão e quem joga com propósito</h1>
+                <h1>Faça login para avaliar e comentar sobre seus jogos indie favoritos</h1>
             </section>
             <!-- Section do container de login -->
             <section class="log">
@@ -118,15 +118,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </section>
 
     </main>
-    <section class="nav-center">
-
-    </section>
-
-    <section class="container-text-pai-logpage">
-        <h1>Sessão de textos</h1>
-    </section>
-
-
     <!-- Contatos -->
     <footer class="footer-nav">
         <!-- Redes sociais -->

@@ -280,9 +280,6 @@ $stmtCountAvaliacoes->close();
 
 
                         <div class="avaliacao-card nova">
-                            <h4>⭐ Marcar como lendário!</h4>
-                            <small>Curtiu esse jogo? marque-o como um favorito digno do trono gamer!</small>
-
                             <?php
                             $favoritado = false;
                             if (isset($_SESSION['user_id'])) {
@@ -417,12 +414,13 @@ $stmtCountAvaliacoes->close();
 
         if (orbeElement === orbe) {
             let texto;
-            if (nota >= 4.9) texto = "Lenda viva!";
-            else if (nota >= 4.5) texto = "Um mito nasce";
-            else if (nota >= 3.5) texto = "Rumo ao sucesso";
-            else if (nota >= 2.5) texto = "Potencial oculto";
-            else if (nota >= 1.5) texto = "Iniciante";
-            else texto = "Start";
+            if (nota >= 4.9) texto = "Perfeito";
+            else if (nota >= 4.0) texto = "Amei";
+            else if (nota >= 3.5) texto = "Gostei";
+            else if (nota >= 2.5) texto = "Legal";
+            else if (nota >= 1.5) texto = "Não gostei";
+             else if (nota == 0.0) texto = "Em avaliação";
+            else texto = "Odiei";
             labelNota.textContent = texto;
         }
     }

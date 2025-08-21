@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </section>
 
         <section id="slogan">
-            <h1>A comunidade de quem cria com paixão e quem joga com propósito</h1>
+            <h1>Cadastre-se para avaliar e comentar sobre os seus jogos indie favoritos</h1>
         </section>
 
         <section class="cad">
