@@ -73,10 +73,9 @@ $count_coment = $comentario->num_rows;
 <body>
     <!-------------------------------------------------------------------------------- Interface -------------------------------------------------------------------------------------->
     <header>
-        <section class="logo">
+        <figure class="logo">
             <a href="paginainicial.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
-
-        </section>
+        </figure>
 
         <nav class="nav_buttons">
             <form method="POST">

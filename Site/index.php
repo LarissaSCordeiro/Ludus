@@ -25,16 +25,16 @@ if (isset($_SESSION['usuario'])) {
 
     <header>
         <!-- Logo do Ludus -->
-        <div class="logo">
+        <figure class="logo">
             <a href="index.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
-        </div>
+        </figure>
         
         <!-- Barra de navegaçao -->
         <nav id="nav" class="nav-links">
+		    <a href="filtragem.php">Games</a>
             <!-- Botao de entrar e links -->
             <a href="login.php" class="a-Button">Entrar</a>
             <a href="cadastro.php">Criar uma conta</a>
-            <a href="filtragem.php">Games</a>
         </nav>
 
         <!-- Barra de pesquisa personalizada -->

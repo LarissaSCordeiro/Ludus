@@ -52,9 +52,9 @@ $favoritos = $favoritosStmt->get_result();
 
 <body>
   <header>
-        <div class="logo">
+        <figure class="logo">
             <a href="paginainicial.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
-        </div>
+        </figure>
 
         <nav id="nav" class="nav-links">
             <a href="filtragem.php">Games</a>

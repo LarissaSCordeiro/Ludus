@@ -30,9 +30,9 @@ $foto_perfil = isset($_SESSION['user_foto']) && !empty($_SESSION['user_foto'])
 
     <!-- Cabeçalho -->
     <header>
-        <div class="logo">
+        <figure class="logo">
             <a href="paginainicial.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
-        </div>
+        </figure>
 
         <!-- Navegação do usuário logado -->
         <nav id="nav" class="nav-links">

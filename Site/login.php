@@ -61,15 +61,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Interface -->
     <header>
         <!-- Logo do Ludus -->
-        <div class="logo">
+        <figure class="logo">
             <a href="index.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
-        </div>
+        </figure>
 
         <!-- Barra de navegaçao -->
         <nav id="nav" class="nav-links">
             <!-- Botao de entrar e links -->
+			<a href="filtragem.php">Games</a>
             <a href="cadastro.php" class="a-Button">Criar uma conta</a>
-            <a href="filtragem.php">Games</a>
         </nav>
 
         <!-- Barra de pesquisa personalizada -->
@@ -90,13 +90,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <main>
 
         <!-- Section do background atrás do container de login -->
-        <section class="log-page-background">
-
-            <section class="overlay">
-            </section>
+        <main class="main-cad-log">
 
             <section id="slogan">
-                <h1>Faça login para avaliar e comentar sobre seus jogos indie favoritos</h1>
+                <h3>Faça login para avaliar e comentar sobre seus jogos indie favoritos</h3>
             </section>
             <!-- Section do container de login -->
             <section class="log">

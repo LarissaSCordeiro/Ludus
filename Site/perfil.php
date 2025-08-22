@@ -53,13 +53,13 @@ $avaliacoes = $avaliacoesStmt->get_result();
 
 <body>
   <header>
-        <div class="logo">
+        <figure class="logo">
             <a href="paginainicial.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
-        </div>
+        </figure>
 
         <!-- Navegação do usuário logado -->
         <nav id="nav" class="nav-links">
-            <a href="filtragem.php">Games</a>
+		    <a href="filtragem.php">Games</a>
             <a href="perfil.php">
                 <img src="<?php echo htmlspecialchars($foto_perfilPerfil); ?>" alt="Perfil do usuário" class="user-avatar">
             </a>

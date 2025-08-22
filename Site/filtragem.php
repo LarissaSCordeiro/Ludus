@@ -18,6 +18,7 @@ if (isset($_SESSION['user_id'])) {
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="icon" href="img/Ludus_Favicon.png" type="image/x-icon" />
   <script defer src="./js/script.js"></script>
+  <script defer src="./js/filtro-script.js"></script>
   <script defer src="./js/pesquisa.ajax.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -143,6 +144,7 @@ if (isset($_SESSION['user_id'])) {
     .jogo-card:hover {
       border: 2px solid #5b5b80ff;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+	  
     }
 
     .jogo-card .btn_img {
@@ -154,6 +156,7 @@ if (isset($_SESSION['user_id'])) {
       width: 100%;
       height: 370px;
       /* antes era 260px — aumenta altura */
+	  cursor:pointer;
     }
 
     .jogo-card img {
@@ -353,6 +356,7 @@ if (isset($_SESSION['user_id'])) {
       z-index: 0;
       color: #a1a1a1ff;
       font-family: 'Comfortaa', sans-serif;
+	  cursor:pointer;
     }
 
     .btn_img {
@@ -364,11 +368,11 @@ if (isset($_SESSION['user_id'])) {
 <body>
   <header>
     <!-- Logo do Ludus -->
-    <section class="logo">
+    <figure class="logo">
       <?php if (isset($_SESSION['user_id'])) { ?>
         <a href="paginainicial.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a> <?php } else { ?>
         <a href="index.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a> <?php } ?>
-    </section>
+    </figure>
 
     <!-- Barra de navegaçao -->
     <nav id="nav" class="nav-links">
@@ -379,7 +383,6 @@ if (isset($_SESSION['user_id'])) {
         <a href="login.php" class="a-Button">Entrar</a> 
 		 <a href="cadastro.php">Criar uma conta</a>
 		<?php } ?>
-      <a href="filtragem.php">Games</a>
     </nav>
 	
 	 <div class="search-container">
@@ -396,7 +399,7 @@ if (isset($_SESSION['user_id'])) {
     </div>
 
   </header>
-  <main>
+  
     <div class="conteudo">
       <div class="coluna-principal">
         <section class="categoria">
@@ -542,7 +545,6 @@ if (isset($_SESSION['user_id'])) {
         </section>
       </div>
     </div>
-  </main>
   <footer class="footer-nav">
     <figure class="social-icons">
       <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a>

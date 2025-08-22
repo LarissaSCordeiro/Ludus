@@ -357,11 +357,11 @@
 <body>
 
     <header>
-        <section class="logo">
+        <figure class="logo">
             <a href="index.html">
                 <img src="img/NewLudusLogo.png" alt="Logotipo">
             </a>
-        </section>
+        </figure>
 
         <nav id="nav" class="nav-links">
             <a href="cadastro.php" class="a-Button">Criar uma conta</a>

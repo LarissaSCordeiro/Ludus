@@ -123,6 +123,7 @@ $stmtCountAvaliacoes->close();
     <link rel="stylesheet" href="./css/dash.css" />
     <link rel="icon" href="img/Ludus_Favicon.png" type="image/x-icon" />
     <script defer src="./js/script.js"> </script>
+	<script defer src="./js/dash-script.js"> </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
@@ -130,22 +131,22 @@ $stmtCountAvaliacoes->close();
 <body>
     <!--------- Interface --------->
     <header>
-        <section class="logo">
+        <figure class="logo">
             <?php if (isset($_SESSION['user_id'])) { ?>
             <a href="paginainicial.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
             <?php } else { ?>
             <a href="index.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
             <?php } ?>
-        </section>
+        </figure>
 
         <nav id="nav" class="nav-links">
+		     <a href="filtragem.php">Games</a>
             <?php if (isset($_SESSION['user_id'])) { ?>
             <a href="perfil.php"><img src="img/usuarios/default.png" alt="Perfil do usuário" class="user-avatar"></a>
             <?php } else { ?>
             <a href="login.php" class="a-Button">Entrar</a>
 			 <a href="cadastro.php" class="a-Button">Criar uma conta</a>
             <?php } ?>
-            <a href="filtragem.php">Games</a>
         </nav>
 
         <div class="search-container">

@@ -1,6 +1,6 @@
 /* Reset */
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=League+Spartan:wght@100..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
 /*aplica em toda a pagina*/
 html {
   margin: 0;
@@ -31,14 +31,18 @@ body {
 
 /* Cabeçalho */
 header {
-  display: flex;
   background: #0b0814;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 30px;
-  position: relative;
-  gap: 40px;
+  padding: 0 2em 0 0;
+  /* superior | direita | inferior | esquerda */
+  
+}
+
+main {
+  background-color: #0b0619;
+  /* fundo escuro do site */
 }
 
 .user-avatar {
@@ -74,62 +78,32 @@ label {
   float: right;
 }
 
-#toggle {
-  display: none;
-}
-
-@media only screen and (max-width: 700px) {
-  label {
-    display: block;
-    cursor: pointer;
-  }
-
-  menu {
-    text-align: center;
-    width: 100%;
-    display: none;
-    position: static;
-  }
-
-  menu a {
-    display: block;
-    border-bottom: solid 1px white;
-    margin: 0;
-    padding: 0;
-  }
-
-  menu a:hover {
-    color: #fff;
-    background-color: #888;
-  }
-
-  #toggle:checked+menu {
-    display: block;
-  }
-}
-
 /* Login e Cadastro */
-.container-text-pai-logpage {
-  display: flex;
-  height: 500px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 50px;
-  background-color: #d9d9d9;
-}
 
-.log-page-background {
+.main-cad-log {
+   position: relative;
   background: url('../img/fundo-log-cad/estrelado-cosmos.jpg') no-repeat center center/cover;
   background-attachment: fixed;
   height: 100vh;
-  height: 100%;
+  min-height:650px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 50px;
   /* superior | direita | inferior | esquerda */
-  animation: moveBackground 8s infinite alternate ease-in-out;
-  /*Mover a imagem sem sair do lugar*/
+  animation: moveBackground 15s infinite alternate ease-in-out;
+  background-size: contain;
+}
+.main-cad-log::before {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.5);
+   position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
 }
 
 /*Mover a imagem*/
@@ -139,28 +113,41 @@ label {
   }
 
   100% {
-    background-size: 105%;
+    background-size: 150%;
   }
+}
+
+@media (max-width: 768px) {
+  #slogan {
+    display: none;
+  }
+  .main-cad-log {
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+  height: 100vh;           
+}
+ @keyframes moveBackground {
+  0% {
+    background-size: 200%;
+  }
+
+  100% {
+    background-size: 250%;
+  }
+}
 }
 
 #slogan {
   z-index: 1;
-  width: 500px;
+  width: 40%;
   text-align: justify;
-  margin-left: 10%;
-  font-size: 36px;
-  font-family: 'League Spartan', sans-serif;
+  margin-left: 5%;
+  font-size: 30px;
+  font-family: 'Lexend', sans-serif;
 }
 
-.overlay {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 750px;
-  /* Se mudar o height daqui mude o de log/cad tambem */
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 0;
-}
+
 
 /* Login e Cadastro */
 .log,
@@ -168,13 +155,12 @@ label {
   /*section*/
   position: relative;
   height: 100vh;
-  /*background-color: grey; */
   width: 100%;
   max-width: 45%;
   /*margin: 100px 5% 5% 1em;*/
   height: 750px;
-  /* Se mudar o height mude o overlay tambem */
   float: right;
+  z-index: 2
 }
 
 .log {
@@ -200,7 +186,8 @@ label {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 350px;
+  width: 70%;
+  min-width:300px;
   box-shadow: #000000;
   transform: translate(-50%, -50%);
 }
@@ -239,6 +226,7 @@ input {
   font-size: 15px;
   color: #d9d9d9;
   transition: box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
 input:focus {
@@ -276,6 +264,7 @@ input::placeholder {
   margin: 1em 0 2em 0;
   /* superior | direita | inferior | esquerda */
   font-family: 'comfortaa', sans-serif;
+  cursor: pointer;
 }
 
 .login-return,
@@ -287,6 +276,7 @@ input::placeholder {
   color: #a86cf7;
   text-decoration: none;
   font-size: 0.95rem;
+  cursor:pointer;
 }
 
 /* --- Perfil jogos ----------------------------------------------------------(DASHBOARD) */
@@ -355,11 +345,13 @@ input::placeholder {
 }
 
 #btn_comentario {
+  cursor:pointer;
   border-radius: 5px;
   border: 0;
   color: white;
   font-size: 15px;
   width: 10%;
+  min-width: 90px;
   height:40px;
   box-sizing: border-box;
   background-color: #cd3dff;
@@ -427,18 +419,14 @@ input::placeholder {
 /*links da nav da index*/
 .nav-links {
   display: flex;
-  gap: 80px;
-  align-items: center;
-  flex: 1;
-  display: flex;
-  justify-content: center;
   gap: 60px;
+  padding: 10px ;
 }
 
 .nav-links a {
   color: white;
   text-decoration: none;
-  padding: 8px 12px;
+  padding: 10px ;
 }
 
 /* Layout responsivo */
@@ -458,7 +446,7 @@ input::placeholder {
   /*ligado ao JS, mostra os links do menu suspenso*/
   .nav-links.show {
     display: flex;
-    z-index: 1;
+    z-index: 3;
   }
 
   .hamburger {
@@ -671,13 +659,6 @@ span {
   color: #f4961e;
 }
 
-
-/* Sobre jogos indie */
-main {
-  background-color: #0b0619;
-  /* fundo escuro do site */
-}
-
 .container-pai {
   padding: 20px;
   height: 500px;
@@ -774,7 +755,7 @@ main {
 
 .jogo-card {
   border-radius: 10px;
-  padding: 1rem;
+  padding: 1em;
   width: 300px;
   text-align: center;
 }
