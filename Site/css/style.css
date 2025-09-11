@@ -71,14 +71,14 @@ main {
   height: auto;
 }
 
-label {
+/* label {
   margin: 0 40px 0 0;
   font-size: 26px;
   line-height: 70px;
   display: none;
   width: 10px;
   float: right;
-}
+}*/
 
 /* Login e Cadastro */
 
@@ -228,7 +228,7 @@ input {
   font-size: 15px;
   color: #d9d9d9;
   transition: box-shadow 0.3s ease;
-  cursor: pointer;
+  cursor: text;
 }
 
 input:focus {
@@ -241,16 +241,14 @@ input::placeholder {
   color: #afafaf;
 }
 
-#titulo {
-  /*titulo de cadastro e login*/
+/* #titulo {
   height: 70px;
   width: 100%;
   padding: 8% 0 6% 0;
-  /* superior | direita | inferior | esquerda */
   margin-bottom: 15px;
   border-radius: 50px;
   background-color: #100a27;
-}
+}*/
 
 #btn {
   /*botao de cadastro e login*/
