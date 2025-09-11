@@ -7,6 +7,11 @@ if (isset($_SESSION['user_id'])) {
   $foto_perfil = isset($_SESSION['user_foto']) && !empty($_SESSION['user_foto']) ? $_SESSION['user_foto'] : 'img/usuarios/default.png';
 }
 
+ $valorPesquisa = '';
+            if (isset($_GET['pesquisa'])) {
+              $valorPesquisa = htmlspecialchars($_GET['pesquisa']);
+            }
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -104,11 +109,11 @@ if (isset($_SESSION['user_id'])) {
       background: linear-gradient(145deg, rgba(43, 43, 68, 0.9), rgba(30, 30, 48, 0.95));
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
-      border: 2px solid #21212eff;
+      border: 2px solid rgba(0, 0, 0, 0);
       z-index: 0;
+	  
     }
 
     .jogo-card::after {
@@ -234,127 +239,12 @@ if (isset($_SESSION['user_id'])) {
       color: #f4961e;
     }
 
-    /* Barra de pesquisa e filtros */
-
-    .filtro-pesquisa {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      /* Corrigido: alinhamento vertical central */
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-
-    /* Botão principal do menu */
-    .menu-toggle {
-      background: linear-gradient(145deg, rgba(43, 43, 68, 0.9), rgba(30, 30, 48, 0.95));
-      border: 2px solid #2d2d44;
-      color: #fff;
-      padding: 10px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      font-family: 'Comfortaa', sans-serif;
-    }
-
-    .menu-toggle:hover {
-      border-color: #d88ce5;
-      background: linear-gradient(145deg, rgba(216, 140, 229, 0.15), rgba(43, 43, 68, 0.95));
-      transform: translateY(-2px);
-    }
-
-    /* Dropdown */
-    .menu-opcoes {
-      display: none;
-      position: absolute;
-      margin-top: 8px;
-      background: rgba(43, 43, 68, 0.95);
-      border: 2px solid #2d2d44;
-      border-radius: 8px;
-      padding: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-      z-index: 10;
-      min-width: 180px;
-    }
-
-    .menu-opcoes form {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .menu-opcoes form button {
-      background: transparent;
-      border: none;
-      color: #fff;
-      text-align: left;
-      padding: 8px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .menu-opcoes form button:hover {
-      background: rgba(216, 140, 229, 0.15);
-    }
-
-    /* Barra de pesquisa */
-    .barra-pesquisa {
-      position: relative;
-      flex: 1;
-      max-width: 300px;
-    }
-
-    .barra-pesquisa input {
-      width: 100%;
-      padding: 10px 36px 10px 14px;
-      /* espaço para ícone */
-      border: 2px solid #2d2d44;
-      border-radius: 8px;
-      background: rgba(43, 43, 68, 0.9);
-      color: #fff;
-      transition: all 0.3s ease;
-      font-family: 'Comfortaa', sans-serif;
-    }
-
-    .barra-pesquisa input:focus {
-      border-color: #d88ce5;
-      background: linear-gradient(145deg, rgba(216, 140, 229, 0.15), rgba(43, 43, 68, 0.95));
-      box-shadow: 0 0 8px rgba(216, 140, 229, 0.6);
-      outline: none;
-    }
-
-    .barra-pesquisa::after {
-      content: none;
-    }
-
-    /* Ícone da lupa dentro da barra */
-    .barra-pesquisa .icon {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none;
-      font-size: 1rem;
-      color: #a1a1a1ff;
-      transition: opacity 0.3s ease;
-    }
-
-    .barra-pesquisa input:hover{
-      border-color: #d88ce5;
-    }
-
-    .barra-pesquisa input:focus+.icon {
-      opacity: 0;
-    }
-
     .jogo-nome {
       background: linear-gradient(145deg, rgba(43, 43, 68, 0), rgba(30, 30, 48, 0));
       style: none;
       border: none;
       z-index: 0;
-      color: #a1a1a1ff;
+      color: #caaec8;
       font-family: 'Comfortaa', sans-serif;
 	  cursor:pointer;
     }
@@ -386,10 +276,11 @@ if (isset($_SESSION['user_id'])) {
     </nav>
 	
 	 <div class="search-container">
-            <form action="filtragem.php" method="GET">
-                <input type="text" name="pesquisa" placeholder="Pesquisar..." required>
+           <form action="filtragem.php" method="GET">
+                <input type="text" id="searchInput" name="pesquisa" placeholder="Pesquisar..."
+                  value="<?php echo $valorPesquisa; ?>" required>
                 <i class="fas fa-search icon"></i>
-            </form>
+              </form>
         </div>
 
 
@@ -403,42 +294,17 @@ if (isset($_SESSION['user_id'])) {
     <div class="conteudo">
       <div class="coluna-principal">
         <section class="categoria">
-          <div class="filtro-pesquisa">
-            <div class="categoria_genero">
-              <nav>
-                <button class="menu-toggle" type="button">gêneros ▾</button>
-                <div class="menu-opcoes">
-                  <form method="POST">
-                    <?php
-                    
-                    $consulta = $mysqli->prepare("SELECT nome FROM genero");
-                    $consulta->execute();
-                    $resultado = $consulta->get_result();
-                    while ($genero = $resultado->fetch_assoc()) {
-                      echo '<button type="submit" name="btn" value="' . htmlspecialchars($genero['nome']) . '">' . htmlspecialchars($genero['nome']) . '</button>';
-                    }
-                    ?>
-                  </form>
+                
+                <div class="buttons-genre">
+                <?php
+                 $consulta = $mysqli->prepare("SELECT nome FROM genero");
+                  $consulta->execute();
+                  $resultado = $consulta->get_result();
+                   while ($genero = $resultado->fetch_assoc()) {
+                   echo '<button type="button" class="btn-genre" data-genero="' . htmlspecialchars($genero['nome']) . '">' . htmlspecialchars($genero['nome']) . '</button>';
+				  }
+                 ?>
                 </div>
-              </nav>
-            </div>
-
-            <?php
-            $valorPesquisa = '';
-            if (isset($_GET['pesquisa'])) {
-              $valorPesquisa = htmlspecialchars($_GET['pesquisa']);
-            }
-            ?>
-
-            <div class="barra-pesquisa">
-              <form action="filtragem.php" method="GET">
-                <input type="text" id="searchInput" name="pesquisa" placeholder="Pesquisar jogos..."
-                  value="<?php echo $valorPesquisa; ?>" required>
-                <i class="fas fa-search icon"></i>
-              </form>
-            </div>
-          </div>
-
           <?php
 
           if ($_SERVER['REQUEST_METHOD'] === 'GET' && !empty($_GET['pesquisa'])) {
@@ -463,27 +329,25 @@ if (isset($_SESSION['user_id'])) {
             $consulta->bind_param("ss", $termo, $termo);
             echo "<h2 id='titulo-resultados'>Resultados para: <span>" . htmlspecialchars($termoBruto) . "</span></h2>";
 
-          } elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['btn'])) {
-            $filtragem = $_POST['btn'];
+          }  elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && !empty($_GET['btn'])) {
+               $filtragem = $_GET['btn'];
 
-            $consulta = $mysqli->prepare("
-            SELECT 
-              jogo.id, 
-              jogo.nome, 
-              jogo.imagem,
-              COALESCE(ROUND(AVG(avaliacao.nota), 1), 0) AS media_avaliacao,
-              COUNT(DISTINCT comentario.id) AS total_comentarios
-            FROM jogo
-            JOIN jogo_possui_genero ON jogo.id = jogo_possui_genero.id_jogo
-            JOIN genero ON genero.id = jogo_possui_genero.id_genero
-            LEFT JOIN avaliacao ON jogo.id = avaliacao.id_jogo
-            LEFT JOIN comentario ON avaliacao.id = comentario.id_avaliacao
-            WHERE genero.nome = ?
-            GROUP BY jogo.id
-          ");
-            $consulta->bind_param("s", $filtragem);
-            echo "<h2>" . htmlspecialchars($filtragem) . "</h2>";
-
+               $consulta = $mysqli->prepare("SELECT 
+               jogo.id, 
+               jogo.nome, 
+               jogo.imagem,
+               COALESCE(ROUND(AVG(avaliacao.nota), 1), 0) AS media_avaliacao,
+               COUNT(DISTINCT comentario.id) AS total_comentarios
+               FROM jogo
+               JOIN jogo_possui_genero ON jogo.id = jogo_possui_genero.id_jogo
+               JOIN genero ON genero.id = jogo_possui_genero.id_genero
+               LEFT JOIN avaliacao ON jogo.id = avaliacao.id_jogo
+               LEFT JOIN comentario ON avaliacao.id = comentario.id_avaliacao
+               WHERE genero.nome = ?
+               GROUP BY jogo.id");
+			   
+               $consulta->bind_param("s", $filtragem);
+               echo "<h2>" . htmlspecialchars($filtragem) . "</h2>";
           } else {
             $consulta = $mysqli->prepare("
             SELECT 

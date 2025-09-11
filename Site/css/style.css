@@ -1,7 +1,10 @@
-/* Reset */
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=League+Spartan:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Epunda+Sans:ital,wght@0,300..900;1,300..900&display=swap');
+
 /*aplica em toda a pagina*/
+
 html {
   margin: 0;
   padding: 0;
@@ -21,7 +24,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'comfortaa', sans-serif;
-  background: #0e0a1a;
+  background-color: #0e0a1a;
   color: #d9d9d9;
   display: flex;
   flex-direction: column;
@@ -67,7 +70,6 @@ main {
   max-width: 100%;
   height: auto;
 }
-
 
 label {
   margin: 0 40px 0 0;
@@ -743,20 +745,22 @@ span {
 .categoria h2 {
   color: #cd3dff;
   margin-bottom: 1rem;
-  font-family: "League Spartan", sans-serif;
-  font-size: 2em;
+  font-family: "Luckiest Guy", cursive;
+  font-weight: 450;
+  font-style: normal;
+  font-size: 40px;
+  
 }
 
 .jogos {
   display: flex;
-  gap: 2rem;
+  gap: 2em;
   flex-wrap: wrap;
 }
 
 .jogo-card {
   border-radius: 10px;
-  padding: 1em;
-  width: 300px;
+  width: 255px;
   text-align: center;
 }
 
@@ -881,60 +885,39 @@ span {
   cursor: pointer;
   text-align: center;
 }
-
-.menu-opcoes {
-  display: none;
-  position: absolute;
-  top: 100%;
-  width: 100%;
-  background-color: #26203f;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-  margin-top: 5px;
-  z-index: 100;
-   height: 180px;
-  overflow-y: scroll;
-}
-
-.menu-opcoes button {
-  width: 100%;
-  padding: 10px 15px;
-  border: none;
-  background-color: transparent;
-  color: #d9d9d9;
-  text-align: left;
-  font-size: 16px;
-  cursor: pointer;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.menu-opcoes button:hover {
-  background-color: #3a2f5c;
-}
-
-.menu-opcoes {
-  /* Firefox */
-  scrollbar-color: #888 #1b1730;
+.buttons-genre {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  padding: 20px;
   
 }
 
-/* WebKit (Chrome, Edge, Safari) */
-.menu-opcoes::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
+.btn-genre {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 999px;
+  background-color: rgba(85, 30, 120, 0.25);
+  cursor: pointer;
+  white-space: nowrap;
+  width: auto;
+  max-width: 100%;
+  flex: 0 0 auto;
+}
+.btn-genre {
+  font-family: "Epunda Sans", sans-serif;
+  font-weight: 600;
+  color:#dddddd;
+  font-size: 16px;
 }
 
-.menu-opcoes::-webkit-scrollbar-track {
-  background: #1b1730;
+.btn-genre:hover {
+  background-color: #3b2754; 
 }
-
-.menu-opcoes::-webkit-scrollbar-thumb {
-  background-color: #888;
-  border-radius: 6px;
-  border: 2px solid #1b1730;
-}
-
-
 
 /*--------------------------*/
 

@@ -1,65 +1,62 @@
 // =================== Filtro com AJAX ===================
-document.addEventListener("DOMContentLoaded", function () {
-  const generoForm = document.querySelector(".categoria_genero form");
-  const jogosContainer = document.querySelector(".jogos");
-  const tituloSeletor = document.querySelector(".categoria h2");
+document.querySelectorAll(".btn-genre").forEach(button => {
+  button.addEventListener("click", () => {
+    const genero = button.getAttribute("data-genero");
 
-  if (generoForm && jogosContainer && tituloSeletor) {
-    generoForm.addEventListener("click", function (e) {
-      if (e.target.tagName === "BUTTON") {
-        e.preventDefault();
-        const genero = e.target.value;
+    
+    const novaURL = new URL(window.location.href);
+    novaURL.searchParams.set("btn", genero);
+    history.pushState({ genero }, "", novaURL);
 
-        fetch("filtragem.php", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: "btn=" + encodeURIComponent(genero)
-        })
-          .then(response => response.text())
-          .then(data => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(data, "text/html");
-            const novosJogos = doc.querySelector(".jogos");
-            const novoTitulo = doc.querySelector(".categoria h2");
-
-            if (novosJogos && novoTitulo) {
-              jogosContainer.innerHTML = novosJogos.innerHTML;
-              tituloSeletor.textContent = novoTitulo.textContent;
-            }
-          })
-          .catch(error => {
-            console.error("Erro ao filtrar:", error);
-          });
-      }
-    });
-  }
+    
+    filtrarPorGenero(genero);
+  });
 });
 
-// =================== Menu da página de filtros ===================
-document.addEventListener("DOMContentLoaded", function () {
-  const toggle = document.querySelector(".menu-toggle");
-  const opcoes = document.querySelector(".menu-opcoes");
+function filtrarPorGenero(genero) {
+  fetch("filtragem.php?btn=" + encodeURIComponent(genero), {
+    method: "GET"
+  })
+    .then(response => response.text())
+    .then(data => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(data, "text/html");
+      const novosJogos = doc.querySelector(".jogos");
+      const novoTitulo = doc.querySelector(".categoria h2");
 
-  if (toggle && opcoes) {
-    toggle.addEventListener("click", function () {
-      const isOpen = opcoes.style.display === "block";
-      opcoes.style.display = isOpen ? "none" : "block";
-    });
-
-    document.addEventListener("click", function (e) {
-      if (!toggle.contains(e.target) && !opcoes.contains(e.target)) {
-        opcoes.style.display = "none";
+      if (novosJogos && novoTitulo) {
+        document.querySelector(".jogos").innerHTML = novosJogos.innerHTML;
+        document.querySelector(".categoria h2").textContent = novoTitulo.textContent;
       }
+    })
+    .catch(error => {
+      console.error("Erro ao filtrar:", error);
     });
+}
 
-    opcoes.addEventListener("click", function (e) {
-      if (e.target.tagName === "BUTTON") {
-        opcoes.style.display = "none";
-      }
-    });
+
+window.addEventListener("popstate", (event) => {
+  const genero = event.state?.genero || new URL(window.location.href).searchParams.get("btn");
+  if (genero) {
+    filtrarPorGenero(genero);
+  } else {
+    fetch("filtragem.php", {
+      method: "GET"
+    })
+      .then(response => response.text())
+      .then(data => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(data, "text/html");
+        const novosJogos = doc.querySelector(".jogos");
+        const novoTitulo = doc.querySelector(".categoria h2");
+
+        if (novosJogos && novoTitulo) {
+          document.querySelector(".jogos").innerHTML = novosJogos.innerHTML;
+          document.querySelector(".categoria h2").textContent = novoTitulo.textContent;
+        }
+      });
   }
 });
-
 //=================== PESQUISA DE JOGOS (filtragem) ===================
  function irParaDashboard(idJogo) {
       window.location.href = 'dashboard.php?id=' + idJogo;
@@ -84,3 +81,19 @@ document.addEventListener("DOMContentLoaded", function () {
         window.history.replaceState({}, document.title, url.pathname);
       }
     }
+//=================== Desaparecer ao pesquisar (filtragem) ===================
+
+const inputPesquisa = document.getElementById('searchInput');
+const container = document.querySelector('.buttons-genre'); 
+
+const displayOriginal = getComputedStyle(container).display;
+
+inputPesquisa.addEventListener('input', function() {
+  if (this.value.length > 0) {
+    container.style.display = 'none'; 
+  } else {
+    container.style.display = displayOriginal; 
+  }
+});
+
+
