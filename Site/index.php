@@ -39,7 +39,7 @@ if (isset($_SESSION['usuario'])) {
 
         <!-- Barra de pesquisa personalizada -->
         <div class="search-container">
-            <form action="filtragem.php" method="GET">
+            <form action="pesquisa.php" method="GET">
                 <input type="text" name="pesquisa" placeholder="Pesquisar..." required>
                 <i class="fas fa-search icon"></i>
             </form>

@@ -63,8 +63,8 @@ $favoritos = $favoritosStmt->get_result();
             </a>
         </nav>
 
-        <div class="search-container">
-            <form action="filtragem.php" method="GET">
+         <div class="search-container">
+            <form action="pesquisa.php" method="GET">
                 <input type="text" name="pesquisa" placeholder="Pesquisar..." required>
                 <i class="fas fa-search icon"></i>
             </form>

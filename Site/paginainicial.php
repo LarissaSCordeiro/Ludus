@@ -44,7 +44,7 @@ $foto_perfil = isset($_SESSION['user_foto']) && !empty($_SESSION['user_foto'])
 
         <!-- Barra de pesquisa -->
         <div class="search-container">
-            <form action="filtragem.php" method="GET">
+            <form action="pesquisa.php" method="GET">
                 <input type="text" name="pesquisa" placeholder="Pesquisar..." required>
                 <i class="fas fa-search icon"></i>
             </form>
