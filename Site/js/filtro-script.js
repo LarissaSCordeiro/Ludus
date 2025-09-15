@@ -63,16 +63,19 @@ window.addEventListener("popstate", (event) => {
     }
 
     window.addEventListener('load', () => {
-      const input = document.getElementById('searchInput');
+  const input = document.getElementById('searchInput');
 
-      if (!sessionStorage.getItem('searchLoaded')) {
-        // Primeira vez na página: mantém valor do PHP
-        sessionStorage.setItem('searchLoaded', 'true');
-      } else {
-        // Recarregou a página: limpa o input
-        input.value = '';
-      }
-    });
+  if (input) {
+    if (!sessionStorage.getItem('searchLoaded')) {
+      // Primeira vez na página: mantém valor do PHP
+      sessionStorage.setItem('searchLoaded', 'true');
+    } else {
+      // Recarregou a página: limpa o input
+      input.value = "";
+    }
+  }
+});
+
 
     if (window.history.replaceState) {
       const url = new URL(window.location.href);
@@ -81,19 +84,29 @@ window.addEventListener("popstate", (event) => {
         window.history.replaceState({}, document.title, url.pathname);
       }
     }
-//=================== Desaparecer ao pesquisar (filtragem) ===================
+//=================== Desaparecer ao clicar no botao ===================
 
-const inputPesquisa = document.getElementById('searchInput');
-const container = document.querySelector('.buttons-genre'); 
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('btn-main');
+  const buttons = document.getElementById('buttons-genre');
 
-const displayOriginal = getComputedStyle(container).display;
+  
+  const originalDisplay = window.getComputedStyle(buttons).display;
 
-inputPesquisa.addEventListener('input', function() {
-  if (this.value.length > 0) {
-    container.style.display = 'none'; 
-  } else {
-    container.style.display = displayOriginal; 
-  }
+  
+  buttons.style.display = 'none';
+
+  btn.addEventListener('click', () => {
+    if (buttons.style.display === 'none') {
+      buttons.style.display = originalDisplay; 
+    } else {
+      buttons.style.display = 'none';
+    }
+  });
 });
+
+
+
+
 
 

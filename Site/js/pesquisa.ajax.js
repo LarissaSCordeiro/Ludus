@@ -39,3 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Aplica debounce de 400ms
   searchInput.addEventListener("input", debounce(buscarJogos, 400));
 });
+
+
+
+

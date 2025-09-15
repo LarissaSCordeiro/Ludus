@@ -35,3 +35,38 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('comentarioForm').submit();
     });
 });
+//Data comentario em tempo real
+function atualizarTempos() {
+    const elementos = document.querySelectorAll("[data-comentario]");
+
+    elementos.forEach(el => {
+        const timestamp = parseInt(el.getAttribute("data-comentario")) * 1000;
+        const agora = new Date().getTime();
+        const diffSegundos = Math.floor((agora - timestamp) / 1000);
+
+        let texto = "";
+
+        if (diffSegundos < 60) {
+            texto = `agora`;
+        } else if (diffSegundos < 3600) {
+            const minutos = Math.floor(diffSegundos / 60);
+            texto = `há ${minutos} minuto${minutos !== 1 ? "s" : ""}`;
+        } else if (diffSegundos < 86400) {
+            const horas = Math.floor(diffSegundos / 3600);
+            texto = `há ${horas} hora${horas !== 1 ? "s" : ""}`;
+        } else if (diffSegundos < 31536000) {
+            const dias = Math.floor(diffSegundos / 86400);
+            texto = `há ${dias} dia${dias !== 1 ? "s" : ""}`;
+        } else {
+            const anos = Math.floor(diffSegundos / 31536000);
+            texto = `há ${anos} ano${anos !== 1 ? "s" : ""}`;
+        }
+
+        el.textContent = texto;
+    });
+}
+
+setInterval(atualizarTempos, 1000);
+document.addEventListener("DOMContentLoaded", atualizarTempos);
+
+

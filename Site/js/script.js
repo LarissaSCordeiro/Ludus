@@ -34,4 +34,22 @@ function toggleMenu() {
         const modal = document.getElementById('modal-confirmacao');
         modal.classList.add('hidden-force');
     }
+	
+// ======= Vai pra pagina pesquisa ao digitar na barra ===========
+
+  document.addEventListener('DOMContentLoaded', function () {
+  const searchInputs = document.querySelectorAll('.searchInput');
+
+  searchInputs.forEach(function (input) {
+    input.addEventListener('input', function () {
+      const termo = input.value.trim();
+      if (termo.length > 0) {
+        window.location.href = 'pesquisa.php?pesquisa=' + encodeURIComponent(termo);
+      }
+    });
+  });
+});
+
+
+
 

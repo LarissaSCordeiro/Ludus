@@ -31,7 +31,12 @@ main.dash-main {
     align-items: stretch;
     position: relative;
 }
-
+.datime{
+	color:gray;
+}
+.fa-star{
+    color: yellow;
+}
 /* CARD UNIFICADO */
 .game-card-full {
     border-radius: 14px;
@@ -117,7 +122,7 @@ main.dash-main {
     animation: shine 5s infinite;
 }
 
-.coluna-direita>.info-card {
+.coluna-direita.info-card {
     margin-bottom: 20px;
 }
 

@@ -7,6 +7,11 @@ if (isset($_SESSION['user_id'])) {
   $foto_perfil = isset($_SESSION['user_foto']) && !empty($_SESSION['user_foto']) ? $_SESSION['user_foto'] : 'img/usuarios/default.png';
 }
 
+ $valorPesquisa = '';
+            if (isset($_GET['pesquisa'])) {
+              $valorPesquisa = htmlspecialchars($_GET['pesquisa']);
+            }
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -20,6 +25,7 @@ if (isset($_SESSION['user_id'])) {
   <link rel="icon" href="img/Ludus_Favicon.png" type="image/x-icon" />
   <script defer src="./js/script.js"></script>
   <script defer src="./js/filtro-script.js"></script>
+  <script defer src="./js/pesquisa.ajax.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
@@ -35,6 +41,7 @@ if (isset($_SESSION['user_id'])) {
 
     <!-- Barra de navegaçao -->
     <nav id="nav" class="nav-links">
+	<a href="filtragem.php">Games</a>
       <!-- Botao de entrar e links -->
       <?php if (!empty($_SESSION['user_id'])) { ?>
         <a href="perfil.php"><img src="img/usuarios/default.png" alt="Perfil do usuário" class="user-avatar"></a>
@@ -44,11 +51,12 @@ if (isset($_SESSION['user_id'])) {
 		<?php } ?>
     </nav>
 	
-	<div class="search-container">
-            <form action="pesquisa.php" method="GET">
-                <input type="text" name="pesquisa" placeholder="Pesquisar..." required>
+	 <div class="search-container">
+           <form action="pesquisa.php" method="GET">
+                <input type="text" id="searchInput" name="pesquisa" placeholder="Pesquisar..."
+                  value="<?php echo $valorPesquisa; ?>" required>
                 <i class="fas fa-search icon"></i>
-            </form>
+              </form>
         </div>
 
 
@@ -62,19 +70,31 @@ if (isset($_SESSION['user_id'])) {
     <div class="conteudo">
       <div class="coluna-principal">
         <section class="categoria">
-                <button type="button" id="btn-main" class="btn-main"> Filtro gêneros</button>
-               <div id="buttons-genre" >
-                <?php
-                 $consulta = $mysqli->prepare("SELECT nome FROM genero");
-                  $consulta->execute();
-                  $resultado = $consulta->get_result();
-                   while ($genero = $resultado->fetch_assoc()) {
-                   echo '<button type="button" class="btn-genre" data-genero="' . htmlspecialchars($genero['nome']) . '">' . htmlspecialchars($genero['nome']) . '</button>';
-				  }
-                 ?>
-                </div>
           <?php
-		   if ($_SERVER['REQUEST_METHOD'] === 'GET' && !empty($_GET['btn'])) {
+
+          if ($_SERVER['REQUEST_METHOD'] === 'GET' && !empty($_GET['pesquisa'])) {
+            $termoBruto = trim($_GET['pesquisa']);
+            $termo = '%' . $termoBruto . '%';
+
+            $consulta = $mysqli->prepare("
+            SELECT 
+              jogo.id, 
+              jogo.nome, 
+              jogo.imagem,
+              COALESCE(ROUND(AVG(avaliacao.nota), 1), 0) AS media_avaliacao,
+              COUNT(DISTINCT comentario.id) AS total_comentarios
+            FROM jogo
+            LEFT JOIN jogo_possui_genero ON jogo.id = jogo_possui_genero.id_jogo
+            LEFT JOIN genero ON genero.id = jogo_possui_genero.id_genero
+            LEFT JOIN avaliacao ON jogo.id = avaliacao.id_jogo
+            LEFT JOIN comentario ON avaliacao.id = comentario.id_avaliacao
+            WHERE jogo.nome LIKE ? OR genero.nome LIKE ?
+            GROUP BY jogo.id
+          ");
+            $consulta->bind_param("ss", $termo, $termo);
+            echo "<h2 id='titulo-resultados'>Resultados para: <span>" . htmlspecialchars($termoBruto) . "</span></h2>";
+
+          }  elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && !empty($_GET['btn'])) {
                $filtragem = $_GET['btn'];
 
                $consulta = $mysqli->prepare("SELECT 
@@ -93,21 +113,7 @@ if (isset($_SESSION['user_id'])) {
 			   
                $consulta->bind_param("s", $filtragem);
                echo "<h2>" . htmlspecialchars($filtragem) . "</h2>";
-          } else {
-            $consulta = $mysqli->prepare("
-            SELECT 
-              jogo.id, 
-              jogo.nome, 
-              jogo.imagem,
-              COALESCE(ROUND(AVG(avaliacao.nota), 1), 0) AS media_avaliacao,
-              COUNT(DISTINCT comentario.id) AS total_comentarios
-            FROM jogo
-            LEFT JOIN avaliacao ON jogo.id = avaliacao.id_jogo
-            LEFT JOIN comentario ON avaliacao.id = comentario.id_avaliacao
-            GROUP BY jogo.id
-          ");
-            echo "<h2>Todos os Jogos :</h2>";
-          }
+          } 
 
           $consulta->execute();
           $resultado = $consulta->get_result();
