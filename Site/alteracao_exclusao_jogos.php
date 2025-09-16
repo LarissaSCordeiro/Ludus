@@ -7,7 +7,6 @@
     <title>Ludus | Jogos Indie BR</title>
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="icon" href="img/Ludus_Favicon.png" type="image/x-icon" />
-    <script src="./js/script.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
@@ -459,15 +458,6 @@
     </div>
 </div>
 
-
-<!-- Toast -->
-<div id="toast" class="toast hidden">
-    <div class="toast-content">
-        <span id="toast-icon" class="toast-icon">✔️</span>
-        <p id="toast-message">Mensagem</p>
-    </div>
-</div>
-
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const modal = document.getElementById("confirmModal");
@@ -496,11 +486,8 @@
         // Botão confirmar exclusão no modal
         confirmarBtn?.addEventListener("click", function (event) {
             event.preventDefault();
-
             if (!jogoIdParaExcluir) return;
-
             modal.classList.add("hidden-force");
-
             fetch("excluir.php", {
                 method: "POST",
                 headers: {
@@ -512,50 +499,18 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        showToast("Jogo excluído com sucesso!");
-
+                        LudusToast("Jogo excluído com sucesso!");
                         const card = document.querySelector(`[data-id-jogo="${jogoIdParaExcluir}"]`);
                         if (card) card.remove();
                     } else {
-                        showToast(data.message || "Erro ao excluir jogo.", true);
+                        LudusToast(data.message || "Erro ao excluir jogo.", true);
                     }
                 })
                 .catch(() => {
-                    showToast("Erro na comunicação com o servidor.", true);
+                    LudusToast("Erro na comunicação com o servidor.", true);
                 });
-
             jogoIdParaExcluir = null;
         });
-
-        // Função de toast visual
-        function showToast(msg, isError = false) {
-            const toast = document.getElementById("toast");
-            const icon = document.getElementById("toast-icon");
-            const text = document.getElementById("toast-message");
-
-            text.textContent = msg;
-            toast.classList.remove("hidden");
-            toast.classList.add("show");
-
-            if (isError) {
-                toast.classList.add("error");
-                icon.textContent = "❌";
-            } else {
-                toast.classList.remove("error");
-                icon.textContent = "✔️";
-            }
-
-            // Reinicia animação
-            icon.style.animation = "none";
-            void icon.offsetWidth;
-            icon.style.animation = null;
-
-            setTimeout(() => {
-                toast.classList.remove("show");
-                // Remove os parâmetros da URL
-                window.history.replaceState({}, document.title, window.location.pathname);
-            }, 3000);
-        }
 
         // Verifica parâmetros da URL (ex: ?sucesso=1) para mostrar toast
         const urlParams = new URLSearchParams(window.location.search);
@@ -563,14 +518,17 @@
         const erro = urlParams.get('erro');
 
         if (sucesso === '1') {
-            showToast("Jogo atualizado com sucesso!");
+            LudusToast("Jogo atualizado com sucesso!");
         } else if (sucesso === '2') {
-            showToast("Jogo excluído com sucesso!");
+            LudusToast("Jogo excluído com sucesso!");
         } else if (erro === '1') {
-            showToast("Erro ao atualizar o jogo.", true);
+            LudusToast("Erro ao atualizar o jogo.", true);
         }
     });
 </script>
+
+<script src="./js/script.js"></script>
+<script src="./js/toast.js"></script>
 
 
 

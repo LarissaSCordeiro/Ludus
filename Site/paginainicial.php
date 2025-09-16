@@ -27,7 +27,6 @@ $foto_perfil = isset($_SESSION['user_foto']) && !empty($_SESSION['user_foto'])
 </head>
 
 <body>
-
     <!-- Cabeçalho -->
     <header>
         <figure class="logo">
@@ -55,7 +54,16 @@ $foto_perfil = isset($_SESSION['user_foto']) && !empty($_SESSION['user_foto'])
             ☰
         </div>
     </header>
-
+    <!-- Toast de sucesso do login -->
+    <script src="./js/toast.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('sucesso') === '1') {
+                LudusToast('Login realizado com sucesso!');
+            }
+        });
+    </script>
     <!-- Conteúdo principal -->
     <main>
 

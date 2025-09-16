@@ -67,8 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_nome'] = $usuario;
             $_SESSION['user_email'] = $email;
             $_SESSION['user_tipo'] = $tipo;
-
-            header('Location: paginainicial.php');
+            header('Location: login.php?sucesso=1');
             exit();
         } else {
             $erros[] = 'Erro ao cadastrar. Tente novamente.';
@@ -87,10 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Ludus | Jogos Indie BR</title>
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="icon" href="img/Ludus_Favicon.png" type="image/x-icon" />
-    <script defer src="./js/script.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-
 <body>
     <!-- Interface -->
     <header>
@@ -132,13 +128,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <article id="cad">
                 <h2 id="titulo">Cadastro</h2>
 
-                <!-- Exibição de erros -->
+
+                <!-- Exibição de erros + toast -->
                 <?php if (!empty($erros)): ?>
                     <div class="error-message">
                         <?php foreach ($erros as $erro): ?>
                             <p><?php echo $erro; ?></p>
                         <?php endforeach; ?>
                     </div>
+                    <script>
+                        window.addEventListener('DOMContentLoaded', function() {
+                            LudusToast("<?php echo addslashes($erros[0]); ?>", true);
+                        });
+                    </script>
+                <?php endif; ?>
+                <?php if (isset($_GET['sucesso']) && $_GET['sucesso'] == '1'): ?>
+                    <!-- Toast de sucesso removido, agora será exibido no login.php -->
                 <?php endif; ?>
 
                 <form action="cadastro.php" method="post">
@@ -153,8 +158,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="password" name="confirmar_senha" id="confirmar_senha" minlength="6"
                         placeholder="Confirmar Senha" required>
 
-                    <button type="submit" id="btn"><strong>Enviar</strong></button>
-                    <a class="login-return" href="login.php"> Fazer Login</a>
+                    <button type="submit" id="btn"><strong>Cadastrar</strong></button>
+                    <a class="login-return" href="login.php"> Já possui uma conta? Fazer Login</a>
                 </form>
             </article>
         </section>
@@ -172,6 +177,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <span>Ludus • v0.1</span>
     </footer>
+    <script src="./js/script.js"></script>
+    <script src="./js/toast.js"></script>
 </body>
 
 </html>

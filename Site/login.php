@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['email'] = $email;
                 $_SESSION['tipo'] = $user_tipo;
 
-                header("Location: paginainicial.php");
+                header("Location: paginainicial.php?sucesso=1");
                 exit();
             } else {
                 $erro = "E-mail ou senha incorretos.";
@@ -53,7 +53,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Ludus | Jogos Indie BR</title>
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="icon" href="img/Ludus_Favicon.png" type="image/x-icon" />
-    <script defer src="./js/script.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -126,6 +125,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <span>Ludus • v0.1</span>
     </footer>
+    <!-- Carregue os scripts globais no final do body -->
+    <script src="./js/script.js"></script>
+    <script src="./js/toast.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('sucesso') === '1') {
+                LudusToast('Cadastro realizado com sucesso!');
+            }
+        });
+    </script>
 </body>
 
 </html>
