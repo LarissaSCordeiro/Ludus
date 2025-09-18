@@ -355,29 +355,8 @@
 
 <body>
 
-    <header>
-        <figure class="logo">
-            <a href="index.html">
-                <img src="img/NewLudusLogo.png" alt="Logotipo">
-            </a>
-        </figure>
-
-        <nav id="nav" class="nav-links">
-            <a href="cadastro.php" class="a-Button">Criar uma conta</a>
-            <a href="filtragem.php">Games</a>
-        </nav>
-
-        <div class="search-container">
-            <form action="filtragem.php" method="GET">
-                <input type="text" name="pesquisa" placeholder="Pesquisar..." required>
-                <i class="fas fa-search icon"></i>
-            </form>
-        </div>
-
-        <div class="hamburger" onclick="toggleMenu()">
-            ☰
-        </div>
-    </header>
+    <!-- Cabeçalho -->
+    <?php include __DIR__ . '/headers/header_selector.php'; ?>
 
     <main>
         <div class="container">
@@ -431,14 +410,8 @@
         </div>
     </main>
 
-    <footer class="footer-nav">
-        <div class="social-icons">
-            <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a>
-            <a href="https://github.com/LarissaSCordeiro/Ludus" target="_blank" title="GitHub"><i
-                    class="fab fa-github"></i></a>
-        </div>
-        <span>Ludus • v0.1</span>
-    </footer>
+    <!-- Rodapé -->
+    <?php include __DIR__ . '/footers/footer.php'; ?>
 
 </body>
 

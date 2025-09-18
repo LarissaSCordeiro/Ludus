@@ -22,36 +22,7 @@ if (isset($_SESSION['usuario'])) {
 <body>
 
     <!-- Cabeçalho -->
-
-    <header>
-        <!-- Logo do Ludus -->
-        <figure class="logo">
-            <a href="index.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
-        </figure>
-        
-        <!-- Barra de navegaçao -->
-        <nav id="nav" class="nav-links">
-		    <a href="filtragem.php">Games</a>
-            <!-- Botao de entrar e links -->
-            <a href="login.php" class="a-Button">Entrar</a>
-            <a href="cadastro.php">Criar uma conta</a>
-        </nav>
-
-        <!-- Barra de pesquisa personalizada -->
-        <div class="search-container">
-            <form action="pesquisa.php" method="GET">
-                <input type="text" name="pesquisa" placeholder="Pesquisar..." required>
-                <i class="fas fa-search icon"></i>
-            </form>
-        </div>
-
-
-        <!-- Ícone do menu sanduíche -->
-        <div class="hamburger" onclick="toggleMenu()">
-            ☰
-        </div>
-
-    </header>
+    <?php include __DIR__ . '/headers/header_selector.php'; ?>
 
     <!-- Parte principal do site -->
     <main>
@@ -116,17 +87,8 @@ if (isset($_SESSION['usuario'])) {
         </section>
     </main>
 
-    <!-- Rodape -->
-    <footer class="footer-nav">
-        <!-- Redes sociais -->
-        <div class="social-icons">
-            <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a>
-            <a href="https://github.com/LarissaSCordeiro/Ludus" target="_blank" title="GitHub"><i
-                    class="fab fa-github"></i></a>
-        </div>
-
-        <span>Ludus • v0.1</span>
-    </footer>
+    <!-- Rodapé -->
+    <?php include __DIR__ . '/footers/footer.php'; ?>
 
 </body>
 

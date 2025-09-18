@@ -699,17 +699,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-  <header>
-    <figure class="logo">
-      <a href="index.html">
-        <img src="img/NewLudusLogo.png" alt="Logotipo" />
-      </a>
-    </figure>
-    <nav id="nav" class="nav-links">
-      <a href="cadastro.php" class="a-Button">Criar uma conta</a>
-      <a href="filtragem.php">Games</a>
-    </nav>
-  </header>
+  <!-- Cabeçalho -->
+    <?php include __DIR__ . '/headers/header_selector.php'; ?>
 
   <main>
     <div class="edit-form-container">
@@ -967,6 +958,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       // Evite tentar enviar para um arquivo externo por enquanto
     });
   </script>
+
+  <!-- Rodapé -->
+    <?php include __DIR__ . '/footers/footer.php'; ?>
 </body>
 
 </html>

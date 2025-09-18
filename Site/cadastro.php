@@ -89,33 +89,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <body>
     <!-- Interface -->
-    <header>
-        <!-- Logo do Ludus -->
-        <figure class="logo">
-            <a href="index.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
-        </figure>
-
-        <!-- Barra de navegaçao -->
-        <nav id="nav" class="nav-links">
-            <!-- Botao de entrar e links -->
-			<a href="filtragem.php">Games</a>
-            <a href="login.php" class="a-Button">Entrar</a>
-        </nav>
-
-        <!-- Barra de pesquisa personalizada -->
-        <div class="search-container">
-            <form action="filtragem.php" method="GET">
-                <input type="text" name="pesquisa" placeholder="Pesquisar..." required>
-                <i class="fas fa-search icon"></i>
-            </form>
-        </div>
-
-        <!-- Ícone do menu sanduíche -->
-        <div class="hamburger" onclick="toggleMenu()">
-            ☰
-        </div>
-
-    </header>
+    <!-- Cabeçalho -->
+    <?php include __DIR__ . '/headers/header_selector.php'; ?>
 
     <!-- Apresentacao do site -->
     <main class="main-cad-log">
@@ -167,16 +142,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </main>
 
     <!-- Contatos -->
-    <footer class="footer-nav">
-        <!-- Redes sociais -->
-        <div class="social-icons">
-            <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a>
-            <a href="https://github.com/LarissaSCordeiro/Ludus" target="_blank" title="GitHub"><i
-                    class="fab fa-github"></i></a>
-        </div>
-
-        <span>Ludus • v0.1</span>
-    </footer>
+    <!-- Rodapé -->
+    <?php include __DIR__ . '/footers/footer.php'; ?>
     <script src="./js/script.js"></script>
     <script src="./js/toast.js"></script>
 </body>

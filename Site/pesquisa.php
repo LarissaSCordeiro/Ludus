@@ -31,41 +31,8 @@ if (isset($_SESSION['user_id'])) {
 </head>
 
 <body>
-  <header>
-    <!-- Logo do Ludus -->
-    <figure class="logo">
-      <?php if (isset($_SESSION['user_id'])) { ?>
-        <a href="paginainicial.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a> <?php } else { ?>
-        <a href="index.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a> <?php } ?>
-    </figure>
-
-    <!-- Barra de navegaçao -->
-    <nav id="nav" class="nav-links">
-	<a href="filtragem.php">Games</a>
-      <!-- Botao de entrar e links -->
-      <?php if (!empty($_SESSION['user_id'])) { ?>
-        <a href="perfil.php"><img src="img/usuarios/default.png" alt="Perfil do usuário" class="user-avatar"></a>
-      <?php } else { ?>
-        <a href="login.php" class="a-Button">Entrar</a> 
-		 <a href="cadastro.php">Criar uma conta</a>
-		<?php } ?>
-    </nav>
-	
-	 <div class="search-container">
-           <form action="pesquisa.php" method="GET">
-                <input type="text" id="searchInput" name="pesquisa" placeholder="Pesquisar..."
-                  value="<?php echo $valorPesquisa; ?>" required>
-                <i class="fas fa-search icon"></i>
-              </form>
-        </div>
-
-
-    <!-- Ícone do menu sanduíche -->
-    <div class="hamburger" onclick="toggleMenu()">
-      ☰
-    </div>
-
-  </header>
+  <!-- Cabeçalho -->
+    <?php include __DIR__ . '/headers/header_selector.php'; ?>
   
     <div class="conteudo">
       <div class="coluna-principal">
@@ -88,10 +55,10 @@ if (isset($_SESSION['user_id'])) {
             LEFT JOIN genero ON genero.id = jogo_possui_genero.id_genero
             LEFT JOIN avaliacao ON jogo.id = avaliacao.id_jogo
             LEFT JOIN comentario ON avaliacao.id = comentario.id_avaliacao
-            WHERE jogo.nome LIKE ? OR genero.nome LIKE ?
+            WHERE jogo.nome LIKE ?
             GROUP BY jogo.id
           ");
-            $consulta->bind_param("ss", $termo, $termo);
+            $consulta->bind_param("s", $termo);
             echo "<h2 id='titulo-resultados'>Resultados para: <span>" . htmlspecialchars($termoBruto) . "</span></h2>";
 
           }  elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && !empty($_GET['btn'])) {
@@ -160,14 +127,8 @@ if (isset($_SESSION['user_id'])) {
         </section>
       </div>
     </div>
-  <footer class="footer-nav">
-    <figure class="social-icons">
-      <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a>
-      <a href="https://github.com/LarissaSCordeiro/Ludus" target="_blank" title="GitHub"><i
-          class="fab fa-github"></i></a>
-    </figure>
-    <span>Ludus • v0.1</span>
-  </footer>
+  <!-- Rodapé -->
+    <?php include __DIR__ . '/footers/footer.php'; ?>
   
 </body>
 

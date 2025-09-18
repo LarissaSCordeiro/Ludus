@@ -54,27 +54,8 @@ $curtidas = $curtidasStmt->get_result();
 </head>
 
 <body>
-  <header>
-        <figure class="logo">
-            <a href="paginainicial.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
-        </figure>
-
-        <nav id="nav" class="nav-links">
-            <a href="filtragem.php">Games</a>
-            <a href="perfil.php">
-                <img src="<?php echo htmlspecialchars($foto_perfilPerfil); ?>" alt="Perfil do usuário" class="user-avatar">
-            </a>
-        </nav>
-
-        <div class="search-container">
-            <form action="pesquisa.php" method="GET">
-                <input type="text" name="pesquisa" placeholder="Pesquisar..." required>
-                <i class="fas fa-search icon"></i>
-            </form>
-        </div>
-
-        <div class="hamburger" onclick="toggleMenu()">☰</div>
-  </header>
+  <!-- Cabeçalho -->
+    <?php include __DIR__ . '/headers/header_selector.php'; ?>
 
   <main class="perfil-container">
     <section class="perfil-top">
@@ -111,13 +92,9 @@ $curtidas = $curtidasStmt->get_result();
     </section>
   </main>
 
-  <footer class="footer-nav">
-    <div class="social-icons">
-      <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a>
-      <a href="https://github.com/LarissaSCordeiro/Ludus" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-    </div>
-    <span>Ludus • v0.1</span>
-  </footer>
+  <!-- Rodapé -->
+    <?php include __DIR__ . '/footers/footer.php'; ?>
+    
 </body>
 
 </html>

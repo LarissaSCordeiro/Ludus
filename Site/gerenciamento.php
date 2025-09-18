@@ -72,6 +72,9 @@ $count_coment = $comentario->num_rows;
 
 <body>
     <!-------------------------------------------------------------------------------- Interface -------------------------------------------------------------------------------------->
+    
+    <!-- Cabeçalho -->
+    <?php include __DIR__ . '/headers/header_selector.php'; ?>
     <header>
         <figure class="logo">
             <a href="paginainicial.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
@@ -195,6 +198,9 @@ $count_coment = $comentario->num_rows;
             </form>
         </div>
     </div>
+
+<!-- Rodapé -->
+    <?php include __DIR__ . '/footers/footer.php'; ?>
 
 </body>
 
