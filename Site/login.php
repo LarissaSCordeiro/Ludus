@@ -16,20 +16,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($email) || empty($senha)) {
         $erro = "Por favor, preencha todos os campos.";
     } else {
-        $stmt = $mysqli->prepare("SELECT id, nome, senha, tipo FROM usuario WHERE email = ?");
+        $stmt = $mysqli->prepare("SELECT id, nome, senha, tipo, foto_perfil FROM usuario WHERE email = ?");
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $stmt->store_result();
 
         if ($stmt->num_rows == 1) {
-            $stmt->bind_result($user_id, $user_nome, $hashed_password, $user_tipo);
+            $stmt->bind_result($user_id, $user_nome, $hashed_password, $user_tipo, $user_foto);
             $stmt->fetch();
 
             if (password_verify($senha, $hashed_password)) {
                 $_SESSION['id_usuario'] = $user_id;
                 $_SESSION['nome'] = $user_nome;
                 $_SESSION['email'] = $email;
-                $_SESSION['tipo'] = $user_tipo;
+                $_SESSION['tipo_usuario'] = $user_tipo;
+                $_SESSION['foto_perfil'] = $user_foto ?? 'img/usuarios/default.png';
 
                 header("Location: paginainicial.php?sucesso=1");
                 exit();
