@@ -2,13 +2,9 @@
 session_start();
 require_once("config.php");
 
-//if (!isset($_SESSION['id_usuario'])) {
-//  header("Location: login.php");
-//  exit();
-//}
+$id_usuario = $_SESSION['user_id'];
 
 // Pega os dados do usuário
-$id_usuario = $_SESSION['id_usuario'];
 $stmt = $mysqli->prepare("SELECT nome, foto_perfil FROM usuario WHERE id = ?");
 $stmt->bind_param("i", $id_usuario);
 $stmt->execute();
@@ -25,9 +21,15 @@ $foto_perfilPerfil = $usuario['foto_perfil'] ?: 'img/usuarios/default.png';
 
 // Pega as 3 avaliações mais recentes do usuário
 $avaliacoesStmt = $mysqli->prepare("
-  SELECT j.nome AS nome_jogo, j.imagem AS foto_perfil_jogo, a.texto
+  SELECT 
+    j.id AS id_jogo,
+    j.nome AS nome_jogo, 
+    j.imagem AS foto_perfil_jogo, 
+    c.texto AS comentario,
+    a.data_avaliacao
   FROM avaliacao a
   JOIN jogo j ON a.id_jogo = j.id
+  LEFT JOIN comentario c ON c.id_avaliacao = a.id
   WHERE a.id_usuario = ?
   ORDER BY a.data_avaliacao DESC
   LIMIT 3
@@ -53,11 +55,11 @@ $avaliacoes = $avaliacoesStmt->get_result();
 
 <body>
   <!-- Cabeçalho -->
-    <?php include __DIR__ . '/headers/header_selector.php'; ?>
+  <?php include __DIR__ . '/headers/header_selector.php'; ?>
 
   <main class="perfil-container">
     <section class="perfil-top">
-      
+
       <div class="perfil-info">
         <img src="<?php echo htmlspecialchars($foto_perfilPerfil); ?>" alt="Foto de perfil" class="foto-perfil">
         <h1 class="perfil-nome"><?php echo htmlspecialchars($nomeUsuario); ?></h1>
@@ -76,26 +78,31 @@ $avaliacoes = $avaliacoesStmt->get_result();
     <section class="recentes">
       <h2 class="recently-reviewed-title">Avaliações Recentes</h2>
       <div class="avaliacoes-recentes">
-        <?php while ($row = $avaliacoes->fetch_assoc()): ?>
-  <div class="avaliacao">
-    <img src="<?php echo htmlspecialchars($row['foto_perfil_jogo']); ?>" alt="<?php echo htmlspecialchars($row['nome_jogo']); ?>">
-    <div class="avaliacao-info">
-      <h3><?php echo htmlspecialchars($row['nome_jogo']); ?></h3>
-      <p>"<?php echo htmlspecialchars($row['comentario']); ?>"</p>
-    </div>
-  </div>
-<?php endwhile; ?>
-
-<?php if ($avaliacoes->num_rows === 0): ?>
-  <p style="color: #888; text-align: center;">Nenhuma avaliação feita ainda.</p>
-<?php endif; ?>
+        <?php if ($avaliacoes->num_rows > 0): ?>
+          <?php while ($row = $avaliacoes->fetch_assoc()): ?>
+            <a href="dashboard.php?id=<?php echo $row['id_jogo']; ?>" class="avaliacao-link">
+              <div class="avaliacao">
+                <img src="<?php echo htmlspecialchars($row['foto_perfil_jogo']); ?>"
+                  alt="<?php echo htmlspecialchars($row['nome_jogo']); ?>">
+                <div class="avaliacao-info">
+                  <h3><?php echo htmlspecialchars($row['nome_jogo']); ?></h3>
+                  <p>
+                    "<?php echo htmlspecialchars(!empty($row['comentario']) ? $row['comentario'] : 'Você ainda não comentou nessa avaliação!'); ?>"
+                  </p>
+                </div>
+              </div>
+            </a>
+          <?php endwhile; ?>
+        <?php else: ?>
+          <p style="color: #888; text-align: center;">Nenhuma avaliação feita ainda.</p>
+        <?php endif; ?>
+      </div>
     </section>
   </main>
 
   <!-- Rodapé -->
-    <?php include __DIR__ . '/footers/footer.php'; ?>
-    
+  <?php include __DIR__ . '/footers/footer.php'; ?>
+
 </body>
 
 </html>
-

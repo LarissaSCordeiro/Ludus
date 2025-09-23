@@ -24,18 +24,21 @@ $fotoPerfil = $usuario['foto_perfil'] ?: 'img/usuarios/default.png';
 
 // Pega todas as avaliações do usuário
 $avaliacoesStmt = $mysqli->prepare("
-  SELECT j.nome AS nome_jogo, j.imagem AS imagem_jogo, a.texto, a.data_avaliacao
+  SELECT j.id AS id_jogo, j.nome AS nome_jogo, j.imagem AS imagem_jogo, c.texto AS comentario, a.data_avaliacao
   FROM avaliacao a
   JOIN jogo j ON a.id_jogo = j.id
+  LEFT JOIN comentario c ON c.id_avaliacao = a.id
   WHERE a.id_usuario = ?
   ORDER BY a.data_avaliacao DESC
 ");
+
 $avaliacoesStmt->bind_param("i", $id_usuario);
 $avaliacoesStmt->execute();
 $avaliacoes = $avaliacoesStmt->get_result();
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,9 +48,10 @@ $avaliacoes = $avaliacoesStmt->get_result();
   <link rel="icon" href="img/Ludus_Favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
   <!-- Cabeçalho -->
-    <?php include __DIR__ . '/headers/header_selector.php'; ?>
+  <?php include __DIR__ . '/headers/header_selector.php'; ?>
 
   <main class="perfil-container">
     <section class="perfil-top">
@@ -69,14 +73,19 @@ $avaliacoes = $avaliacoesStmt->get_result();
       <div class="avaliacoes-recentes">
         <?php if ($avaliacoes->num_rows > 0): ?>
           <?php while ($row = $avaliacoes->fetch_assoc()): ?>
-            <div class="avaliacao">
-              <img src="<?php echo htmlspecialchars($row['imagem_jogo']); ?>" alt="<?php echo htmlspecialchars($row['nome_jogo']); ?>">
-              <div class="avaliacao-info">
-                <h3><?php echo htmlspecialchars($row['nome_jogo']); ?></h3>
-                <p>"<?php echo htmlspecialchars($row['comentario']); ?>"</p>
-                <small style="color: #888;"><?php echo date('d/m/Y', strtotime($row['data'])); ?></small>
+            <a href="dashboard.php?id=<?php echo $row['id_jogo']; ?>" class="avaliacao-link">
+              <div class="avaliacao">
+                <img src="<?php echo htmlspecialchars($row['imagem_jogo']); ?>"
+                  alt="<?php echo htmlspecialchars($row['nome_jogo']); ?>">
+                <div class="avaliacao-info">
+                  <h3><?php echo htmlspecialchars($row['nome_jogo']); ?></h3>
+                  <p>
+                    "<?php echo htmlspecialchars(!empty($row['comentario']) ? $row['comentario'] : 'Você ainda não comentou nessa avaliação!'); ?>"
+                  </p>
+                  <small style="color: #888; text-align: center;"><?php echo date('d/m/Y', strtotime($row['data_avaliacao'])); ?></small>
+                </div>
               </div>
-            </div>
+            </a>
           <?php endwhile; ?>
         <?php else: ?>
           <p style="color: #888; text-align: center;">Nenhuma avaliação feita ainda.</p>
@@ -86,7 +95,7 @@ $avaliacoes = $avaliacoesStmt->get_result();
   </main>
 
   <!-- Rodapé -->
-    <?php include __DIR__ . '/footers/footer.php'; ?>
-    
+  <?php include __DIR__ . '/footers/footer.php'; ?>
 </body>
+
 </html>

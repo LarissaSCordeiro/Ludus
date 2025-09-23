@@ -27,7 +27,7 @@ $foto_perfilPerfil = $usuario['foto_perfil'] ?: 'img/usuarios/default.png';
 
 // Pega os jogos favoritados pelo usuário
 $favoritosStmt = $mysqli->prepare("
-  SELECT j.nome AS nome_jogo, j.imagem AS imagem_jogo, j.descricao
+  SELECT j.id AS id_jogo, j.nome AS nome_jogo, j.imagem AS imagem_jogo, j.descricao
   FROM usuario_favorita_jogo uf
   JOIN jogo j ON uf.id_jogo = j.id
   WHERE uf.id_usuario = ?
@@ -52,7 +52,7 @@ $favoritos = $favoritosStmt->get_result();
 
 <body>
   <!-- Cabeçalho -->
-    <?php include __DIR__ . '/headers/header_selector.php'; ?>
+  <?php include __DIR__ . '/headers/header_selector.php'; ?>
 
   <main class="perfil-container">
     <section class="perfil-top">
@@ -72,17 +72,19 @@ $favoritos = $favoritosStmt->get_result();
 
     <section class="recentes">
       <div class="avaliacoes-recentes">
-        <?php while ($row = $favoritos->fetch_assoc()): ?>
-          <div class="avaliacao">
-            <img src="<?php echo htmlspecialchars($row['imagem_jogo']); ?>" alt="<?php echo htmlspecialchars($row['nome_jogo']); ?>">
-            <div class="avaliacao-info">
-              <h3><?php echo htmlspecialchars($row['nome_jogo']); ?></h3>
-              <p><?php echo htmlspecialchars(mb_strimwidth($row['descricao'], 0, 100, "...")); ?></p>
-            </div>
-          </div>
-        <?php endwhile; ?>
-
-        <?php if ($favoritos->num_rows === 0): ?>
+        <?php if ($favoritos->num_rows > 0): ?>
+          <?php while ($row = $favoritos->fetch_assoc()): ?>
+            <a href="dashboard.php?id=<?php echo $row['id_jogo']; ?>" class="avaliacao-link">
+              <div class="avaliacao">
+                <img src="<?php echo htmlspecialchars($row['imagem_jogo']); ?>" alt="<?php echo htmlspecialchars($row['nome_jogo']); ?>">
+                <div class="avaliacao-info">
+                  <h3><?php echo htmlspecialchars($row['nome_jogo']); ?></h3>
+                  <p><?php echo htmlspecialchars(mb_strimwidth($row['descricao'], 0, 100, "...")); ?></p>
+                </div>
+              </div>
+            </a>
+          <?php endwhile; ?>
+        <?php else: ?>
           <p style="color: #888; text-align: center;">Você ainda não favoritou nenhum jogo.</p>
         <?php endif; ?>
       </div>
@@ -90,10 +92,7 @@ $favoritos = $favoritosStmt->get_result();
   </main>
 
   <!-- Rodapé -->
-    <?php include __DIR__ . '/footers/footer.php'; ?>
+  <?php include __DIR__ . '/footers/footer.php'; ?>
 
 </body>
-
 </html>
-
-

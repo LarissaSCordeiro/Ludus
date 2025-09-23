@@ -31,12 +31,15 @@ main.dash-main {
     align-items: stretch;
     position: relative;
 }
-.datime{
-	color:gray;
+
+.datime {
+    color: gray;
 }
-.fa-star{
+
+.fa-star {
     color: yellow;
 }
+
 /* CARD UNIFICADO */
 .game-card-full {
     border-radius: 14px;
@@ -76,12 +79,6 @@ main.dash-main {
     gap: 20px;
 }
 
-.info-bloco {
-    background: rgba(59, 59, 94, 0.9);
-    border-radius: 10px;
-    padding: 16px;
-}
-
 /* Título com efeito glow */
 .titulo-jogo {
     font-weight: bold;
@@ -95,19 +92,28 @@ main.dash-main {
     text-align: center;
 }
 
+.linha-horizontal {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #68581662, #ffbb336b);
+    margin: 16px 0;
+}
+
 /* Cards individuais */
+
+.cards-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+}
+
 .info-card {
-    background: linear-gradient(145deg, rgba(43, 43, 68, 0.9), rgba(30, 30, 48, 0.95));
-    padding: 20px;
-    border-radius: 16px;
-    border: 1px solid #2f2f4f;
+    border-radius: 10px;
+    padding: 16px;
     position: relative;
     overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
 
 .info-card::after {
@@ -116,36 +122,12 @@ main.dash-main {
     top: -100%;
     left: -100%;
     width: 200%;
-    height: 200%;
-    background: linear-gradient(120deg, transparent 0%, rgba(216, 140, 229, 0.05) 50%, transparent 100%);
+    height: 350%;
     transform: rotate(25deg);
-    animation: shine 5s infinite;
 }
 
 .coluna-direita.info-card {
     margin-bottom: 20px;
-}
-
-
-@keyframes shine {
-    0% {
-        transform: translateX(-100%) rotate(25deg);
-        opacity: 0;
-    }
-
-    40%,
-    60% {
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateX(100%) rotate(25deg);
-        opacity: 0;
-    }
-}
-
-.info-card:hover {
-    transform: translateY(-4px);
 }
 
 .info-card h3 {
@@ -166,7 +148,7 @@ main.dash-main {
 }
 
 .tag {
-    background-color: #3a3a5c;
+    background-color: #23233a;
     padding: 6px 12px;
     border-radius: 8px;
     color: #f0f0f0;
@@ -189,13 +171,6 @@ main.dash-main {
 }
 
 /* Card de avaliação (orbes) */
-.info-card.avaliacao-card {
-    grid-column: span 2;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
 .avaliacoes-gerais {
     display: flex;
     justify-content: space-between;
@@ -203,18 +178,36 @@ main.dash-main {
     flex-wrap: wrap;
 }
 
+.card-hero {
+    display: flex;
+    max-width: 400px;
+    max-height: 500px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 26px;
+}
+
+small {
+    color: #757575;
+    font-size: 0.8rem;
+    margin: 8px;
+}
+
 .avaliacao-card.nova {
-    background: rgba(255, 255, 255, 0.02);
+    display: flex;
+    background: #10101f86;
     border-radius: 16px;
     padding: 20px;
-    width: 100%;
-    max-width: 200px;
+    width: 300px;
+    height: 250px;
+    margin-top: 10px;
+    margin-right: 30px;
     text-align: center;
     color: #f0f0f0;
-    display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.03);
+    gap: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.589);
 }
 
 .avaliacao-card.nova .orbe {
@@ -224,13 +217,27 @@ main.dash-main {
     font-size: 1.6rem;
     font-weight: bold;
     border-radius: 50%;
-    margin-bottom: 10px;
-    box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.1);
+    margin-bottom: 0;
+    box-shadow: inset 0 0 8px rgba(85, 4, 67, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
+    flex-shrink: 0;
+    flex: 0 0 auto;
 }
+
+/* Conteúdo que fica ao lado do orbe */
+.avaliacao-card.nova .avaliacao-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-basis: 100%;
+    margin-top: 10px;
+}
+
 
 .orbe.media {
     background-color: #4444aa;
@@ -242,6 +249,7 @@ main.dash-main {
 }
 
 .estrelas {
+    margin-top: 5px;
     display: flex;
     gap: 0.5rem;
     font-size: 2rem;
@@ -277,6 +285,7 @@ main.dash-main {
     gap: 8px;
 }
 
+
 .btn-favorito.favoritado {
     background-color: #3d3d3d;
     color: rgb(0, 0, 0);
@@ -300,9 +309,10 @@ main.dash-main {
 
 /* Estrelas de avaliação */
 .avaliacao-container .estrelas i {
+
     color: #888;
     font-size: 1.2rem;
-    margin: 0 2px;
+    margin: 5px 0 0 5px;
     cursor: pointer;
 }
 
@@ -445,4 +455,215 @@ main.dash-main {
         transform: scale(1);
         opacity: 1;
     }
+}
+
+
+/* HERO */
+.hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    align-items: center;
+    height: 400px;
+    overflow: hidden;
+    z-index: 0;
+    margin-bottom: 40px;
+}
+
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 30, 0.158);
+    backdrop-filter: blur(2px);
+    background: linear-gradient(to bottom, rgba(41, 41, 151, 0), #0b0619);
+    z-index: 0;
+}
+
+.hero-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.4) blur(2px);
+    z-index: 0;
+}
+
+.hero-img {
+    width: 250px;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-left: 40px;
+    z-index: 1;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.hero-title {
+    max-width: 700px;
+    z-index: 1;
+    margin-left: 20px;
+}
+
+.hero-title h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.hero-title-pai {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+/* SEÇÕES */
+.section {
+    padding: 25px;
+    display: grid;
+    gap: 10px;
+}
+
+/* AVALIAÇÕES */
+.card {
+    padding: 40px;
+    border-radius: 16px;
+    background-color: #10101f;
+}
+
+.card h2 {
+    color: #a6a6f2;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #48455aff;
+    padding-bottom: 8px;
+}
+
+/* INFORMAÇÕES */
+.info {
+    display: grid;
+    grid-template-columns: 2.5fr 3fr;
+    gap: 40px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+/* Linha de baixo: cards 3 e 4 */
+.info .card:nth-child(3) {
+    grid-column: 1;
+}
+
+.info .card:nth-child(4) {
+    grid-column: 2;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .info {
+        grid-template-columns: 1fr;
+        /* apenas uma coluna */
+        gap: 20px;
+        /* opcional, menor gap no mobile */
+    }
+
+    .info .card:nth-child(3),
+    .info .card:nth-child(4) {
+        grid-column: 1;
+        /* ambos ocupam a única coluna */
+    }
+}
+
+.text-style {
+    margin-left: 3px;
+    color: #ff9100;
+}
+
+
+.tags span {
+    display: inline-block;
+    background: #333;
+    padding: 6px 12px;
+    border-radius: 12px;
+    margin: 4px;
+    font-size: 0.9rem;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 900px) {
+    .hero {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+        height: auto;
+        padding: 20px;
+    }
+
+    .hero-img {
+        margin: 0;
+    }
+
+    .hero-title {
+        margin: 20px 0 0;
+    }
+
+    .ratings,
+    .info {
+        grid-template-columns: 1fr;
+    }
+}
+
+.hero-img-container {
+    position: relative;
+    display: inline-block;
+    z-index: 10;
+    border-radius: 12px;
+    padding: 3px;
+    background: transparent;
+    transition: background 0.5s ease;
+}
+
+.hero-img {
+    width: 250px;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease;
+}
+
+/* Botão Overlay */
+.btn-favorito-overlay {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    background: rgba(155, 10, 10, 0.753);
+    border: 1px solid rgb(133, 0, 0);
+    border-radius: 12px;
+    width: auto;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-favorito-overlay i {
+    margin: 5px;
+    color: #fff;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+/* Hover */
+.btn-favorito-overlay:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid #ffffff;
+}
+
+.btn-favorito-overlay.favoritado i {
+    color: #ff5252;
 }

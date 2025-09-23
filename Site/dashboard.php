@@ -1,6 +1,6 @@
 <!-------------------------------------------------------------------------------- PHP -------------------------------------------------------------------------------------------->
 <?php
-ob_start(); 
+ob_start();
 session_start();
 require_once "config.php";
 
@@ -25,9 +25,9 @@ if (!empty($_SESSION['user_id'])) {
 
             if ($inserir->execute()) {
                 header("Location: dashboard.php?id=" . $id);
-                exit(); 
+                exit();
             } else {
-                $msg_erro  = "Não foi possível enviar seu comentário.";
+                $msg_erro = "Não foi possível enviar seu comentário.";
             }
 
             $inserir->close();
@@ -123,7 +123,7 @@ $stmtCountAvaliacoes->close();
     <link rel="stylesheet" href="./css/dash.css" />
     <link rel="icon" href="img/Ludus_Favicon.png" type="image/x-icon" />
     <script defer src="./js/script.js"> </script>
-	<script defer src="./js/dash-script.js"> </script>
+    <script defer src="./js/dash-script.js"> </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
@@ -134,214 +134,212 @@ $stmtCountAvaliacoes->close();
     <?php include __DIR__ . '/headers/header_selector.php'; ?>
     <!--------- Informações dos jogos --------->
 
-    <main id="dash_main">
+    <main>
 
-        <div>
-            <!-- Coluna da imagem -->
-            <div class="game-card-full info-card">
+        <!-- HERO -->
+        <section class="hero">
+            <img src="img/HeroStars.png" alt="Banner Ludus Games" class="hero-banner">
 
-                <!-- Título e favorito -->
-                <div class="card-header">
+            <div class="hero-img-container">
+                <img src="<?= $jogo["imagem"]; ?>" alt="Capa do jogo" class="hero-img" />
+
+                <?php
+                $favoritado = false;
+                if (isset($_SESSION['user_id'])) {
+                    $stmt = $mysqli->prepare("SELECT 1 FROM usuario_favorita_jogo WHERE id_usuario = ? AND id_jogo = ?");
+                    $stmt->bind_param("ii", $_SESSION['user_id'], $jogo['id_jogo']);
+                    $stmt->execute();
+                    $stmt->store_result();
+                    $favoritado = $stmt->num_rows > 0;
+                }
+                ?>
+
+                <button class="btn-favorito-overlay <?= $favoritado ? 'favoritado' : '' ?>"
+                    data-jogo-id="<?= $jogo['id_jogo'] ?>" data-usuario-id="<?= $_SESSION['user_id'] ?? '' ?>">
+                    <i class="fa-heart <?= $favoritado ? 'fas' : 'far' ?> icone-coracao"></i>
+                </button>
+            </div>
+
+            <section class="hero-title-pai">
+                <div class="hero-title">
                     <h1 class="titulo-jogo"><?= $jogo["nome"]; ?></h1>
-                </div>
+                    <div class="linha-horizontal"></div>
 
-                <!-- Imagem -->
-                <div class="card-image-wrapper">
-                    <img src="<?= $jogo["imagem"]; ?>" alt="Capa do jogo" />
-                </div>
+                    <section class="cards-container">
 
-                <!-- Informações principais -->
-                <div class="card-info-grid">
+                        <div class="card-hero">
 
-                    <div class="info-bloco">
-                        <h3>Descrição:</h3>
-                        <p><?= $jogo["descricao"]; ?></p>
-                    </div>
+                            <div class="avaliacao-card nova">
 
-                    <div class="info-bloco">
-                        <h3>Estúdio:</h3>
-                        <p><?= $jogo["estudio"]; ?></p>
-                    </div>
+                                <div class="orbe media" id="orbe-comunidade">
+                                    <span
+                                        id="nota-comunidade"><?= number_format(floatval($media_comunidade ?? 0), 1) ?></span>
+                                </div>
+                                <div class="avaliacao-content">
+                                    <h4>Média da Comunidade</h4>
+                                    <small id="total-avaliacoes">Baseada em 0 avaliações</small>
+                                </div>
 
-                    <div class="info-bloco">
-                        <h3>Desenvolvedor:</h3>
-                        <p><?= $jogo["desenvolvedor"]; ?></p>
-                    </div>
-
-                    <div class="info-bloco">
-                        <h3>Data de Lançamento:</h3>
-                        <p><?= date("d/m/Y", strtotime($jogo["data_lancamento"])); ?></p>
-                    </div>
-
-                    <div class="info-bloco">
-                        <h3>Plataformas:</h3>
-                        <div class="icon-tags">
-                            <?php
-                            $plataformas = explode(", ", $jogo["plataforma"]);
-                            foreach ($plataformas as $plataforma) {
-                                $icon = match (strtolower($plataforma)) {
-                                    "pc" => '<i class="fas fa-desktop"></i>',
-                                    "playstation" => '<i class="fab fa-playstation"></i>',
-                                    "xbox" => '<i class="fab fa-xbox"></i>',
-                                    "nintendo" => '<i class="fas fa-gamepad"></i>',
-                                    default => '<i class="fas fa-laptop"></i>',
-                                };
-                                echo "<span class='tag'>$icon $plataforma</span>";
-                            }
-                            ?>
-                        </div>
-                    </div>
-
-                    <div class="info-bloco">
-                        <h3>Gêneros:</h3>
-                        <div class="icon-tags">
-                            <?php
-                            $generos = explode(", ", $jogo["genero"]);
-                            foreach ($generos as $genero) {
-                                $icon = match (strtolower($genero)) {
-                                    "terror" => '<i class="fas fa-skull-crossbones"></i>',
-                                    "ação" => '<i class="fas fa-fist-raised"></i>',
-                                    "aventura" => '<i class="fas fa-hiking"></i>',
-                                    "estratégia" => '<i class="fas fa-chess-board"></i>',
-                                    "corrida" => '<i class="fas fa-flag-checkered"></i>',
-                                    default => '<i class="fas fa-puzzle-piece"></i>',
-                                };
-                                echo "<span class='tag'>$icon $genero</span>";
-                            }
-                            ?>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div>
-                    <div class="avaliacoes-gerais">
-                        <!-- Avaliação da comunidade -->
-                        <div class="avaliacao-card nova">
-                            <div class="orbe media" id="orbe-comunidade">
-                                <span
-                                    id="nota-comunidade"><?= number_format(floatval($media_comunidade ?? 0), 1) ?></span>
                             </div>
-                            <h4>Média da Comunidade</h4>
-                            <small id="total-avaliacoes">Baseada em <?= $totalAvaliacoes ?? 0 ?> avaliações</small>
                         </div>
 
-                        <?php
-                        // Garante que $nota_usuario está definido como float ou 0.0
-                        $nota_usuario = isset($nota_usuario) ? floatval($nota_usuario) : 0.0;
-                        ?>
+                        <div class="card-hero user-avaliacao ">
+                            <?php
+                            $nota_usuario = isset($nota_usuario) ? floatval($nota_usuario) : 0.0;
+                            ?>
 
-                        <div class="avaliacao-card nova">
-                            <div id="label-nota" class="label-nota">Em progresso</div>
-                            <div class="orbe usuario" id="orbe"><span id="nota-texto">0.0</span></div>
-                            <h4>Dê sua nota</h4>
-                            <div class="avaliacao-container">
-                                <div class="estrelas" id="estrelas" data-jogo-id="<?= $jogo['id_jogo'] ?>"
-                                    data-usuario-id="<?= $user_id ?? '' ?>">
-                                    <i class="fa-regular fa-star" data-value="1"></i>
-                                    <i class="fa-regular fa-star" data-value="2"></i>
-                                    <i class="fa-regular fa-star" data-value="3"></i>
-                                    <i class="fa-regular fa-star" data-value="4"></i>
-                                    <i class="fa-regular fa-star" data-value="5"></i>
+                            <div class="avaliacao-card nova">
+                                <div class="orbe usuario" id="orbe"><span id="nota-texto">0.0</span></div>
+                                <div class="avaliacao-content">
+                                    <div id="label-nota" class="label-nota">Em progresso</div>
+                                    <small id="user-avaliacao-text">
+                                        <?= $nota_usuario > 0 ? "Sua nota: " . number_format($nota_usuario, 1) : "Você ainda não avaliou" ?>
+                                        <div class="avaliacao-container">
+                                            <div class="estrelas" id="estrelas" data-jogo-id="<?= $jogo['id_jogo'] ?>">
+                                                <i class="fa-regular fa-star" data-value="1"></i>
+                                                <i class="fa-regular fa-star" data-value="2"></i>
+                                                <i class="fa-regular fa-star" data-value="3"></i>
+                                                <i class="fa-regular fa-star" data-value="4"></i>
+                                                <i class="fa-regular fa-star" data-value="5"></i>
+                                            </div>
+                                        </div>
+                                    </small>
                                 </div>
                             </div>
-                            <small id="user-avaliacao-text">
-                                <?= $nota_usuario > 0 ? "Sua nota: " . number_format($nota_usuario, 1) : "Você ainda não avaliou" ?>
-                            </small>
                         </div>
+                    </section>
+            </section>
+        </section>
 
+        <!-- INFORMAÇÕES -->
+        <section class="section info">
+            <div class="card info-card">
+                <h2>Informações</h2>
 
-                        <div class="avaliacao-card nova">
-                            <?php
-                            $favoritado = false;
-                            if (isset($_SESSION['user_id'])) {
-                                $stmt = $mysqli->prepare("SELECT 1 FROM usuario_favorita_jogo WHERE id_usuario = ? AND id_jogo = ?");
-                                $stmt->bind_param("ii", $_SESSION['user_id'], $jogo['id_jogo']);
-                                $stmt->execute();
-                                $stmt->store_result();
-                                $favoritado = $stmt->num_rows > 0;
-                            }
-                            ?>
+                <p><strong>Estúdio:</strong>
+                    <span class="text-style"><?= $jogo["estudio"]; ?></span>
+                </p>
 
-                            <button class="btn-favorito <?= $favoritado ? 'favoritado' : '' ?>"
-                                data-jogo-id="<?= $jogo['id_jogo'] ?>"
-                                data-usuario-id="<?= $_SESSION['user_id'] ?? '' ?>">
-                                <i class="fa-heart <?= $favoritado ? 'fas' : 'far' ?> icone-coracao"></i>
-                                <span class="label-favorito"><?= $favoritado ? 'Desfavoritar' : 'Favoritar' ?></span>
-                            </button>
+                <p><strong>Desenvolvedor:</strong>
+                    <span class="text-style"><?= $jogo["desenvolvedor"]; ?></span>
+                </p>
 
+                <p><strong>Data de lançamento:</strong>
+                    <span class="text-style"><?= date("d/m/Y", strtotime($jogo["data_lancamento"])); ?></span>
+                </p>
+            </div>
 
+            <div class="card info-card">
+                <h2>Descrição</h2>
+                <p><?= $jogo["descricao"]; ?></p>
+            </div>
 
-                        </div>
-                    </div>
+            <div class="card info-card">
+                <div class="tags">
+                    <h2>Plataformas</h2>
+                    <?php
+                    $plataformas = explode(", ", $jogo["plataforma"]);
+                    foreach ($plataformas as $plataforma) {
+                        $icon = match (strtolower($plataforma)) {
+                            "pc" => '<i class="fas fa-desktop"></i>',
+                            "playstation" => '<i class="fab fa-playstation"></i>',
+                            "xbox" => '<i class="fab fa-xbox"></i>',
+                            "nintendo" => '<i class="fas fa-gamepad"></i>',
+                            default => '<i class="fas fa-laptop"></i>',
+                        };
+                        echo "<span class='tag'>$icon $plataforma</span>";
+                    }
+                    ?>
                 </div>
             </div>
-        </div>
 
-<!-------------------------------------------------------------------------------- Comentarios ------------------------------------------------------------------------------------>
-        <article class="p2">
-            <?php 
-            $count = count($comentarios);
-            echo "<h2>Comentários ($count)</h2> ";
-			 if (!empty($msg_erro)) { ?>
-            <div class="mensagem-alerta">
-              <?php echo htmlspecialchars($msg_erro); ?>
-			 </div> <?php }
-            if (isset($_SESSION['user_id'])){ ?>
-                <section class="coment_usu">
-                    <figure class="usu_foto">
-                        <img src="<?php echo $usuario["foto_perfil"]; ?>" alt="img" class="img_coment">
-                        <h4><?php echo $usuario["nome"]; ?></h4>
-                    </figure>
-                    <div class="form_com">
-                        <p><?php echo $usuario["email"]; ?></p>
-                        <form method="POST" id="comentarioForm">
-                             <textarea name="comentario" placeholder="Adicione seu comentário..." required></textarea><br>
-							 <input type="hidden" name="id" value="<?php echo $id; ?>">
-                             <input type="hidden" name="enviar_comentario" value="1">
-                             <button type="button" id="btn_comentario">Enviar</button>
-                        </form>
-                    </div>
-                </section>
-            <?php } else { ?>
-                <section class="coment_usu">
-                    <p>Faça <a href="login.php">login</a> para comentar ou <a
-                            href="cadastro.php">cadastre-se</a>
-                    </p>
-                </section> <?php }?>
-			 <div class="coment_usu_pb">	
-            <?php 
-           foreach ($comentarios as $coment) { ?>
-		  
-                <section class="coment_usu">
-                    <figure class="usu_foto">
-                        <img src="<?php echo $coment["foto_perfil"]; ?>" alt="img" class="img_coment">
-                        <h4><?php echo $coment["nome_usuario"]; ?></h4>
+            <div class="card info-card">
+                <div class="tags">
+                    <h2>Gêneros</h2>
+                    <?php
+                    $generos = explode(", ", $jogo["genero"]);
+                    foreach ($generos as $genero) {
+                        $icon = match (strtolower($genero)) {
+                            "terror" => '<i class="fas fa-skull-crossbones"></i>',
+                            "ação" => '<i class="fas fa-fist-raised"></i>',
+                            "aventura" => '<i class="fas fa-hiking"></i>',
+                            "estratégia" => '<i class="fas fa-chess-board"></i>',
+                            "corrida" => '<i class="fas fa-flag-checkered"></i>',
+                            default => '<i class="fas fa-puzzle-piece"></i>',
+                        };
+                        echo "<span class='tag'>$icon $genero</span>";
+                    }
+                    ?>
+                </div>
+            </div>
+        </section>
 
-                        <p><?php
-                        $data_comentario = new DateTime($coment["data_comentario"]);
-                        $data = $data_comentario->format('d/m \à\s H\hi');
-                        echo $data; ?></p>
+        <!-------------------------------------------------------------------------------- Comentarios ------------------------------------------------------------------------------------>
+        <section id="dash_main">
+            <article class="p2">
+                <?php
+                $count = count($comentarios);
+                echo "<h2>Comentários ($count)</h2> ";
+                if (!empty($msg_erro)) { ?>
+                    <div class="mensagem-alerta">
+                        <?php echo htmlspecialchars($msg_erro); ?>
+                    </div> <?php }
+                if (isset($_SESSION['user_id'])) { ?>
+                    <section class="coment_usu">
+                        <figure class="usu_foto">
+                            <img src="<?php echo $usuario["foto_perfil"]; ?>" alt="img" class="img_coment">
+                            <h4><?php echo $usuario["nome"]; ?></h4>
+                        </figure>
+                        <div class="form_com">
+                            <p><?php echo $usuario["email"]; ?></p>
+                            <form method="POST" id="comentarioForm">
+                                <textarea name="comentario" placeholder="Adicione seu comentário..."
+                                    required></textarea><br>
+                                <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                <input type="hidden" name="enviar_comentario" value="1">
+                                <button type="button" id="btn_comentario">Enviar</button>
+                            </form>
+                        </div>
+                    </section>
+                <?php } else { ?>
+                    <section class="coment_usu">
+                        <p>Faça <a href="login.php">login</a> para comentar ou <a href="cadastro.php">cadastre-se</a>
+                        </p>
+                    </section> <?php } ?>
+                <div class="coment_usu_pb">
+                    <?php
+                    foreach ($comentarios as $coment) { ?>
 
-                        <p><?php echo "nota " . $coment["nota"]; ?></p>
-                    </figure>
-                        <p class="form_com" ><?php echo $coment["texto"]; ?></p> 
-                </section> 
-            <?php } ?>  </div>
-			<?php if ($count == 0) { ?>
-                <section class="coment_usu">
-                    <p>Ninguém comentou aqui ainda, seja o primeiro a comentar !</p>
-                </section> <?php }?>
-        </article>
+                        <section class="coment_usu">
+                            <figure class="usu_foto">
+                                <img src="<?php echo $coment["foto_perfil"]; ?>" alt="img" class="img_coment">
+                                <h4><?php echo $coment["nome_usuario"]; ?></h4>
+
+                                <p><?php
+                                $data_comentario = new DateTime($coment["data_comentario"]);
+                                $data = $data_comentario->format('d/m \à\s H\hi');
+                                echo $data; ?></p>
+
+                                <p><?php echo "nota " . $coment["nota"]; ?></p>
+                            </figure>
+                            <p class="form_com"><?php echo $coment["texto"]; ?></p>
+                        </section>
+                    <?php } ?>
+                </div>
+                <?php if ($count == 0) { ?>
+                    <section class="coment_usu">
+                        <p>Ninguém comentou aqui ainda, seja o primeiro a comentar !</p>
+                    </section> <?php } ?>
+            </article>
+        </section>
     </main>
-<!-------------------------------------------------------------------------------- Contatos --------------------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------------------- Contatos --------------------------------------------------------------------------------------->
     <!-- Rodapé -->
     <?php include __DIR__ . '/footers/footer.php'; ?>
 
 </body>
 <script>
-    const usuarioLogado = <?= isset($_SESSION['user_id']) ? 'true' : 'false' ?>;
+    const usuarioLogado = <?= isset($_SESSION['user_id']) && $_SESSION['user_id'] ? 'true' : 'false' ?>;
     const notaUsuario = <?= json_encode($nota_usuario ?? 0) ?>;
     const mediaComunidad = <?= json_encode(round($media_comunidade ?? 0, 1)) ?>;
     const totalAvaliacoes = <?= json_encode($totalAvaliacoes ?? 0) ?>; // valor inicial vindo do PHP
@@ -358,7 +356,6 @@ $stmtCountAvaliacoes->close();
 
     const divEstrelas = document.getElementById('estrelas');
     const jogoID = divEstrelas ? divEstrelas.getAttribute('data-jogo-id') : null;
-    const usuarioID = divEstrelas ? divEstrelas.getAttribute('data-usuario-id') : null;
 
     const cores = [
         "#5e5e5e", "#da5959ff", "#4fff3fff", "#00ffffff", "#00b3e0ff", "#d15cffff"
@@ -370,28 +367,35 @@ $stmtCountAvaliacoes->close();
         return `Baseada em ${qtd} ${texto}`;
     }
 
-
+    // Função para atualizar orbe
     function atualizarOrbe(nota, orbeElement = orbe, notaElement = notaTexto) {
         if (!orbeElement || !notaElement) return;
+
+        nota = Math.max(0, Math.min(nota, 5));
+
+        // Atualiza o valor numérico da nota
         notaElement.textContent = nota.toFixed(1);
+
+        // Escolhe a cor da orbe
         const corIndex = Math.floor(nota);
         const corFinal = cores[corIndex] || cores[0];
         orbeElement.style.background = `radial-gradient(circle at center, ${corFinal}, #222)`;
         orbeElement.style.boxShadow = `0 0 25px ${corFinal}`;
 
-        if (orbeElement === orbe) {
+        if (orbeElement === orbe && labelNota) {
             let texto;
             if (nota >= 4.9) texto = "Perfeito";
             else if (nota >= 4.0) texto = "Amei";
             else if (nota >= 3.5) texto = "Gostei";
             else if (nota >= 2.5) texto = "Legal";
             else if (nota >= 1.5) texto = "Não gostei";
-             else if (nota == 0.0) texto = "Em avaliação";
+            else if (nota === 0.0) texto = "Você ainda não avaliou";
             else texto = "Odiei";
             labelNota.textContent = texto;
         }
     }
 
+    // Função para preencher estrelas
     function preencherEstrelas(nota) {
         estrelas.forEach((estrela, index) => {
             const valorEstrela = index + 1;
@@ -404,30 +408,33 @@ $stmtCountAvaliacoes->close();
         });
     }
 
-    // Atualiza a orbe da comunidade e o texto "Baseada em X avaliações" ao carregar
-    if (orbeComunidade && notaTextoComunidade) {
-        atualizarOrbe(parseFloat(mediaComunidad) || 0, orbeComunidade, notaTextoComunidade);
-    }
-    if (totalAvaliacoesElemento) {
-        totalAvaliacoesElemento.textContent = pluralizarAvaliacao(totalAvaliacoes);
-    }
+    // Inicializa orbes
+    function inicializarOrbes() {
 
-    // Inicialização do estado visual do usuário
-    if (usuarioLogado) {
-        notaAtual = notaUsuario; // Pode ser 0, o que indica "ainda não avaliou"
-        if (notaAtual > 0) {
-            atualizarOrbe(notaAtual);
+        // Orbe da comunidade
+        atualizarOrbe(parseFloat(mediaComunidad) || 0, orbeComunidade, notaTextoComunidade);
+
+        // Orbe do usuário
+        if (usuarioLogado) {
+            notaAtual = notaUsuario > 0 ? notaUsuario : 0;
+            atualizarOrbe(notaAtual); 
             preencherEstrelas(notaAtual);
         } else {
+
+            notaAtual = 0;
             atualizarOrbe(0);
             preencherEstrelas(0);
         }
-    } else {
-        notaAtual = mediaComunidad;
-        atualizarOrbe(mediaComunidad);
-        preencherEstrelas(mediaComunidad);
+
+        // Texto de avaliações
+        if (totalAvaliacoesElemento) {
+            totalAvaliacoesElemento.textContent = pluralizarAvaliacao(totalAvaliacoes || 0);
+        }
     }
 
+    inicializarOrbes();
+
+    // Eventos de hover e click nas estrelas
     estrelas.forEach((estrela) => {
         estrela.addEventListener('mousemove', (e) => {
             if (cooldown) return;
@@ -486,16 +493,14 @@ $stmtCountAvaliacoes->close();
                         mostrarToast("Avaliação salva com sucesso!", "success");
 
                         // Atualiza orbe da comunidade (nota e cor)
-                        if (resposta.media_comunidade && orbeComunidade && notaTextoComunidade) {
+                        if (resposta.media_comunidade !== undefined && orbeComunidade && notaTextoComunidade) {
                             atualizarOrbe(parseFloat(resposta.media_comunidade), orbeComunidade, notaTextoComunidade);
                         }
+
                         // Atualiza texto "Baseada em X avaliações"
-                        // Atualiza texto "Baseada em X avaliações"
-                        const totalAvaliacoesElemento = document.getElementById('total-avaliacoes');
                         if (resposta.total_avaliacoes !== undefined && totalAvaliacoesElemento) {
                             totalAvaliacoesElemento.textContent = pluralizarAvaliacao(resposta.total_avaliacoes);
                         }
-
 
                     } else {
                         mostrarToast("Erro ao salvar avaliação: " + resposta.mensagem, "error");
@@ -506,12 +511,11 @@ $stmtCountAvaliacoes->close();
             }
         };
 
-        xhr.send("nota=" + nota + "&id_jogo=" + jogoID + "&user_id=" + usuarioID);
+        xhr.send("nota=" + nota + "&id_jogo=" + jogoID);
     }
 
     // Toast para mensagens na tela
     let toastAtivo = false;
-
     function mostrarToast(mensagem, tipo = 'error') {
         if (toastAtivo) return;
         toastAtivo = true;
@@ -544,7 +548,7 @@ $stmtCountAvaliacoes->close();
     }
 
     // Botão Favoritar
-    document.querySelectorAll('.btn-favorito').forEach(btn => {
+    document.querySelectorAll('.btn-favorito-overlay').forEach(btn => {
         btn.addEventListener('click', () => {
             const jogoId = btn.dataset.jogoId;
             const usuarioId = btn.dataset.usuarioId;
@@ -583,5 +587,6 @@ $stmtCountAvaliacoes->close();
         });
     });
 </script>
+
 
 </html>
