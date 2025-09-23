@@ -31,17 +31,31 @@ if (isset($_SESSION['user_id'])) {
     <div class="conteudo">
       <div class="coluna-principal">
         <section class="categoria">
-                <button type="button" id="btn-main" class="btn-main"> Filtro gêneros</button>
-               <div id="buttons-genre" >
-                <?php
-                 $consulta = $mysqli->prepare("SELECT nome FROM genero");
-                  $consulta->execute();
-                  $resultado = $consulta->get_result();
-                   while ($genero = $resultado->fetch_assoc()) {
-                   echo '<button type="button" class="btn-genre" data-genero="' . htmlspecialchars($genero['nome']) . '">' . htmlspecialchars($genero['nome']) . '</button>';
-				  }
-                 ?>
-                </div>
+    <div class="titulo-filtros">
+  <?php
+    if ($_SERVER['REQUEST_METHOD'] === 'GET' && !empty($_GET['btn'])) {
+        $filtragem = $_GET['btn'];
+        echo "<h2>" . htmlspecialchars($filtragem) . "</h2>";
+    } else {
+        echo "<h2>Todos os Jogos</h2>";
+    }
+  ?>
+  <button type="button" id="btn-main">Aplicar filtros</button>
+</div>
+    
+    <div id="buttons-genre">
+        <?php
+        $consulta = $mysqli->prepare("SELECT nome FROM genero");
+        $consulta->execute();
+        $resultado = $consulta->get_result();
+        while ($genero = $resultado->fetch_assoc()) {
+            echo '<button type="button" class="btn-genre" data-genero="' . 
+                 htmlspecialchars($genero['nome']) . '">' . 
+                 htmlspecialchars($genero['nome']) . '</button>';
+        }
+        ?>
+    </div>
+
           <?php
 		   if ($_SERVER['REQUEST_METHOD'] === 'GET' && !empty($_GET['btn'])) {
                $filtragem = $_GET['btn'];
@@ -75,7 +89,6 @@ if (isset($_SESSION['user_id'])) {
             LEFT JOIN comentario ON avaliacao.id = comentario.id_avaliacao
             GROUP BY jogo.id
           ");
-            echo "<h2>Todos os Jogos :</h2>";
           }
 
           $consulta->execute();
