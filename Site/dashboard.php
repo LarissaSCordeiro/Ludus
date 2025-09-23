@@ -310,20 +310,22 @@ $stmtCountAvaliacoes->close();
                     <?php
                     foreach ($comentarios as $coment) { ?>
 
-                        <section class="coment_usu">
-                            <figure class="usu_foto">
-                                <img src="<?php echo $coment["foto_perfil"]; ?>" alt="img" class="img_coment">
-                                <h4><?php echo $coment["nome_usuario"]; ?></h4>
+                    <section class="coment_usu">
+                    <figure class="usu_foto">
+                        <img src="<?php echo $coment["foto_perfil"]; ?>" alt="img" class="img_coment">
+                        <h4><?php echo $coment["nome_usuario"]; ?></h4>
+                        
+                           <?php
+                             date_default_timezone_set('America/Sao_Paulo');
+                             $data_comentario = strtotime($coment["data_comentario"]);
+                             echo '<h6 class="datime" data-comentario="' . $data_comentario . '"></h6>';
+                              ?>
 
-                                <p><?php
-                                $data_comentario = new DateTime($coment["data_comentario"]);
-                                $data = $data_comentario->format('d/m \à\s H\hi');
-                                echo $data; ?></p>
 
-                                <p><?php echo "nota " . $coment["nota"]; ?></p>
-                            </figure>
-                            <p class="form_com"><?php echo $coment["texto"]; ?></p>
-                        </section>
+                        <h6><?php echo '<i class="fas fa-star"></i>' . " " . $coment["nota"]; ?></h6>
+                    </figure>
+                        <p class="form_com" ><?php echo $coment["texto"]; ?></p> 
+                </section> 
                     <?php } ?>
                 </div>
                 <?php if ($count == 0) { ?>
