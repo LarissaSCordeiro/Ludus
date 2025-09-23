@@ -1,0 +1,119 @@
+.edit-perfil-container {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    box-sizing: border-box;
+}
+
+.edit-perfil-card {
+    display: flex;
+    gap: 2rem;
+    background: #2b2640;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 900px;
+    width: 100%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    flex-wrap: wrap;
+}
+
+.edit-perfil-left {
+    flex: 1;
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.edit-perfil-left img.foto-perfil {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #cd3dff;
+}
+
+.drop-area {
+    padding: 10px;
+    border: 2px dashed #ccc;
+    border-radius: 12px;
+    text-align: center;
+    color: #ccc;
+    cursor: pointer;
+    width: 80%;
+    transition: background 0.3s ease;
+}
+
+.drop-area:hover {
+    background-color: #3a3a5a;
+}
+
+.edit-perfil-right {
+    flex: 2;
+    min-width: 300px;
+}
+
+.edit-perfil-right h2 {
+    color: #cd3dff;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #f4961e;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 0px;
+    background: #0e0a1a;
+    color: #fff;
+    outline: none;
+}
+
+.button-align {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+button, .btn-cancelar {
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+
+button {
+    background-color: #cd3dff;
+    color: #fff;
+    border: none;
+    transition: 0.2s;
+}
+
+button:hover {
+    background-color: #b600e2;
+}
+
+.btn-cancelar {
+    background-color: #555;
+    color: #fff;
+}
+
+.btn-cancelar:hover {
+    background-color: #333;
+}

@@ -11,7 +11,8 @@ a {
 .perfil-container {
   width: 100%;
   max-width: 1000px;
-  margin: 2rem auto;
+  min-height: 500px;
+  margin: auto;
   padding: 2rem;
   background-color: #1f1b2e;
   border-radius: 12px;

@@ -2,11 +2,11 @@
 session_start();
 require_once("config.php");
 
-$id_usuario = $_SESSION['user_id'];
+$id_usuario = $_SESSION['id_usuario'];
 
 // Pega os dados do usuário
 $stmt = $mysqli->prepare("SELECT nome, foto_perfil FROM usuario WHERE id = ?");
-$stmt->bind_param("i", $id_usuario);
+$stmt->bind_param("i", $_SESSION['id_usuario']);
 $stmt->execute();
 $resultado = $stmt->get_result();
 
@@ -46,7 +46,7 @@ $avaliacoes = $avaliacoesStmt->get_result();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perfil | Ludus</title>
+  <title>Ludus | Jogos Indie BR</title>
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/perfil.css">
   <link rel="icon" href="img/Ludus_Favicon.png" type="image/x-icon">

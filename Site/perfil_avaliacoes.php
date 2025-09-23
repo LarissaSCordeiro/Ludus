@@ -42,7 +42,7 @@ $avaliacoes = $avaliacoesStmt->get_result();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Avaliações | Ludus</title>
+  <title>Ludus | Jogos Indie BR</title>
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/perfil.css">
   <link rel="icon" href="img/Ludus_Favicon.png" type="image/x-icon">

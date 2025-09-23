@@ -616,7 +616,6 @@ span {
 
 .categoria h2 {
   color: #cd3dff;
-  margin-bottom: 1rem;
   font-family: "Luckiest Guy";
   font-weight: 450;
   font-style: normal;
@@ -626,8 +625,9 @@ span {
 
 .jogos {
   display: flex;
-  gap: 2em;
   flex-wrap: wrap;
+  gap: 2em;
+  justify-content: center;    /* centraliza os cards */
 }
 
 .jogo-card {
@@ -671,7 +671,10 @@ span {
   
 /* Coluna de conteúdo principal (jogos) */
 .coluna-principal {
-  flex: 3;
+  display: inline-flex;       /* ou inline-block */
+  flex-direction: column;     /* mantém a direção vertical */
+  align-items: center;        /* centraliza o conteúdo horizontalmente */
+  margin: 0 auto;             /* centraliza a coluna na página */
 }
 
 /* Coluna lateral direita */
@@ -739,7 +742,7 @@ span {
   }
 }
 
-/* Botoes da selecao de genero */
+/* Botao de filtros */
 
 #buttons-genre {
   display: flex;
@@ -761,6 +764,7 @@ span {
   width: auto;
   max-width: 100%;
   flex: 0 0 auto;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 .btn-genre {
   font-family: "Epunda Sans", sans-serif;
@@ -776,12 +780,24 @@ span {
 }
 
 #btn-main {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  width: auto;
+  max-width: 100%; 
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-family: "Epunda Sans", sans-serif;
   font-weight: 800;
-  color:#e28fff;
+  color: #e28fff;
   font-size: 20px;
   border-radius: 10px;
   background-color: rgba(85, 30, 120, 0.25);
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #btn-main:hover {
