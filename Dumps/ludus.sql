@@ -37,7 +37,7 @@ CREATE TABLE `avaliacao` (
   CONSTRAINT `fk_avaliacao_jogo` FOREIGN KEY (`id_jogo`) REFERENCES `jogo` (`id`),
   CONSTRAINT `fk_avaliacao_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`),
   CONSTRAINT `avaliacao_chk_1` CHECK ((`nota` between 0 and 5))
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `avaliacao` (
 
 LOCK TABLES `avaliacao` WRITE;
 /*!40000 ALTER TABLE `avaliacao` DISABLE KEYS */;
-INSERT INTO `avaliacao` VALUES (1,5.0,'2025-09-24 12:26:45',NULL,1,13);
+INSERT INTO `avaliacao` VALUES (1,5.0,'2025-09-24 12:26:45',NULL,1,13),(2,5.0,'2025-09-24 17:48:48',NULL,7,15);
 /*!40000 ALTER TABLE `avaliacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -68,7 +68,7 @@ CREATE TABLE `comentario` (
   KEY `fk_comentario_avaliacao` (`id_avaliacao`),
   CONSTRAINT `fk_comentario_avaliacao` FOREIGN KEY (`id_avaliacao`) REFERENCES `avaliacao` (`id`),
   CONSTRAINT `fk_comentario_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -77,7 +77,7 @@ CREATE TABLE `comentario` (
 
 LOCK TABLES `comentario` WRITE;
 /*!40000 ALTER TABLE `comentario` DISABLE KEYS */;
-INSERT INTO `comentario` VALUES (1,'2025-09-24 12:26:58','Esse jogo é de fato muito bom!',13,1);
+INSERT INTO `comentario` VALUES (1,'2025-09-24 12:26:58','Esse jogo é de fato muito bom!',13,1),(2,'2025-09-24 17:49:04','Esse jogo é muito bom! De fato!',15,2);
 /*!40000 ALTER TABLE `comentario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,7 +125,7 @@ CREATE TABLE `jogo` (
   PRIMARY KEY (`id`),
   KEY `fk_jogo_usuario` (`id_usuario`),
   CONSTRAINT `fk_jogo_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -161,7 +161,7 @@ CREATE TABLE `jogo_possui_genero` (
 
 LOCK TABLES `jogo_possui_genero` WRITE;
 /*!40000 ALTER TABLE `jogo_possui_genero` DISABLE KEYS */;
-INSERT INTO `jogo_possui_genero` VALUES (3,1),(4,1),(7,1),(8,1),(9,1),(10,1),(11,1),(12,1),(13,1),(14,1),(16,1),(17,1),(18,1),(19,1),(20,1),(22,1),(23,1),(24,1),(28,1),(34,1),(35,1),(37,1),(41,1),(43,1),(3,2),(4,2),(7,2),(10,2),(11,2),(14,2),(15,2),(16,2),(19,2),(25,2),(26,2),(31,2),(32,2),(38,2),(3,3),(7,3),(42,3),(23,4),(42,4),(4,6),(11,6),(14,6),(15,6),(16,6),(27,6),(29,6),(32,6),(33,6),(3,7),(4,7),(8,7),(9,7),(10,7),(11,7),(12,7),(15,7),(19,7),(21,7),(34,7),(20,8),(35,8),(38,8),(39,8),(40,8),(5,9),(6,9),(7,9),(14,9),(17,9),(18,9),(41,9),(4,10),(11,10),(19,10),(25,10),(26,10),(4,11),(5,11),(6,11),(7,11),(8,11),(13,11),(5,12),(6,12),(29,12),(36,12),(38,12),(39,12),(40,12),(8,13),(9,13),(10,13),(12,13),(14,13),(16,13),(17,13),(18,13),(20,13),(23,13),(28,13),(30,13),(34,13),(37,13),(41,13),(5,14),(8,14),(17,14),(18,14),(34,14),(35,14),(41,14),(29,15),(24,16),(31,16),(36,16),(38,16),(39,16),(40,16),(24,17),(31,17),(21,18),(22,18),(43,18),(14,19),(16,19),(27,19),(29,19),(30,19),(6,21),(13,21),(22,21),(28,21),(43,21),(10,22),(11,22),(12,22),(15,22),(16,22),(19,22),(20,22),(33,22),(7,23),(43,23),(3,24),(4,24),(21,24),(32,25);
+INSERT INTO `jogo_possui_genero` VALUES (2,1),(3,1),(4,1),(7,1),(8,1),(9,1),(10,1),(11,1),(12,1),(13,1),(14,1),(16,1),(17,1),(18,1),(19,1),(20,1),(22,1),(23,1),(24,1),(28,1),(34,1),(35,1),(37,1),(41,1),(43,1),(2,2),(3,2),(4,2),(7,2),(10,2),(11,2),(14,2),(15,2),(16,2),(19,2),(25,2),(26,2),(31,2),(32,2),(38,2),(3,3),(7,3),(42,3),(23,4),(42,4),(4,6),(11,6),(14,6),(15,6),(16,6),(27,6),(29,6),(32,6),(33,6),(3,7),(4,7),(8,7),(9,7),(10,7),(11,7),(12,7),(15,7),(19,7),(21,7),(34,7),(20,8),(35,8),(38,8),(39,8),(40,8),(5,9),(6,9),(7,9),(14,9),(17,9),(18,9),(41,9),(4,10),(11,10),(19,10),(25,10),(26,10),(4,11),(5,11),(6,11),(7,11),(8,11),(13,11),(5,12),(6,12),(29,12),(36,12),(38,12),(39,12),(40,12),(8,13),(9,13),(10,13),(12,13),(14,13),(16,13),(17,13),(18,13),(20,13),(23,13),(28,13),(30,13),(34,13),(37,13),(41,13),(5,14),(8,14),(17,14),(18,14),(34,14),(35,14),(41,14),(29,15),(24,16),(31,16),(36,16),(38,16),(39,16),(40,16),(24,17),(31,17),(21,18),(22,18),(43,18),(14,19),(16,19),(27,19),(29,19),(30,19),(6,21),(13,21),(22,21),(28,21),(43,21),(10,22),(11,22),(12,22),(15,22),(16,22),(19,22),(20,22),(33,22),(7,23),(43,23),(3,24),(4,24),(21,24),(32,25);
 /*!40000 ALTER TABLE `jogo_possui_genero` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,7 +188,7 @@ CREATE TABLE `jogo_possui_plataforma` (
 
 LOCK TABLES `jogo_possui_plataforma` WRITE;
 /*!40000 ALTER TABLE `jogo_possui_plataforma` DISABLE KEYS */;
-INSERT INTO `jogo_possui_plataforma` VALUES (41,1),(3,2),(4,2),(5,2),(6,2),(7,2),(8,2),(9,2),(10,2),(11,2),(12,2),(13,2),(14,2),(15,2),(16,2),(17,2),(18,2),(19,2),(20,2),(21,2),(22,2),(23,2),(24,2),(25,2),(26,2),(27,2),(28,2),(29,2),(31,2),(32,2),(33,2),(34,2),(35,2),(36,2),(37,2),(38,2),(39,2),(40,2),(41,2),(42,2),(43,2),(4,3),(9,3),(10,3),(22,3),(23,3),(32,3),(33,3),(34,3),(43,3),(4,4),(9,4),(10,4),(11,4),(12,4),(22,4),(23,4),(32,4),(43,4),(4,5),(13,5),(14,5),(15,5),(16,5),(17,5),(18,5),(23,5),(30,5),(41,5),(4,6),(13,6),(14,6),(15,6),(16,6),(17,6),(18,6),(30,6),(41,6),(3,7),(4,7),(8,7),(9,7),(10,7),(11,7),(12,7),(13,7),(14,7),(15,7),(16,7),(17,7),(18,7),(19,7),(20,7),(21,7),(22,7),(23,7),(32,7),(33,7),(38,7),(3,8),(4,8),(9,8),(10,8),(19,8),(20,8),(21,8),(22,8),(23,8),(25,8),(26,8),(32,8),(34,8),(4,9),(9,9),(10,9),(11,9),(12,9),(19,9),(20,9),(21,9),(22,9),(23,9),(26,9),(32,9),(4,10),(25,10),(32,10),(33,10),(35,10),(36,10),(37,10),(41,10),(42,10),(43,10),(4,11),(6,11),(7,11),(8,11),(32,11),(33,11),(35,11),(36,11),(43,11),(3,12),(4,12),(5,12),(6,12),(7,12),(8,12),(9,12),(10,12),(11,12),(12,12),(13,12),(14,12),(15,12),(16,12),(17,12),(18,12),(19,12),(20,12),(21,12),(22,12),(23,12),(24,12),(25,12),(26,12),(27,12),(28,12),(29,12),(31,12),(32,12),(33,12),(34,12),(35,12),(36,12),(37,12),(38,12),(39,12),(40,12),(41,12),(42,12),(43,12);
+INSERT INTO `jogo_possui_plataforma` VALUES (41,1),(2,2),(3,2),(4,2),(5,2),(6,2),(7,2),(8,2),(9,2),(10,2),(11,2),(12,2),(13,2),(14,2),(15,2),(16,2),(17,2),(18,2),(19,2),(20,2),(21,2),(22,2),(23,2),(24,2),(25,2),(26,2),(27,2),(28,2),(29,2),(31,2),(32,2),(33,2),(34,2),(35,2),(36,2),(37,2),(38,2),(39,2),(40,2),(41,2),(42,2),(43,2),(4,3),(9,3),(10,3),(22,3),(23,3),(32,3),(33,3),(34,3),(43,3),(4,4),(9,4),(10,4),(11,4),(12,4),(22,4),(23,4),(32,4),(43,4),(4,5),(13,5),(14,5),(15,5),(16,5),(17,5),(18,5),(23,5),(30,5),(41,5),(4,6),(13,6),(14,6),(15,6),(16,6),(17,6),(18,6),(30,6),(41,6),(3,7),(4,7),(8,7),(9,7),(10,7),(11,7),(12,7),(13,7),(14,7),(15,7),(16,7),(17,7),(18,7),(19,7),(20,7),(21,7),(22,7),(23,7),(32,7),(33,7),(38,7),(3,8),(4,8),(9,8),(10,8),(19,8),(20,8),(21,8),(22,8),(23,8),(25,8),(26,8),(32,8),(34,8),(4,9),(9,9),(10,9),(11,9),(12,9),(19,9),(20,9),(21,9),(22,9),(23,9),(26,9),(32,9),(4,10),(25,10),(32,10),(33,10),(35,10),(36,10),(37,10),(41,10),(42,10),(43,10),(4,11),(6,11),(7,11),(8,11),(32,11),(33,11),(35,11),(36,11),(43,11),(2,12),(3,12),(4,12),(5,12),(6,12),(7,12),(8,12),(9,12),(10,12),(11,12),(12,12),(13,12),(14,12),(15,12),(16,12),(17,12),(18,12),(19,12),(20,12),(21,12),(22,12),(23,12),(24,12),(25,12),(26,12),(27,12),(28,12),(29,12),(31,12),(32,12),(33,12),(34,12),(35,12),(36,12),(37,12),(38,12),(39,12),(40,12),(41,12),(42,12),(43,12);
 /*!40000 ALTER TABLE `jogo_possui_plataforma` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,7 +235,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `nome` (`nome`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -244,7 +244,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'dev_teste','dev@email.com','desenvolvedor','1234senha_hashada','img/usuarios/default.png','2025-06-13 11:07:37'),(13,'pierrehneppel','pierrehenriquedemirandaneppel@gmail.com','administrador','$2y$10$iOru.M4FawSFZPqVp3/OLuxybL8B0EyVmydv5lsBOhVHFfXztRQBi','img/usuarios/user_13.jpg','2025-09-24 12:26:02');
+INSERT INTO `usuario` VALUES (1,'dev_teste','dev@email.com','desenvolvedor','1234senha_hashada','img/usuarios/default.png','2025-06-13 11:07:37'),(13,'pierrehneppel','pierrehenriquedemirandaneppel@gmail.com','administrador','$2y$10$iOru.M4FawSFZPqVp3/OLuxybL8B0EyVmydv5lsBOhVHFfXztRQBi','img/usuarios/user_13.jpg','2025-09-24 12:26:02'),(15,'jotape','jotapegameplays@gmail.com','jogador','$2y$10$J40.iFVYThaCp.XROHR0W.MUkPbHoSa1cSHorxkgvpAE4.i7jOOG2','img/usuarios/user_15.jpg','2025-09-24 17:47:41');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,7 +297,7 @@ CREATE TABLE `usuario_favorita_jogo` (
 
 LOCK TABLES `usuario_favorita_jogo` WRITE;
 /*!40000 ALTER TABLE `usuario_favorita_jogo` DISABLE KEYS */;
-INSERT INTO `usuario_favorita_jogo` VALUES (13,1);
+INSERT INTO `usuario_favorita_jogo` VALUES (13,1),(15,7);
 /*!40000 ALTER TABLE `usuario_favorita_jogo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -310,4 +310,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-09-24 15:59:24
+-- Dump completed on 2025-09-24 18:11:01
