@@ -3,16 +3,16 @@ session_start();
 require_once("config.php");
 
 // Verifica se o usuário está logado
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['id_usuario'])) {
   header("Location: login.php");
   exit();
 }
 
-$id_usuario = $_SESSION['user_id'];
+$id_usuario = $_SESSION['id_usuario'];
 
 // Pega os dados do usuário
-$stmt = $mysqli->prepare("SELECT nome, foto_perfil FROM usuario WHERE id = ?");
-$stmt->bind_param("i", $id_usuario);
+$stmt = $mysqli->prepare("SELECT nome, foto_perfil, tipo FROM usuario WHERE id = ?");
+$stmt->bind_param("i", $_SESSION['id_usuario']);
 $stmt->execute();
 $resultado = $stmt->get_result();
 
@@ -24,6 +24,7 @@ if ($resultado->num_rows === 0) {
 $usuario = $resultado->fetch_assoc();
 $nomeUsuario = $usuario['nome'];
 $foto_perfilPerfil = $usuario['foto_perfil'] ?: 'img/usuarios/default.png';
+$tipoUsuario = $usuario['tipo'];
 
 // Pega os jogos favoritados pelo usuário
 $favoritosStmt = $mysqli->prepare("
@@ -58,7 +59,14 @@ $favoritos = $favoritosStmt->get_result();
     <section class="perfil-top">
       <div class="perfil-info">
         <img src="<?php echo htmlspecialchars($foto_perfilPerfil); ?>" alt="Foto de perfil" class="foto-perfil">
-        <h1 class="perfil-nome"><?php echo htmlspecialchars($nomeUsuario); ?></h1>
+        <h1 class="perfil-nome">
+          <?php echo htmlspecialchars($nomeUsuario); ?>
+          <?php if ($tipoUsuario === 'desenvolvedor'): ?>
+            <span class="badge dev">DEV</span>
+          <?php elseif ($tipoUsuario === 'administrador'): ?>
+            <span class="badge adm">ADM</span>
+          <?php endif; ?>
+        </h1>
       </div>
       <a href="editar_perfil.php" class="btn-editar">Editar perfil</a>
     </section>

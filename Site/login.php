@@ -91,18 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </section>
 
     </main>
-    <!-- Contatos -->
-    <footer class="footer-nav">
-        <!-- Redes sociais -->
-        <div class="social-icons">
-            <a href="mailto:exemplo@email.com" title="Email"><i class="fas fa-envelope"></i></a>
-            <a href="https://github.com/LarissaSCordeiro/Ludus" target="_blank" title="GitHub"><i
-                    class="fab fa-github"></i></a>
-        </div>
-
-        <span>Ludus • v0.1</span>
-    </footer>
-    <!-- Carregue os scripts globais no final do body -->
+    <!-- Carrega os scripts globais no final do body -->
     <script src="./js/script.js"></script>
     <script src="./js/toast.js"></script>
     <script>
@@ -117,6 +106,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Rodapé -->
     <?php include __DIR__ . '/footers/footer.php'; ?>
     
+<?php if (!empty($erro)): ?>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            LudusToast("<?php echo addslashes($erro); ?>", true);
+        });
+    </script>
+<?php endif; ?>
+
 </body>
 
 </html>

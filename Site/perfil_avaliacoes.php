@@ -2,25 +2,28 @@
 session_start();
 require_once 'config.php';
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['id_usuario'])) {
   header("Location: login.php");
   exit();
 }
 
-$id_usuario = $_SESSION['user_id'];
+$id_usuario = $_SESSION['id_usuario'];
 
-// Pega dados do usuário
-$stmt = $mysqli->prepare("SELECT nome, foto_perfil FROM usuario WHERE id = ?");
-$stmt->bind_param("i", $id_usuario);
+// Pega os dados do usuário
+$stmt = $mysqli->prepare("SELECT nome, foto_perfil, tipo FROM usuario WHERE id = ?");
+$stmt->bind_param("i", $_SESSION['id_usuario']);
 $stmt->execute();
-$result = $stmt->get_result();
-if ($result->num_rows === 0) {
+$resultado = $stmt->get_result();
+
+if ($resultado->num_rows === 0) {
   echo "Usuário não encontrado.";
   exit();
 }
-$usuario = $result->fetch_assoc();
+
+$usuario = $resultado->fetch_assoc();
 $nomeUsuario = $usuario['nome'];
-$fotoPerfil = $usuario['foto_perfil'] ?: 'img/usuarios/default.png';
+$foto_perfilPerfil = $usuario['foto_perfil'] ?: 'img/usuarios/default.png';
+$tipoUsuario = $usuario['tipo'];
 
 // Pega todas as avaliações do usuário
 $avaliacoesStmt = $mysqli->prepare("
@@ -56,8 +59,15 @@ $avaliacoes = $avaliacoesStmt->get_result();
   <main class="perfil-container">
     <section class="perfil-top">
       <div class="perfil-info">
-        <img src="<?php echo htmlspecialchars($fotoPerfil); ?>" alt="Foto de perfil" class="foto-perfil">
-        <h1 class="perfil-nome"><?php echo htmlspecialchars($nomeUsuario); ?></h1>
+        <img src="<?php echo htmlspecialchars($foto_perfilPerfil); ?>" alt="Foto de perfil" class="foto-perfil">
+        <h1 class="perfil-nome">
+          <?php echo htmlspecialchars($nomeUsuario); ?>
+          <?php if ($tipoUsuario === 'desenvolvedor'): ?>
+            <span class="badge dev">DEV</span>
+          <?php elseif ($tipoUsuario === 'administrador'): ?>
+            <span class="badge adm">ADM</span>
+          <?php endif; ?>
+        </h1>
       </div>
       <a href="editar_perfil.php" class="btn-editar">Editar perfil</a>
     </section>

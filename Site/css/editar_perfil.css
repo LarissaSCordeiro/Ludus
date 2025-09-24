@@ -8,14 +8,17 @@
 }
 
 .edit-perfil-card {
-    display: flex;
-    gap: 2rem;
     background: #2b2640;
     padding: 2rem;
     border-radius: 12px;
     max-width: 900px;
     width: 100%;
     box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.edit-perfil-card form {
+    display: flex;
+    gap: 2rem;
     flex-wrap: wrap;
 }
 
@@ -54,6 +57,8 @@
 .edit-perfil-right {
     flex: 2;
     min-width: 300px;
+    display: flex;
+    flex-direction: column;
 }
 
 .edit-perfil-right h2 {

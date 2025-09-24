@@ -20,7 +20,6 @@ $nomeUsuario = $usuario['nome'];
 $emailUsuario = $usuario['email'];
 $foto_perfilPerfil = $usuario['foto_perfil'] ?: 'img/usuarios/default.png';
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -39,17 +38,20 @@ $foto_perfilPerfil = $usuario['foto_perfil'] ?: 'img/usuarios/default.png';
 
     <main class="edit-perfil-container">
         <div class="edit-perfil-card">
-            <div class="edit-perfil-left">
-                <img src="<?php echo htmlspecialchars($foto_perfilPerfil); ?>" alt="Foto de perfil" class="foto-perfil">
-                <div class="drop-area" id="dropArea">
-                    Clique ou arraste nova foto
-                    <input type="file" id="fileInput" name="foto" accept="image/*" hidden>
-                </div>
-            </div>
 
-            <div class="edit-perfil-right">
-                <h2>Editar Perfil</h2>
-                <form id="editProfileForm" enctype="multipart/form-data" method="post" action="salvar_editar_perfil.php">
+            <form id="editProfileForm" enctype="multipart/form-data" method="post" action="salvar_editar_perfil.php">
+                <div class="edit-perfil-left">
+                    <img src="<?php echo htmlspecialchars($foto_perfilPerfil); ?>" alt="Foto de perfil" class="foto-perfil">
+
+                    <div class="drop-area" id="dropArea">
+                        Clique ou arraste nova foto
+                        <input type="file" id="fileInput" name="foto" accept="image/*" hidden>
+                    </div>
+                </div>
+
+                <div class="edit-perfil-right">
+                    <h2>Editar Perfil</h2>
+
                     <div class="form-group">
                         <label for="nome">Nome</label>
                         <input type="text" id="nome" name="nome" value="<?php echo htmlspecialchars($nomeUsuario); ?>" required>
@@ -67,20 +69,20 @@ $foto_perfilPerfil = $usuario['foto_perfil'] ?: 'img/usuarios/default.png';
 
                     <div class="form-group">
                         <label for="nova_senha">Nova senha (opcional)</label>
-                        <input type="password" id="nova_senha" name="nova_senha">
+                        <input type="password" id="nova_senha" name="nova_senha" minlength="6">
                     </div>
 
                     <div class="form-group">
                         <label for="confirmar_senha">Confirmar nova senha</label>
-                        <input type="password" id="confirmar_senha" name="confirmar_senha">
+                        <input type="password" id="confirmar_senha" name="confirmar_senha" minlength="6">
                     </div>
 
                     <div class="button-align">
                         <button type="submit"><i class="fas fa-save"></i> Salvar alterações</button>
                         <a href="perfil.php" class="btn-cancelar"><i class="fas fa-arrow-left"></i> Cancelar</a>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </main>
 
@@ -102,6 +104,27 @@ $foto_perfilPerfil = $usuario['foto_perfil'] ?: 'img/usuarios/default.png';
             }
         });
     </script>
+
+    <?php if (isset($_GET['erro'])): ?>
+        <script src="js/toast.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const erro = "<?= $_GET['erro'] ?>";
+                switch (erro) {
+                    case "senha_incorreta":
+                        LudusToast("Senha atual incorreta!", true);
+                        break;
+                    case "senha_nao_coincide":
+                        LudusToast("As senhas não coincidem!", true);
+                        break;
+                    case "usuario_nao_encontrado":
+                        LudusToast("Usuário não encontrado!", true);
+                        break;
+                }
+            });
+        </script>
+    <?php endif; ?>
+
 </body>
 
 </html>

@@ -49,6 +49,25 @@ a {
   margin-left: 20px;
 }
 
+.badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.badge.dev {
+    background-color: #e91e63; /* rosa */
+}
+
+.badge.adm {
+    background-color: #ff9800; /* laranja */
+}
+
 .btn-editar {
   background-color: #cd3dff;
   color: #fff;
