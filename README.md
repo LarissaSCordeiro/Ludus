@@ -172,6 +172,14 @@ Criar uma plataforma acessível e intuitiva que valorize os jogos independentes 
 
 📄 [Relatório Lições Aprendidas - Docs](https://docs.google.com/document/d/1w1GoujQIEhakpGTIowcEpFMmT5DfaRJW/edit?usp=sharing&ouid=104092952947185357370&rtpof=true&sd=true)
 
+---
+
+###  Documentação TCC
+
+📄 [Documentação TCC - Docs](https://docs.google.com/document/d/1BCSS85L0NBDkjnNopXd8NaE8Ue1qKKZqO8RWw0cD19I/edit?usp=sharing)
+
+
+
 
 
 
