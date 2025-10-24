@@ -1,0 +1,320 @@
+.button_gen{
+      background: none;
+      border: none;
+	  border-radius:0;
+      text-decoration: none;
+	  color: white;
+	  cursor:pointer;
+	  align-items: center;
+      background-color : #19162b;	  
+}
+/* Container de cada comentário */
+.coment_usu {
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Título do jogo */
+.nome-jogo {
+    font-size: 1.3rem;
+    color: #f4961e;
+    margin-bottom: 8px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Dados do usuário e botão em linha (desktop) */
+.dados_u .detalhes {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Imagem de perfil */
+.img_coment {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Área com nome, data e nota + botão */
+.perfil-coment {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+/* Formulário de exclusão alinhado à direita */
+.form-excluir-comentario {
+    margin-left: auto;
+}
+
+/* Texto do comentário */
+.form_com {
+    background-color: rgb(62, 56, 78);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    color: #e0e0e0;
+    margin-top: 10px;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .dados_u {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .perfil-coment {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .form-excluir-comentario {
+        margin-left: 0;
+    }
+
+    .btn-excluir-coment {
+        width: 100%;
+    }
+
+    .nome-jogo {
+        text-align: center;
+    }
+
+    .form_com {
+        text-align: left;
+    }
+}
+
+.section_gerencia {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 4%;
+    margin-bottom: 15px;
+    padding: 0 1em 0 1em;
+}
+.main_aside {
+    display: flex;
+     align-items:center;
+	 align-content:center;
+	  height:100%;
+  }
+#main_gerencia {
+    width: 70%;
+   height:100%;
+    border-radius: 10px;
+}
+#aside_gerencia{
+	width: 30%;
+	text-align:center;
+	 height:100%;
+	background-color: rgba(25, 22, 43, 0.7);
+}
+
+#main_gerencia h2,
+h4 {
+    text-align: center;
+}
+
+.dados_u {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    gap: 6%;
+}
+
+#nome_jogo {
+    width: 100%;
+    color: #f4961e;
+    text-align: center;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 15, 30, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.modal-content {
+    background: linear-gradient(145deg, rgba(43, 43, 68, 0.95), rgba(30, 30, 48, 0.98));
+    padding: 30px;
+    border-radius: 20px;
+    color: #fff;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    animation: fadeInUp 0.4s ease forwards;
+    opacity: 0;
+}
+
+.modal-content h3 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    color: #f4961e;
+}
+
+.modal-content p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn-vermelho {
+    background-color: #c62828;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-vermelho:hover {
+    background-color: #a21515;
+}
+
+.btn-verde {
+    background-color: #2e7d32;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-verde:hover {
+    background-color: #1b5e20;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal.hidden-force {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+.fa-times-circle .fa-check-circle {
+    margin-right: 10px;
+}
+
+.usuario-card {
+    background-color: #1e1b2e;
+    color: #fff;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+}
+
+.usuario-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+    min-width: 250px;
+}
+
+.avatar img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.detalhes p {
+    margin: 4px 0;
+    font-size: 14px;
+}
+
+.form-excluir {
+    margin-top: 10px;
+}
+
+.form-excluir button {
+    background-color: #c62828;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-excluir button:hover {
+    background-color: #a21515;
+}
+
+@media (max-width: 600px) {
+    .usuario-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .form-excluir {
+        width: 100%;
+    }
+
+    .form-excluir button {
+        width: 100%;
+    }
+}
+
+.btn-excluir-coment {
+    background-color: #c62828;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-excluir-coment:hover {
+    background-color: #a21515;
+}
