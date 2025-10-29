@@ -6,9 +6,11 @@ require_once "config.php";
 
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-if (!empty($_SESSION['user_id'])) {
-    $user_id = $_SESSION['user_id'];
 
+ 
+if (!empty($_SESSION['id_usuario'])) {
+	$user_id = $_SESSION['id_usuario'] ;
+   
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar_comentario'])) {
         $comentario = trim($_POST['comentario']);
 
@@ -145,7 +147,7 @@ $stmtCountAvaliacoes->close();
 
                 <?php
                 $favoritado = false;
-                if (isset($_SESSION['user_id'])) {
+                if (isset($_SESSION['id_usuario'])) {
                     $stmt = $mysqli->prepare("SELECT 1 FROM usuario_favorita_jogo WHERE id_usuario = ? AND id_jogo = ?");
                     $stmt->bind_param("ii", $_SESSION['user_id'], $jogo['id_jogo']);
                     $stmt->execute();
@@ -155,7 +157,7 @@ $stmtCountAvaliacoes->close();
                 ?>
 
                 <button class="btn-favorito-overlay <?= $favoritado ? 'favoritado' : '' ?>"
-                    data-jogo-id="<?= $jogo['id_jogo'] ?>" data-usuario-id="<?= $_SESSION['user_id'] ?? '' ?>">
+                    data-jogo-id="<?= $jogo['id_jogo'] ?>" data-usuario-id="<?= $_SESSION['id_usuario'] ?? '' ?>">
                     <i class="fa-heart <?= $favoritado ? 'fas' : 'far' ?> icone-coracao"></i>
                 </button>
             </div>
@@ -284,7 +286,7 @@ $stmtCountAvaliacoes->close();
                     <div class="mensagem-alerta">
                         <?php echo htmlspecialchars($msg_erro); ?>
                     </div> <?php }
-                if (isset($_SESSION['user_id'])) { ?>
+                if (isset($_SESSION['id_usuario'])) { ?>
                     <section class="coment_usu">
                         <figure class="usu_foto">
                             <img src="<?php echo $usuario["foto_perfil"]; ?>" alt="img" class="img_coment">
@@ -341,7 +343,7 @@ $stmtCountAvaliacoes->close();
 
 </body>
 <script>
-    const usuarioLogado = <?= isset($_SESSION['user_id']) && $_SESSION['user_id'] ? 'true' : 'false' ?>;
+    const usuarioLogado = <?= isset($_SESSION['id_usuario']) && $_SESSION['id_usuario'] ? 'true' : 'false' ?>;
     const notaUsuario = <?= json_encode($nota_usuario ?? 0) ?>;
     const mediaComunidad = <?= json_encode(round($media_comunidade ?? 0, 1)) ?>;
     const totalAvaliacoes = <?= json_encode($totalAvaliacoes ?? 0) ?>; // valor inicial vindo do PHP

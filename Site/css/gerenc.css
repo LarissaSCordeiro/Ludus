@@ -1,27 +1,29 @@
+.button_gen{
+      background: none;
+      border: none;
+	  border-radius:0;
+      text-decoration: none;
+	  color: white;
+	  cursor:pointer;
+	  align-items: center;
+      background-color : #19162b;	  
+}
 /* Container de cada comentário */
 .coment_usu {
-    background-color: #1e1b2e;
-    padding: 30px;
-    border-radius: 12px;
-    margin: 20px auto;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     gap: 10px;
-    max-width: 800px;
 }
 
 /* Título do jogo */
 .nome-jogo {
-    font-size: 30px;
+    font-size: 1.3rem;
     color: #f4961e;
     margin-bottom: 8px;
     font-weight: 600;
     text-align: center;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #f4961e;
 }
 
 /* Dados do usuário e botão em linha (desktop) */
@@ -45,16 +47,8 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    width: 100%;
     flex-wrap: wrap;
     gap: 5px;
-}
-
-.perfil-coment h4{
-    color: #f35ff3;
-    font-size: 25px;
-    text-align: left;
-    margin-bottom: 5px;
 }
 
 /* Formulário de exclusão alinhado à direita */
@@ -64,14 +58,12 @@
 
 /* Texto do comentário */
 .form_com {
-    align-self: center;
     background-color: rgb(62, 56, 78);
-    padding: 16px;
+    padding: 10px;
     border-radius: 10px;
     font-size: 0.95rem;
     color: #e0e0e0;
     margin-top: 10px;
-    width: 80%;
 }
 
 /* Responsividade */
@@ -109,56 +101,31 @@
     display: flex;
     align-items: center;
     width: 100%;
-    height: 60%;
     gap: 4%;
     margin-bottom: 15px;
-    background-color: #19162b;
     padding: 0 1em 0 1em;
 }
-
+.main_aside {
+    display: flex;
+     align-items:center;
+	 align-content:center;
+	  height:100%;
+  }
 #main_gerencia {
-    width: 60%;
-    margin: 30px auto;
+    width: 70%;
+   height:100%;
     border-radius: 10px;
-    padding: 1em 0 1em 0;
-    /* superior | direita | inferior | esquerda */
+}
+#aside_gerencia{
+	width: 30%;
+	text-align:center;
+	 height:100%;
+	background-color: rgba(25, 22, 43, 0.7);
 }
 
 #main_gerencia h2,
 h4 {
     text-align: center;
-}
-
-header.form-align {
-    display: flex;
-    justify-content: end;
-    gap: 10px;
-}
-
-.btn-style {
-    background-color: #393458;
-    color: #fff;
-    border: none;
-    padding: 10px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn-style:hover {
-    background-color: #6357ad;
-    border: none;
-}
-
-.nav_buttons input {
-    width: 200px;
-    height: 40px;
-}
-
-.nav_buttons form {
-    width: 100%;
-    display: flex;
-    gap: 10px;
 }
 
 .dados_u {

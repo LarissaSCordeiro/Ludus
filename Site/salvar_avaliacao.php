@@ -5,13 +5,13 @@ require_once("config.php");
 header('Content-Type: application/json');
 
 // Verifica se o usuário está logado
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['id_usuario'])) {
     http_response_code(401);
     echo json_encode(["status" => "erro", "mensagem" => "Você precisa estar logado para avaliar."]);
     exit;
 }
 
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['id_usuario'];
 $id_jogo = isset($_POST['id_jogo']) ? (int) $_POST['id_jogo'] : 0;
 $nota = isset($_POST['nota']) ? floatval($_POST['nota']) : 0;
 

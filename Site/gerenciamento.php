@@ -6,10 +6,14 @@ require_once("config.php");
 $query_usu = "SELECT * FROM usuario";
 $query_coment = "SELECT comentario.id AS id_comentario, comentario.data_comentario, comentario.texto, usuario.nome AS nome_usuario, usuario.email, usuario.foto_perfil, avaliacao.nota, jogo.nome AS nome_jogo FROM
  comentario INNER JOIN usuario ON comentario.id_usuario = usuario.id INNER JOIN avaliacao ON comentario.id_avaliacao = avaliacao.id INNER JOIN jogo ON avaliacao.id_jogo = jogo.id";
+ 
 
+if ($_SESSION['tipo_usuario'] != 'administrador') {
+	header('Location: paginainicial.php');
+    exit();
+}
 
-function excluirComentario($mysqli, $id_coment)
-{
+function excluirComentario($mysqli, $id_coment) {
     $query_u = "DELETE FROM comentario WHERE id = $id_coment";
     if ($mysqli->query($query_u)) {
         echo "<p>Comentário excluído</p>";
@@ -43,7 +47,10 @@ if (isset($_POST['excluir_usu']) && is_numeric($_POST['excluir_usu'])) {
     } else {
         echo $mysqli->error;
     }
-} elseif (isset($_POST['excluir_coment']) && is_numeric($_POST['excluir_coment'])) {
+}
+
+
+elseif (isset($_POST['excluir_coment']) && is_numeric($_POST['excluir_coment'])) {
     $id_coment = intval($_POST['excluir_coment']);
     excluirComentario($mysqli, $id_coment);
 }
@@ -57,37 +64,23 @@ $count_coment = $comentario->num_rows;
 ?>
 
 <html>
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ludus | Jogos Indie BR</title>
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/gerenc.css" />
-    <script defer src="./js/script.js"> </script>
+	<script defer src="./js/script.js"> </script>
     <link rel="icon" href="img/Ludus_Favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
     <!-------------------------------------------------------------------------------- Interface -------------------------------------------------------------------------------------->
-
+    
     <!-- Cabeçalho -->
-    <?php include __DIR__ . '/headers/header_selector.php'; ?>
-    <header class="form-align">
-
-        <nav class="nav_buttons">
-            <form method="POST">
-                <input class="btn-style" type="submit" name="button_coment" value="Comentários">
-                <input class="btn-style" type="submit" name="button_usu" value="Usuários">
-            </form>
-        </nav>
-
-        <div class="hamburger" onclick="toggleMenu()">
-            ☰
-        </div>
-
-    </header>
+    <?php include __DIR__ . '/headers/header_admin.php'; ?>
+  <div class="main_aside">
     <main id="main_gerencia">
         <?php
         function usuarios()
@@ -177,7 +170,14 @@ $count_coment = $comentario->num_rows;
         }
         ?>
     </main>
-
+	 <aside id="aside_gerencia" >
+	 <h2>Gerenciar</h2>
+            <form method="POST">
+                <input type="submit" name="button_coment" class="button_gen" value="Comentários">
+                <input type="submit" name="button_usu" class="button_gen" value="Usuários">
+            </form>
+        </aside>
+</div>
     <div id="modal-confirmacao" class="modal hidden-force">
         <div class="modal-content">
             <h3><i class="fas fa-exclamation-triangle"></i> Tem certeza?</h3>
@@ -195,7 +195,7 @@ $count_coment = $comentario->num_rows;
         </div>
     </div>
 
-    <!-- Rodapé -->
+<!-- Rodapé -->
     <?php include __DIR__ . '/footers/footer.php'; ?>
 
 </body>
