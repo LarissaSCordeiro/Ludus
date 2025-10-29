@@ -93,24 +93,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include __DIR__ . '/headers/header_selector.php'; ?>
 
     <!-- Apresentacao do site -->
-    <main class="main-cad-log">
-
-        <section id="slogan">
-            <h3>Cadastre-se para avaliar e comentar sobre os seus jogos indie favoritos</h3>
-        </section>
-
-        <section class="cad">
-            <article id="cad">
-                <h2 id="titulo">Cadastro</h2>
-
-
-                <!-- Exibição de erros + toast -->
+	 <!-- Exibição de erros + toast -->
                 <?php if (!empty($erros)): ?>
-                    <div class="error-message">
-                        <?php foreach ($erros as $erro): ?>
-                            <p><?php echo $erro; ?></p>
-                        <?php endforeach; ?>
-                    </div>
+                    <!-- <div class="error-message">
+                        <?php //foreach ($erros as $erro): ?>
+                            <p><?php // echo $erro; ?></p>
+                        <?php // endforeach; ?>
+                    </div> -->
                     <script>
                         window.addEventListener('DOMContentLoaded', function() {
                             LudusToast("<?php echo addslashes($erros[0]); ?>", true);
@@ -120,7 +109,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php if (isset($_GET['sucesso']) && $_GET['sucesso'] == '1'): ?>
                     <!-- Toast de sucesso removido, agora será exibido no login.php -->
                 <?php endif; ?>
+    <main class="main-cad-log">
+     
+        <section id="slogan">
+            <h3>Cadastre-se para avaliar e comentar sobre os seus jogos indie favoritos</h3>
+        </section>
 
+        <section class="cad">
+            <article id="cad">
+                <h2>Cadastro</h2>
                 <form action="cadastro.php" method="post">
                     <input type="email" name="email" id="email" placeholder="Email" required
                         value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">

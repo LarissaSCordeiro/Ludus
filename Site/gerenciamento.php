@@ -8,7 +8,8 @@ $query_coment = "SELECT comentario.id AS id_comentario, comentario.data_comentar
  comentario INNER JOIN usuario ON comentario.id_usuario = usuario.id INNER JOIN avaliacao ON comentario.id_avaliacao = avaliacao.id INNER JOIN jogo ON avaliacao.id_jogo = jogo.id";
 
 
-function excluirComentario($mysqli, $id_coment) {
+function excluirComentario($mysqli, $id_coment)
+{
     $query_u = "DELETE FROM comentario WHERE id = $id_coment";
     if ($mysqli->query($query_u)) {
         echo "<p>Comentário excluído</p>";
@@ -42,10 +43,7 @@ if (isset($_POST['excluir_usu']) && is_numeric($_POST['excluir_usu'])) {
     } else {
         echo $mysqli->error;
     }
-}
-
-
-elseif (isset($_POST['excluir_coment']) && is_numeric($_POST['excluir_coment'])) {
+} elseif (isset($_POST['excluir_coment']) && is_numeric($_POST['excluir_coment'])) {
     $id_coment = intval($_POST['excluir_coment']);
     excluirComentario($mysqli, $id_coment);
 }
@@ -59,31 +57,29 @@ $count_coment = $comentario->num_rows;
 ?>
 
 <html>
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ludus | Jogos Indie BR</title>
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/gerenc.css" />
-	<script defer src="./js/script.js"> </script>
+    <script defer src="./js/script.js"> </script>
     <link rel="icon" href="img/Ludus_Favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
     <!-------------------------------------------------------------------------------- Interface -------------------------------------------------------------------------------------->
-    
+
     <!-- Cabeçalho -->
     <?php include __DIR__ . '/headers/header_selector.php'; ?>
-    <header>
-        <figure class="logo">
-            <a href="paginainicial.php"><img src="img/NewLudusLogo.png" alt="Logotipo"></a>
-        </figure>
+    <header class="form-align">
 
         <nav class="nav_buttons">
             <form method="POST">
-                <input type="submit" name="button_coment" value="Comentários">
-                <input type="submit" name="button_usu" value="Usuários">
+                <input class="btn-style" type="submit" name="button_coment" value="Comentários">
+                <input class="btn-style" type="submit" name="button_usu" value="Usuários">
             </form>
         </nav>
 
@@ -199,7 +195,7 @@ $count_coment = $comentario->num_rows;
         </div>
     </div>
 
-<!-- Rodapé -->
+    <!-- Rodapé -->
     <?php include __DIR__ . '/footers/footer.php'; ?>
 
 </body>

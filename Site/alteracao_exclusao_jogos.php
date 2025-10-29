@@ -1,3 +1,9 @@
+<?php
+session_start();
+require_once("config.php");
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -29,41 +35,8 @@
             flex-direction: column;
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            max-width: 300px;
+            max-width: 255px;
             width: 100%;
-        }
-
-        .card::after {
-            content: "";
-            position: absolute;
-            top: -100%;
-            left: -100%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(120deg, transparent 0%, rgba(216, 140, 229, 0.05) 50%, transparent 100%);
-            transform: rotate(25deg);
-            animation: shine 5s infinite;
-            z-index: 0;
-        }
-
-        @keyframes shine {
-            0% {
-                transform: translateX(-100%) rotate(25deg);
-                opacity: 0;
-            }
-
-            40% {
-                opacity: 1;
-            }
-
-            60% {
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateX(100%) rotate(25deg);
-                opacity: 0;
-            }
         }
 
         .card-img-wrapper {

@@ -74,12 +74,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <!-- Section do container de login -->
             <section class="log">
                 <article id="log">
-                    <?php if (!empty($erro)): ?>
-                        <div class="error-message">
-                            <p><?php echo $erro; ?></p>
-                        </div>
-                    <?php endif; ?>
-                    <h2 id="titulo">Login</h2>
+                    <?php //if (!empty($erro)): ?>
+                        <!--<div class="error-message">
+                            <p><?php // echo $erro; ?></p>
+                        </div> -->
+                    <?php // endif; ?>
+                    <h2>Login</h2>
                     <form action="login.php" method="post">
                         <input type="email" name="email" id="email" placeholder="Email" required>
                         <input type="password" name="senha" id="senha" minlength="6" placeholder="Senha" required>

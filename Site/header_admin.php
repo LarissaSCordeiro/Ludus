@@ -6,12 +6,13 @@
     <!-- Navegação do usuário logado -->
     <nav id="nav" class="nav-links">
         <a href="filtragem.php">Games</a>
+        <a href="gerenciamento.php">Gerenciamento</a>
+        <a href="alteracao_exclusao_jogos.php">Edição de jogos</a>
         <a href="perfil.php">
             <img src="<?= htmlspecialchars($_SESSION['foto_perfil'] ?? 'img/usuarios/default.png') ?>" 
                  alt="Perfil do usuário" 
                  class="user-avatar">
         </a>
-		<a href="gerenciamento.php">Gerenciamento</a>
     </nav>
 
     <!-- Barra de pesquisa -->

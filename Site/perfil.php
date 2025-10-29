@@ -75,6 +75,7 @@ $avaliacoes = $avaliacoesStmt->get_result();
 
       <a href="editar_perfil.php" class="btn-editar">Editar perfil</a>
       <a href="cadastro_jogo.php" class="btn-editar">Cadastrar jogo</a>
+      <a href="logout.php" class="btn-logout">Sair</a>
     </section>
 
     <nav class="perfil-nav">
