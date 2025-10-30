@@ -15,6 +15,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+	background-color: rgb(12 5 30);
 }
 
 /* Título do jogo */
@@ -58,12 +59,14 @@
 
 /* Texto do comentário */
 .form_com {
-    background-color: rgb(62, 56, 78);
+    background-color: rgb(21 12 45);
     padding: 10px;
     border-radius: 10px;
     font-size: 0.95rem;
     color: #e0e0e0;
     margin-top: 10px;
+	text-align: justify; 
+	
 }
 
 /* Responsividade */
@@ -109,7 +112,7 @@
     display: flex;
      align-items:center;
 	 align-content:center;
-	  height:100%;
+	  height:auto;
   }
 #main_gerencia {
     width: 70%;

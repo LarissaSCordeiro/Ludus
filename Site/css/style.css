@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=League+Spartan:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Epunda+Sans:ital,wght@0,300..900;1,300..900&display=swap');
 
 /*aplica em toda a pagina*/
 
@@ -508,29 +507,6 @@ span {
 
 .dot.active {
   background: #f4961e;
-}
-
-/* Barra de navegaçao abaixo do slider */
-.nav-center {
-  background: #0a0714f7;
-  color: white;
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  padding: 20px;
-  font-size: 14px;
-  align-items: center;
-  flex: 1;
-}
-
-.nav-center a {
-  color: #ccc;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.nav-center a:hover {
-  color: #f4961e;
 }
 
 .container-pai {

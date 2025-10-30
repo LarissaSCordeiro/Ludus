@@ -40,9 +40,7 @@ $foto_perfil = isset($_SESSION['user_foto']) && !empty($_SESSION['user_foto'])
             }
         });
     </script>
-    <!-- Conteúdo principal -->
-    <main>
-
+   
         <!-- Carrossel -->
         <div class="carousel">
             <button class="nav prev">&#10094;</button>
@@ -78,8 +76,6 @@ $foto_perfil = isset($_SESSION['user_foto']) && !empty($_SESSION['user_foto'])
             <div class="dots" id="dotsContainer"></div>
         </div>
 
-        <div class="nav-center"></div>
-
         <!-- Call to action -->
         <section class="container-pai">
             <section class="cta-start">
@@ -92,8 +88,6 @@ $foto_perfil = isset($_SESSION['user_foto']) && !empty($_SESSION['user_foto'])
                 </div>
             </section>
         </section>
-
-    </main>
 
     <!-- Rodapé -->
     <?php include __DIR__ . '/footers/footer.php'; ?>

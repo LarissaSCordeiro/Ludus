@@ -771,6 +771,7 @@ small {
 .form_com{
   margin-left: 10%;
   margin-right: 5%;
+  text-align: justify; 
   word-wrap: break-word; 
   white-space: normal;   
   overflow: hidden;  	

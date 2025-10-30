@@ -3,49 +3,63 @@
 session_start();
 require_once("config.php");
 
-$query_usu = "SELECT * FROM usuario";
-$query_coment = "SELECT comentario.id AS id_comentario, comentario.data_comentario, comentario.texto, usuario.nome AS nome_usuario, usuario.email, usuario.foto_perfil, avaliacao.nota, jogo.nome AS nome_jogo FROM
- comentario INNER JOIN usuario ON comentario.id_usuario = usuario.id INNER JOIN avaliacao ON comentario.id_avaliacao = avaliacao.id INNER JOIN jogo ON avaliacao.id_jogo = jogo.id";
- 
-
-if ($_SESSION['tipo_usuario'] != 'administrador') {
-	header('Location: paginainicial.php');
+if ($tipoUsuario != 'administrador'  ) {
+    header("Location: paginainicial.php");
     exit();
 }
 
+$query_usu = "SELECT * FROM usuario";
+$query_coment = "SELECT comentario.id AS id_comentario, comentario.data_comentario, comentario.texto, usuario.nome AS nome_usuario, usuario.email, usuario.foto_perfil, avaliacao.nota, jogo.nome AS nome_jogo 
+FROM comentario 
+INNER JOIN usuario ON comentario.id_usuario = usuario.id 
+INNER JOIN avaliacao ON comentario.id_avaliacao = avaliacao.id 
+INNER JOIN jogo ON avaliacao.id_jogo = jogo.id";
+
+
 function excluirComentario($mysqli, $id_coment) {
-    $query_u = "DELETE FROM comentario WHERE id = $id_coment";
-    if ($mysqli->query($query_u)) {
+    $query = "DELETE FROM comentario WHERE id = $id_coment";
+    if ($mysqli->query($query)) {
         echo "<p>Comentário excluído</p>";
     } else {
-        echo $mysqli->error;
+        echo "<p>Erro ao excluir comentário: " . $mysqli->error . "</p>";
     }
 }
+
 
 if (isset($_POST['excluir_usu']) && is_numeric($_POST['excluir_usu'])) {
     $id_usu = intval($_POST['excluir_usu']);
 
+   
     $mysqli->query("DELETE FROM comentario WHERE id_usuario = $id_usu");
-    $mysqli->query("DELETE FROM avaliacao WHERE id_usuario = $id_usu");
     $mysqli->query("DELETE FROM usuario_favorita_jogo WHERE id_usuario = $id_usu");
     $mysqli->query("DELETE FROM usuario_curte_avaliacao WHERE id_usuario = $id_usu");
 
+   
     $jogos = $mysqli->query("SELECT id FROM jogo WHERE id_usuario = $id_usu");
     while ($jogo = $jogos->fetch_assoc()) {
-        $id_jogo = $jogo['id'];
+        $id_jogo = intval($jogo['id']);
+
+        $mysqli->query("DELETE FROM avaliacao WHERE id_jogo = $id_jogo");
+
+       
         $mysqli->query("DELETE FROM jogo_possui_genero WHERE id_jogo = $id_jogo");
         $mysqli->query("DELETE FROM jogo_possui_plataforma WHERE id_jogo = $id_jogo");
         $mysqli->query("DELETE FROM usuario_favorita_jogo WHERE id_jogo = $id_jogo");
+
+       
+        $mysqli->query("DELETE FROM jogo WHERE id = $id_jogo");
     }
 
-    $mysqli->query("DELETE FROM jogo WHERE id_usuario = $id_usu");
+    
+    $mysqli->query("DELETE FROM avaliacao WHERE id_usuario = $id_usu");
 
+   
     $query_u = "DELETE FROM usuario WHERE id = $id_usu";
     if ($mysqli->query($query_u)) {
         session_destroy();
         echo "<p>Usuário excluído</p>";
     } else {
-        echo $mysqli->error;
+        echo "<p>Erro ao excluir usuário: " . $mysqli->error . "</p>";
     }
 }
 

@@ -15,7 +15,7 @@ if (isset($_SESSION['usuario'])) {
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="icon" href="img/Ludus_Favicon.png" type="image/x-icon" />
     <script defer src="./js/script.js"></script>
-	 <script defer src="./js/carousel.js"></script>
+	<script defer src="./js/carousel.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -24,53 +24,41 @@ if (isset($_SESSION['usuario'])) {
     <!-- Cabeçalho -->
     <?php include __DIR__ . '/headers/header_selector.php'; ?>
 
-    <!-- Parte principal do site -->
-    <main>
-
-        <!-- Carrosel de imagens (linkado ao JS) -->
-        <div class="carousel">
-            <button class="nav prev">&#10094;</button>
-
             <!-- Imagens do carrosel -->
+            <div class="carousel">
+            <button class="nav prev">&#10094;</button>
             <div class="carousel-images" id="carouselImages">
-
-                <div class="carousel-slide">
-                    <img src="img/Soldier.jpeg" alt="Soldier">
+                <div class="carousel-slide" onclick="irParaDashboard(1)">
+                    <img src="img/EnigmaBanner.jpg" alt="Enigma do Medo">
                     <div class="overlay">
-                        <h2 class="h2-overlay">Clique <span>para ver mais</span></h2>
+                        <a>
+                            <h2 class="h2-overlay">E<span>nigma do Medo</span></h2>
+                        </a>
                     </div>
                 </div>
-
-                <div class="carousel-slide">
-                    <img src="img/Everest.jpeg" alt="Everest">
+                <div class="carousel-slide" onclick="irParaDashboard(2)">
+                    <img src="img/DandaraBanner.avif" alt="Dandara">
                     <div class="overlay">
-                        <h2 class="h2-overlay">Clique <span>para ver mais</span></h2>
+                        <h2 class="h2-overlay">D<span>andara</span></h2>
                     </div>
                 </div>
-
-                <div class="carousel-slide">
-                    <img src="img/Montanhas.jpeg" alt="Desert">
+                <div class="carousel-slide" onclick="irParaDashboard(9)">
+                    <img src="img/KazeBanner.jpg" alt="Kaze and the wild Masks">
                     <div class="overlay">
-                        <h2 class="h2-overlay">Clique <span>para ver mais</span></h2>
+                        <h2 class="h2-overlay">K<span>aze and the wild Masks</span></h2>
                     </div>
                 </div>
-
-                <div class="carousel-slide">
-                    <img src="img/Eden-img.jpeg" alt="Eden">
+                <div class="carousel-slide" onclick="irParaDashboard(3)">
+                    <img src="img/AdoreBanner.jpg" alt="Adore">
                     <div class="overlay">
-                        <h2 class="h2-overlay">Clique <span>para ver mais</span></h2>
+                        <h2 class="h2-overlay">A<span>dore</span></h2>
                     </div>
                 </div>
             </div>
-
             <button class="nav next">&#10095;</button>
-            <!-- Pontinhos do slider -->
             <div class="dots" id="dotsContainer"></div>
         </div>
 
-        <div class="nav-center">
-
-        </div>
 
         <!-- Sobre jogos indie -->
 
@@ -85,7 +73,7 @@ if (isset($_SESSION['usuario'])) {
                 </div>
             </section>
         </section>
-    </main>
+   
 
     <!-- Rodapé -->
     <?php include __DIR__ . '/footers/footer.php'; ?>
