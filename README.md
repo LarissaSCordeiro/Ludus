@@ -13,7 +13,7 @@
 ## 🎨 Identidade Visual
 
 ### Logo
-![Logo do Ludus](https://github.com/LarissaSCordeiro/Ludus/blob/5fc98394d2e716202f6a2578954c2847ba7d3af9/Imagens/Logotipo%20Ludus%20(atualizada).png)
+![Logo do Ludus](https://github.com/LarissaSCordeiro/Ludus/blob/main/Imagens/Logotipo%20Ludus%20(atualizada).png)
 
 ### Paleta de Cores
 ![Paleta de Cores](https://github.com/LarissaSCordeiro/Ludus/blob/fab4d19b3ea04b5652e6c7231516e948d63f7d08/Imagens/Paleta%20de%20Cores%20Ludus.png)
