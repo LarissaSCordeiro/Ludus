@@ -73,8 +73,15 @@ $avaliacoes = $avaliacoesStmt->get_result();
         </h1>
       </div>
 
-      <a href="editar_perfil.php" class="btn-editar">Editar perfil</a>
-      <a href="cadastro_jogo.php" class="btn-editar">Cadastrar jogo</a>
+      <a href="editar_perfil.php" class="icon-link" title="Editar perfil"><i class="fa-solid fa-user-pen"></i></a>
+      <?php if ($tipoUsuario === 'administrador' || $tipoUsuario === 'desenvolvedor'): ?>
+        <a href="cadastro_jogo.php" class="icon-link" title="Cadastrar jogo">
+          <i class="fa-solid fa-gamepad"></i>
+        </a>
+        <a href="alteracao_exclusao_jogos.php" class="icon-link" title="Editar jogo">
+          <i class="fa-solid fa-pen-to-square"></i>
+        </a>
+      <?php endif; ?>
       <a href="logout.php" class="btn-logout">Sair</a>
     </section>
 

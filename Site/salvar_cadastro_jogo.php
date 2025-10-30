@@ -31,7 +31,7 @@ $imagem_nome = 'img/jogos/default.png'; // Default
 if (isset($_FILES['capa']) && $_FILES['capa']['error'] === UPLOAD_ERR_OK) {
     $arquivoTmp = $_FILES['capa']['tmp_name'];
     $nomeArquivo = time() . '_' . basename($_FILES['capa']['name']);
-    $destino = 'uploads/' . $nomeArquivo;
+    $destino = 'img/jogos/' . $nomeArquivo;
 
     $extensao = strtolower(pathinfo($destino, PATHINFO_EXTENSION));
     $permitidos = ['jpg', 'jpeg', 'png', 'gif', 'webp'];

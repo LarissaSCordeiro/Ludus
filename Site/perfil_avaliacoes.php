@@ -69,7 +69,7 @@ $avaliacoes = $avaliacoesStmt->get_result();
           <?php endif; ?>
         </h1>
       </div>
-      <a href="editar_perfil.php" class="btn-editar">Editar perfil</a>
+      <a href="editar_perfil.php" class="icon-link" title="Editar perfil"><i class="fa-solid fa-user-pen"></i></a>
     </section>
 
     <nav class="perfil-nav">
