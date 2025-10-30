@@ -1,4 +1,3 @@
-
 a {
   text-decoration: none;
 }
@@ -50,22 +49,24 @@ a {
 }
 
 .badge {
-    display: inline-block;
-    font-size: 0.7rem;
-    font-weight: bold;
-    color: white;
-    padding: 2px 6px;
-    border-radius: 4px;
-    margin-left: 8px;
-    vertical-align: middle;
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+  vertical-align: middle;
 }
 
 .badge.dev {
-    background-color: #e91e63; /* rosa */
+  background-color: #e91e63;
+  /* rosa */
 }
 
 .badge.adm {
-    background-color: #ff9800; /* laranja */
+  background-color: #ff9800;
+  /* laranja */
 }
 
 .btn-logout {
@@ -83,19 +84,26 @@ a {
   background-color: #9e0c0c;
 }
 
-.btn-editar {
-  background-color: #cd3dff;
+/*Personalização dos icones dos links do perfil*/
+
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #4f4a6d;
   color: #fff;
-  padding: 0.5rem 1.2rem;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+  text-decoration: none;
+  margin-left: 10px;
+  font-size: 18px;
+  transition: all 0.3s ease-in-out;
 }
 
-.btn-editar:hover {
-  background-color: #b600e2;
+.icon-link:hover {
+  background: #5b5bff;
+  color: #fff;
 }
 
 /* Navegação das abas do perfil */
