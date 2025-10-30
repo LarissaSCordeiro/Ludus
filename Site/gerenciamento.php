@@ -3,8 +3,8 @@
 session_start();
 require_once("config.php");
 
-if ($tipoUsuario != 'administrador'  ) {
-    header("Location: paginainicial.php");
+if ($_SESSION['tipo_usuario'] != 'administrador') {
+	header('Location: paginainicial.php');
     exit();
 }
 
@@ -213,5 +213,6 @@ $count_coment = $comentario->num_rows;
     <?php include __DIR__ . '/footers/footer.php'; ?>
 
 </body>
+
 
 </html>
