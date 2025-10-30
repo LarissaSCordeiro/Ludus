@@ -161,6 +161,10 @@ a {
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
+.avaliacao p {
+  text-align :justify;
+}
+
 .avaliacao:hover {
   background-color: #2a1f3f;
   transform: scale(1.02);
@@ -190,4 +194,5 @@ a {
   margin: 0;
   font-size: 0.9rem;
   color: #aaa;
+
 }
