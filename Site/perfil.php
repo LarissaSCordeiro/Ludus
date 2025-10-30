@@ -82,7 +82,7 @@ $avaliacoes = $avaliacoesStmt->get_result();
           <i class="fa-solid fa-pen-to-square"></i>
         </a>
       <?php endif; ?>
-      <a href="logout.php" class="btn-logout">Sair</a>
+      <a href="logout.php" class="btn-logout">Sair da conta</a>
     </section>
 
     <nav class="perfil-nav">
@@ -137,5 +137,6 @@ $avaliacoes = $avaliacoesStmt->get_result();
   <?php endif; ?>
 
 </body>
+
 
 </html>
