@@ -112,6 +112,7 @@ main.dash-main {
     padding: 16px;
     position: relative;
     overflow: hidden;
+	text-align: justify; 
     flex-direction: column;
     justify-content: space-evenly;
 }
@@ -797,4 +798,5 @@ small {
     max-width: 100%;
     box-shadow: 0 0 6px rgba(0,0,0,0.05);
 	text-align:center;
+
 }
