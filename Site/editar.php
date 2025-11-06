@@ -358,6 +358,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       border-radius: 20px;
       border: 1px solid #ccc;
       outline: none;
+      background-color: #26203f;
+      color: #d9d9d9;
     }
 
     .button-align {
@@ -963,5 +965,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <!-- Rodapé -->
     <?php include __DIR__ . '/footers/footer.php'; ?>
 </body>
+
 
 </html>
