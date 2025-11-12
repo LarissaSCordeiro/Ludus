@@ -78,7 +78,12 @@ $avaliacoes = $avaliacoesStmt->get_result();
         <a href="cadastro_jogo.php" class="icon-link" title="Cadastrar jogo">
           <i class="fa-solid fa-gamepad"></i>
         </a>
-      <?php endif; ?>
+         <?php if ($tipoUsuario === 'administrador' ){ ?>
+        <a href="alteracao_exclusao_jogos.php" class="icon-link" title="Editar jogo">
+          <i class="fa-solid fa-pen-to-square"></i>
+        </a>
+		<?php } 
+       endif; ?>
       <a href="logout.php" class="btn-logout">Sair da conta</a>
     </section>
 
@@ -137,4 +142,5 @@ $avaliacoes = $avaliacoesStmt->get_result();
 
 
 </html>
+
 
