@@ -217,4 +217,148 @@
   height: 60px;         /* define uma altura fixa p/ alinhar sempre */
 }
 
+    /* Reduce distance between section title and the carousel row */
+    .categoria h2, .highlights h2 {
+      margin-bottom: 8px;
+    }
 
+    .highlights .container {
+      /* align titles with main content like in filtragem.php */
+      padding-left: 6rem; /* matches .conteudo side padding (approx) */
+      padding-right: 6rem;
+    }
+
+    .carousel-row {
+      margin: 0.5rem 0 1.5rem 0; /* tightened spacing */
+    }
+
+    @media (max-width: 1024px) {
+      .highlights .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .highlights .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+
+    /* Estilos para carrossel em linha (destaques na home) */
+    .carousel-row {
+      position: relative;
+      width: 100%;
+      margin: 1.5rem 0 3rem 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+
+    .row-scroll {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 8px 48px; /* espaço para setas absolutas */
+      width: 100%;
+    }
+
+    /* When .jogos is used as a row-scroll, prevent wrapping (overrides .jogos default) */
+    .jogos.row-scroll {
+      flex-wrap: nowrap !important;
+      align-items: flex-start;
+    }
+
+    .row-scroll::-webkit-scrollbar { display: none; }
+
+    .row-scroll .jogo-card {
+      scroll-snap-align: start;
+      flex: 0 0 240px; /* largura fixa do card no carrossel */
+      width: 240px;
+      min-width: 240px;
+      max-width: 240px;
+    }
+
+    .row-prev, .row-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(20, 10, 30, 0.8);
+      border: none;
+      color: #fff;
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      z-index: 50;
+    }
+
+    .row-prev { left: 8px; }
+    .row-next { right: 8px; }
+
+    /* Fade effect on carousel row laterals (left and right) */
+    .carousel-row::before,
+    .carousel-row::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .carousel-row::before {
+      left: 0;
+      background: linear-gradient(to right, rgba(14, 10, 26, 1), rgba(14, 10, 26, 0));
+    }
+
+    .carousel-row::after {
+      right: 0;
+      background: linear-gradient(to left, rgba(14, 10, 26, 1), rgba(14, 10, 26, 0));
+    }
+
+    @media (max-width: 768px) {
+      .row-scroll .jogo-card { flex: 0 0 80%; }
+      .row-prev, .row-next { display: none; }
+      /* reduce fade width on mobile */
+      .carousel-row::before,
+      .carousel-row::after {
+        width: 60px;
+      }
+    }
+
+    /* Correção: faz o container de destaques empilhar título + linha (não usar o .container flex global) */
+.highlights .container {
+  display: block; /* força empilhamento vertical: título em cima dos cards */
+  padding-left: 6rem;  /* mantém espaçamento lateral que você pediu */
+  padding-right: 6rem;
+}
+
+/* mantém responsivo como antes */
+@media (max-width: 1024px) {
+  .highlights .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+@media (max-width: 600px) {
+  .highlights .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* ajuste fino do espaçamento vertical do título */
+.highlights h2 {
+  margin-top: 0.3rem;
+  margin-bottom: 8px;
+}

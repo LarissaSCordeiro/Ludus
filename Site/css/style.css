@@ -397,6 +397,7 @@ a:hover:not(.a-Button) {
   width: 100%;
   height: 450px;
   overflow: hidden;
+  margin-bottom: 3rem;
 }
 
 /*classe de personalizaçao das imagens*/
@@ -825,4 +826,27 @@ footer {
 
 .footer-nav .social-icons a:hover {
   color: #f4961e;
+}
+
+/* Animações para notificações e modais */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
 }

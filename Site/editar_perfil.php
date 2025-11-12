@@ -5,7 +5,7 @@ require_once("config.php");
 $id_usuario = $_SESSION['id_usuario'];
 
 // Pega os dados do usuário
-$stmt = $mysqli->prepare("SELECT nome, email, foto_perfil FROM usuario WHERE id = ?");
+$stmt = $mysqli->prepare("SELECT nome, email, foto_perfil, tipo FROM usuario WHERE id = ?");
 $stmt->bind_param("i", $id_usuario);
 $stmt->execute();
 $resultado = $stmt->get_result();
@@ -19,6 +19,7 @@ $usuario = $resultado->fetch_assoc();
 $nomeUsuario = $usuario['nome'];
 $emailUsuario = $usuario['email'];
 $foto_perfilPerfil = $usuario['foto_perfil'] ?: 'img/usuarios/default.png';
+$tipoUsuario = $usuario['tipo'];
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -81,6 +82,17 @@ $foto_perfilPerfil = $usuario['foto_perfil'] ?: 'img/usuarios/default.png';
                         <button type="submit"><i class="fas fa-save"></i> Salvar alterações</button>
                         <a href="perfil.php" class="btn-cancelar"><i class="fas fa-arrow-left"></i> Cancelar</a>
                     </div>
+
+                    <?php if ($tipoUsuario === 'jogador'): ?>
+                    <div class="button-align" style="margin-top: 20px; border-top: 1px solid #444; padding-top: 20px;">
+                        <button type="button" id="btnTornarDesenvolvedor" class="btn-developer">
+                            <i class="fas fa-code"></i> Tornar-se Desenvolvedor
+                        </button>
+                        <p style="font-size: 0.85rem; color: #aaa; margin-top: 10px;">
+                            Confirme sua identidade como um desenvolvedor de jogos. Você receberá um email de verificação.
+                        </p>
+                    </div>
+                    <?php endif; ?>
                 </div>
             </form>
         </div>
@@ -105,8 +117,10 @@ $foto_perfilPerfil = $usuario['foto_perfil'] ?: 'img/usuarios/default.png';
         });
     </script>
 
+    <!-- Global toast (load before any inline scripts that may call LudusToast) -->
+    <script src="js/toast.js"></script>
+
     <?php if (isset($_GET['erro'])): ?>
-        <script src="js/toast.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 const erro = "<?= $_GET['erro'] ?>";
@@ -124,6 +138,43 @@ $foto_perfilPerfil = $usuario['foto_perfil'] ?: 'img/usuarios/default.png';
             });
         </script>
     <?php endif; ?>
+
+    <!-- Modal para solicitação de desenvolvedor -->
+    <div id="developerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-code"></i> Solicitação de Desenvolvedor</h2>
+                <button type="button" class="modal-close" id="modalClose">&times;</button>
+            </div>
+            
+            <form id="developerForm" method="post">
+                <div class="form-group">
+                    <label for="motivo">Por que deseja ser desenvolvedor?</label>
+                    <textarea 
+                        id="motivo" 
+                        name="motivo" 
+                        placeholder="Conte-nos sobre seus jogos, portfólio, ou projetos que está desenvolvendo. Mínimo 10 caracteres..."
+                        minlength="10"
+                        maxlength="1000"
+                        required
+                        rows="6"
+                    ></textarea>
+                    <small id="charCount">0/1000</small>
+                </div>
+                
+                <div class="modal-info">
+                    <p><i class="fas fa-info-circle"></i> Você receberá um email com um link de verificação. O link expira em 48 horas.</p>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button type="submit" class="btn-submit">Enviar</button>
+                    <button type="button" class="btn-cancel" id="modalCancel">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/developer-request.js"></script>
 
 </body>
 
