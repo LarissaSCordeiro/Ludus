@@ -37,7 +37,7 @@ CREATE TABLE `avaliacao` (
   CONSTRAINT `fk_avaliacao_jogo` FOREIGN KEY (`id_jogo`) REFERENCES `jogo` (`id`),
   CONSTRAINT `fk_avaliacao_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`),
   CONSTRAINT `avaliacao_chk_1` CHECK ((`nota` between 0 and 5))
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `avaliacao` (
 
 LOCK TABLES `avaliacao` WRITE;
 /*!40000 ALTER TABLE `avaliacao` DISABLE KEYS */;
-INSERT INTO `avaliacao` VALUES (1,5.0,'2025-09-24 12:26:45',NULL,1,13),(2,5.0,'2025-09-24 17:48:48',NULL,7,15);
+INSERT INTO `avaliacao` VALUES (1,5.0,'2025-09-24 12:26:45',NULL,1,13),(2,5.0,'2025-09-24 17:48:48',NULL,7,15),(3,5.0,'2025-09-24 18:20:48',NULL,1,15),(4,5.0,'2025-09-24 21:31:34',NULL,2,15),(5,5.0,'2025-11-12 09:13:17',NULL,2,13);
 /*!40000 ALTER TABLE `avaliacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -68,7 +68,7 @@ CREATE TABLE `comentario` (
   KEY `fk_comentario_avaliacao` (`id_avaliacao`),
   CONSTRAINT `fk_comentario_avaliacao` FOREIGN KEY (`id_avaliacao`) REFERENCES `avaliacao` (`id`),
   CONSTRAINT `fk_comentario_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -77,7 +77,7 @@ CREATE TABLE `comentario` (
 
 LOCK TABLES `comentario` WRITE;
 /*!40000 ALTER TABLE `comentario` DISABLE KEYS */;
-INSERT INTO `comentario` VALUES (1,'2025-09-24 12:26:58','Esse jogo é de fato muito bom!',13,1),(2,'2025-09-24 17:49:04','Esse jogo é muito bom! De fato!',15,2);
+INSERT INTO `comentario` VALUES (1,'2025-09-24 12:26:58','Esse jogo é de fato muito bom!',13,1),(2,'2025-09-24 17:49:04','Esse jogo é muito bom! De fato!',15,2),(3,'2025-11-12 09:13:22','Abublé',13,5);
 /*!40000 ALTER TABLE `comentario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,7 +235,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `nome` (`nome`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -244,7 +244,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'dev_teste','dev@email.com','desenvolvedor','1234senha_hashada','img/usuarios/default.png','2025-06-13 11:07:37'),(13,'pierrehneppel','pierrehenriquedemirandaneppel@gmail.com','administrador','$2y$10$iOru.M4FawSFZPqVp3/OLuxybL8B0EyVmydv5lsBOhVHFfXztRQBi','img/usuarios/user_13.jpg','2025-09-24 12:26:02'),(15,'jotape','jotapegameplays@gmail.com','jogador','$2y$10$J40.iFVYThaCp.XROHR0W.MUkPbHoSa1cSHorxkgvpAE4.i7jOOG2','img/usuarios/user_15.jpg','2025-09-24 17:47:41');
+INSERT INTO `usuario` VALUES (1,'dev_teste','dev@email.com','desenvolvedor','1234senha_hashada','img/usuarios/default.png','2025-06-13 11:07:37'),(13,'pierrehneppel','pierrehenrique@gmail.com','administrador','$2y$10$RB3NQ8FTNguuVxaPvSCsNe4x8qRa3k5gSs31OMM6ixQurKGLCnrNu','img/usuarios/user_13.jpg','2025-09-24 12:26:02'),(15,'jotape','jotapegameplays@gmail.com','jogador','$2y$10$J40.iFVYThaCp.XROHR0W.MUkPbHoSa1cSHorxkgvpAE4.i7jOOG2','img/usuarios/user_15.jpg','2025-09-24 17:47:41'),(16,'SouDevMsm','lanaxor846@etramay.com','desenvolvedor','$2y$10$o63gE/VyP3l1V7WOTaDU9OfgzPOl34pPy4sKuJzye9qV2HSuZkoa6','img/usuarios/default.png','2025-11-12 10:19:05'),(17,'Dev2wow','xirek20391@fermiro.com','desenvolvedor','$2y$10$IFwdNUMs5ZnBYz3TNWNylejl9l89xegMrmpD1m1eYzJxBsem2hQHW','img/usuarios/default.png','2025-11-12 11:00:01'),(18,'PedrinhoDev','rearea@gmail.com','desenvolvedor','$2y$10$ZjDbuG6NQxVIztr1UO0b2uWXdN/2s/LE7G0XzdNOOX.WoU3lSLOcG','img/usuarios/default.png','2025-11-12 11:21:58');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -300,6 +300,45 @@ LOCK TABLES `usuario_favorita_jogo` WRITE;
 INSERT INTO `usuario_favorita_jogo` VALUES (13,1),(15,7);
 /*!40000 ALTER TABLE `usuario_favorita_jogo` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `verificacao_desenvolvedor`
+--
+
+DROP TABLE IF EXISTS `verificacao_desenvolvedor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `verificacao_desenvolvedor` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_usuario` int NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `motivo` text COLLATE utf8mb4_unicode_ci,
+  `status` enum('pendente','aprovado','rejeitado') COLLATE utf8mb4_unicode_ci DEFAULT 'pendente',
+  `data_solicitacao` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `data_expiracao` timestamp NOT NULL,
+  `data_verificacao` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `token` (`token`),
+  KEY `idx_token` (`token`),
+  KEY `idx_id_usuario` (`id_usuario`),
+  KEY `idx_status` (`status`),
+  KEY `idx_data_expiracao` (`data_expiracao`),
+  CONSTRAINT `verificacao_desenvolvedor_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `verificacao_desenvolvedor`
+--
+
+LOCK TABLES `verificacao_desenvolvedor` WRITE;
+/*!40000 ALTER TABLE `verificacao_desenvolvedor` DISABLE KEYS */;
+INSERT INTO `verificacao_desenvolvedor` VALUES (4,16,'lanaxor846@etramay.com','c7bdfaaea5dd487c6c917b18ba09edb6fcefd1bb6b216a33b96b66c4bbeaa39a','Criar uma plataforma acessível e intuitiva que valorize os jogos independentes brasileiros. A proposta é oferecer um espaço para que desenvolvedores divulguem seus jogos e jogadores descubram novas experiências, contribuindo com avaliações, comentários e engajamento.','','2025-11-12 13:52:12','2025-11-14 16:52:12','2025-11-12 13:56:48','2025-11-12 13:52:12','2025-11-12 13:56:48'),(5,17,'xirek20391@fermiro.com','dad197a6f4f84fa3772154dbe062fa6ae1261a6627e93258593b072607c64d05','Criar uma plataforma acessível e intuitiva que valorize os jogos independentes brasileiros. A proposta é oferecer um espaço para que desenvolvedores divulguem seus jogos e jogadores descubram novas experiências, contribuindo com avaliações, comentários e engajamento.','','2025-11-12 14:00:19','2025-11-14 17:00:19','2025-11-12 14:18:06','2025-11-12 14:00:19','2025-11-12 14:18:06'),(8,18,'rearea@gmail.com','0299310599db17f4fa60c80b7757fd28332a6f7d92d6ac72e220e22203286cdc','fasffewfwefwefewfwefewf','','2025-11-12 14:52:14','2025-11-14 17:52:14','2025-11-12 14:52:17','2025-11-12 14:52:14','2025-11-12 14:52:17');
+/*!40000 ALTER TABLE `verificacao_desenvolvedor` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -310,4 +349,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-09-24 18:11:01
+-- Dump completed on 2025-11-12 12:33:28
