@@ -70,6 +70,12 @@ $avaliacoes = $avaliacoesStmt->get_result();
         </h1>
       </div>
       <a href="editar_perfil.php" class="icon-link" title="Editar perfil"><i class="fa-solid fa-user-pen"></i></a>
+      <?php if ($tipoUsuario === 'administrador' || $tipoUsuario === 'desenvolvedor'): ?>
+        <a href="cadastro_jogo.php" class="icon-link" title="Cadastrar jogo">
+          <i class="fa-solid fa-gamepad"></i>
+        </a>
+      <?php endif; ?>
+      <a href="logout.php" class="btn-logout">Sair da conta</a>
     </section>
 
     <nav class="perfil-nav">
@@ -107,5 +113,6 @@ $avaliacoes = $avaliacoesStmt->get_result();
   <!-- Rodapé -->
   <?php include __DIR__ . '/footers/footer.php'; ?>
 </body>
+
 
 </html>
