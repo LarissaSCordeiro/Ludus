@@ -60,6 +60,7 @@ $curtidas = $curtidasStmt->get_result();
 
   <main class="perfil-container">
     <section class="perfil-top">
+
       <div class="perfil-info">
         <img src="<?php echo htmlspecialchars($foto_perfilPerfil); ?>" alt="Foto de perfil" class="foto-perfil">
         <h1 class="perfil-nome">
@@ -71,11 +72,21 @@ $curtidas = $curtidasStmt->get_result();
           <?php endif; ?>
         </h1>
       </div>
-       <a href="editar_perfil.php" class="icon-link" title="Editar perfil"><i class="fa-solid fa-user-pen"></i></a>
+
+      <a href="editar_perfil.php" class="icon-link" title="Editar perfil"><i class="fa-solid fa-user-pen"></i></a>
       <?php if ($tipoUsuario === 'administrador' || $tipoUsuario === 'desenvolvedor'): ?>
         <a href="cadastro_jogo.php" class="icon-link" title="Cadastrar jogo">
           <i class="fa-solid fa-gamepad"></i>
         </a>
+        <?php if ($tipoUsuario === 'administrador' ): ?>
+          <a href="alteracao_exclusao_jogos.php" class="icon-link" title="Editar jogos">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </a>
+        <?php elseif ($tipoUsuario === 'desenvolvedor'): ?>
+          <a href="alteracao_exclusao_jogos_dev.php" class="icon-link" title="Meus jogos">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </a>
+        <?php endif; ?>
       <?php endif; ?>
       <a href="logout.php" class="btn-logout">Sair da conta</a>
     </section>

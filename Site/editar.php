@@ -30,6 +30,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   }
 
   $jogo = $result->fetch_assoc();
+  // Verifica permissão: só o dono (id_usuario) ou administrador podem editar
+  $current_user_id = $_SESSION['id_usuario'] ?? null;
+  $allowed = false;
+  if ($current_user_id) {
+    if ($current_user_id == $jogo['id_usuario']) {
+      $allowed = true;
+    } else {
+      $u = $mysqli->prepare("SELECT tipo FROM usuario WHERE id = ?");
+      $u->bind_param("i", $current_user_id);
+      $u->execute();
+      $ru = $u->get_result();
+      $tipo = $ru->fetch_assoc()['tipo'] ?? '';
+      $u->close();
+      if ($tipo === 'administrador') $allowed = true;
+    }
+  }
+
+  if (! $allowed) {
+    echo "Acesso negado.";
+    exit;
+  }
 
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Submissão do formulário
@@ -39,6 +60,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   }
 
   $id = intval($_POST['id']);
+  // Verifica permissão no POST também: só dono ou administrador
+  $current_user_id = $_SESSION['id_usuario'] ?? null;
+  $checkOwner = $mysqli->prepare("SELECT id_usuario FROM jogo WHERE id = ?");
+  $checkOwner->bind_param("i", $id);
+  $checkOwner->execute();
+  $resOwner = $checkOwner->get_result();
+  if ($resOwner->num_rows === 0) {
+    echo "Jogo não encontrado.";
+    exit;
+  }
+  $ownerRow = $resOwner->fetch_assoc();
+  $owner_id = $ownerRow['id_usuario'];
+  $checkOwner->close();
+
+  $allowed = false;
+  if ($current_user_id) {
+    if ($current_user_id == $owner_id) {
+      $allowed = true;
+    } else {
+      $u = $mysqli->prepare("SELECT tipo FROM usuario WHERE id = ?");
+      $u->bind_param("i", $current_user_id);
+      $u->execute();
+      $ru = $u->get_result();
+      $tipo = $ru->fetch_assoc()['tipo'] ?? '';
+      $u->close();
+      if ($tipo === 'administrador') $allowed = true;
+    }
+  }
+
+  if (! $allowed) {
+    echo "Acesso negado.";
+    exit;
+  }
 }
 
 // =====================
@@ -177,7 +231,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
   }
 
-  header("Location: alteracao_exclusao_jogos.php?sucesso=1");
+  $redirect = 'alteracao_exclusao_jogos.php?sucesso=1';
+  $current_user_id = $_SESSION['id_usuario'] ?? null;
+  if ($current_user_id && isset($owner_id) && $current_user_id == $owner_id) {
+    $redirect = 'alteracao_exclusao_jogos_dev.php?sucesso=1';
+  }
+
+  header("Location: $redirect");
   exit;
 }
 ?>
@@ -815,10 +875,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <h3><i class="fas fa-exclamation-triangle"></i> Tem certeza?</h3>
       <p>Você deseja editar esses dados? Essa ação <strong>não poderá ser desfeita</strong>.</p>
       <div class="modal-buttons">
-        <button id="cancelarConfirmacao">
+        <button id="cancelarConfirmacao" class="btn-vermelho">
           <i class="fas fa-times-circle"></i> Cancelar
         </button>
-        <button id="confirmarBtn" class="btn-vermelho">
+        <button id="confirmarBtn" class="btn-verde">
           <i class="fas fa-check-circle"></i> Confirmar
         </button>
       </div>

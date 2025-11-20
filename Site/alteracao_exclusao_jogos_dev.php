@@ -1,8 +1,27 @@
 <?php
 session_start();
 require_once("config.php");
-?>
 
+if (!isset($_SESSION['id_usuario'])) {
+    header('Location: login.php');
+    exit;
+}
+
+$id_usuario = $_SESSION['id_usuario'];
+
+$stmtTipo = $mysqli->prepare("SELECT tipo FROM usuario WHERE id = ?");
+$stmtTipo->bind_param("i", $id_usuario);
+$stmtTipo->execute();
+$resTipo = $stmtTipo->get_result();
+$tipoRow = $resTipo->fetch_assoc();
+$tipoUsuario = $tipoRow['tipo'] ?? '';
+$stmtTipo->close();
+
+if ($tipoUsuario !== 'desenvolvedor' && $tipoUsuario !== 'administrador') {
+    echo "Acesso negado.";
+    exit;
+}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -10,11 +29,10 @@ require_once("config.php");
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ludus | Jogos Indie BR</title>
+    <title>Meus Jogos | Ludus</title>
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="icon" href="img/Ludus_Favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
     <style>
         .container {
             margin: 26px;
@@ -42,12 +60,10 @@ require_once("config.php");
         .card-img-wrapper {
             width: 100%;
             aspect-ratio: 3 / 4;
-            /* Proporção ideal pra capa de jogo */
             overflow: hidden;
             border-radius: 8px;
             margin-bottom: 12px;
             background-color: #222;
-            /* fallback se imagem quebrar */
             z-index: 1;
         }
 
@@ -125,7 +141,6 @@ require_once("config.php");
 
             .card {
                 flex-direction: row;
-                /* 👉 card horizontal */
                 width: 100%;
                 max-width: 100%;
                 align-items: flex-start;
@@ -218,7 +233,6 @@ require_once("config.php");
             animation: pop 0.3s ease;
         }
 
-        /* Animação do ícone */
         @keyframes pop {
             0% {
                 transform: scale(0.8);
@@ -230,7 +244,6 @@ require_once("config.php");
                 opacity: 1;
             }
         }
-
 
         .modal {
             position: fixed;
@@ -334,50 +347,46 @@ require_once("config.php");
     <main>
         <div class="container">
             <?php
-            require_once("config.php");
-
-            $sql = "SELECT nome, desenvolvedor, imagem, id FROM jogo";
-            $result = mysqli_query($mysqli, $sql);
+            $stmt = $mysqli->prepare("SELECT id, nome, imagem, desenvolvedor FROM jogo WHERE id_usuario = ? ORDER BY id DESC");
+            $stmt->bind_param("i", $id_usuario);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
             if (!$result) {
-                die("Erro na consulta: " . mysqli_error($mysqli));
+                die("Erro na consulta: " . $mysqli->error);
             }
 
-            if (mysqli_num_rows($result) > 0) {
-                while ($jogo = mysqli_fetch_assoc($result)) {
+            if ($result->num_rows > 0) {
+                while ($jogo = $result->fetch_assoc()) {
                     echo '<div class="card" data-id-jogo="' . $jogo["id"] . '">';
 
-                    // Wrapper da imagem pra manter o tamanho padronizado
                     echo '<div class="card-img-wrapper">';
                     echo '<img src="' . htmlspecialchars($jogo["imagem"]) . '" alt="Capa do Jogo">';
                     echo '</div>';
 
-                    // Conteúdo do card
                     echo '<div class="card-content">';
                     echo '<h2>' . htmlspecialchars($jogo["nome"]) . '</h2>';
-                    echo '<p>Criado por: ' . htmlspecialchars($jogo["desenvolvedor"]) . '</p>';
+                    echo '<p>Criador: ' . htmlspecialchars($jogo["desenvolvedor"]) . '</p>';
 
-                    // Botões
                     echo '<div class="card-buttons">';
 
-                    // Botão excluir (NÃO dentro de form)
                     echo '<button class="btn-excluir" data-id="' . $jogo["id"] . '">';
                     echo '<i class="fas fa-trash-alt"></i> Excluir</button>';
 
-                    // Botão editar
                     echo '<form action="editar.php" method="GET" style="margin: 0;">';
                     echo '<input type="hidden" name="id" value="' . $jogo["id"] . '">';
                     echo '<button class="btn-editar" type="submit">';
                     echo '<i class="fas fa-pencil-alt"></i> Editar</button>';
                     echo '</form>';
 
-                    echo '</div>'; // .card-buttons
-                    echo '</div>'; // .card-content
-                    echo '</div>'; // .card
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
                 }
             } else {
-                echo "<p>Nenhum jogo cadastrado.</p>";
+                echo "<p>Nenhum jogo cadastrado por você.</p>";
             }
+            $stmt->close();
             ?>
 
         </div>
@@ -388,7 +397,7 @@ require_once("config.php");
 
 </body>
 
-<!-- Janelinha de confirmação de alteração -->
+<!-- Modal de confirmação -->
 <div id="confirmModal" class="modal hidden-force">
     <div class="modal-content">
         <h3><i class="fas fa-exclamation-triangle"></i> Tem certeza?</h3>
@@ -405,17 +414,15 @@ require_once("config.php");
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         const modal = document.getElementById("confirmModal");
         const cancelarBtn = document.getElementById("cancelarConfirmacao");
         const confirmarBtn = document.getElementById("confirmarBtn");
         let jogoIdParaExcluir = null;
 
-        // Botões de exclusão
         document.querySelectorAll(".btn-excluir").forEach(button => {
-            button.addEventListener("click", function (e) {
+            button.addEventListener("click", function(e) {
                 e.preventDefault();
-
                 jogoIdParaExcluir = this.getAttribute("data-id");
                 if (jogoIdParaExcluir) {
                     modal.classList.remove("hidden-force");
@@ -423,25 +430,23 @@ require_once("config.php");
             });
         });
 
-        // Botão cancelar no modal
         cancelarBtn?.addEventListener("click", () => {
             modal.classList.add("hidden-force");
             jogoIdParaExcluir = null;
         });
 
-        // Botão confirmar exclusão no modal
-        confirmarBtn?.addEventListener("click", function (event) {
+        confirmarBtn?.addEventListener("click", function(event) {
             event.preventDefault();
             if (!jogoIdParaExcluir) return;
             modal.classList.add("hidden-force");
             fetch("excluir.php", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                    "X-Requested-With": "XMLHttpRequest"
-                },
-                body: `id=${encodeURIComponent(jogoIdParaExcluir)}`
-            })
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        "X-Requested-With": "XMLHttpRequest"
+                    },
+                    body: `id=${encodeURIComponent(jogoIdParaExcluir)}`
+                })
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
@@ -457,26 +462,10 @@ require_once("config.php");
                 });
             jogoIdParaExcluir = null;
         });
-
-        // Verifica parâmetros da URL (ex: ?sucesso=1) para mostrar toast
-        const urlParams = new URLSearchParams(window.location.search);
-        const sucesso = urlParams.get('sucesso');
-        const erro = urlParams.get('erro');
-
-        if (sucesso === '1') {
-            LudusToast("Jogo atualizado com sucesso!");
-        } else if (sucesso === '2') {
-            LudusToast("Jogo excluído com sucesso!");
-        } else if (erro === '1') {
-            LudusToast("Erro ao atualizar o jogo.", true);
-        }
     });
 </script>
 
 <script src="./js/script.js"></script>
 <script src="./js/toast.js"></script>
-
-
-
 
 </html>
